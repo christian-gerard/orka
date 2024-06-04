@@ -1,2 +1,2 @@
-# orka
-## production management software
+# ORKA
+## production management software for Jackson & Moran
