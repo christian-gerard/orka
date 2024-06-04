@@ -23,7 +23,7 @@ function Nav() {
 
             { navOpen ?
 
-                <div className='pb-4 ml-12 tracking-[0.2em] flex flex-col'>
+                <div className='pb-4 ml-12 tracking-[0.2em] flex flex-col z-0'>
                 
                     <NavLink to='/dashboard' className='hover:text-ocean w-[100px]' onClick={handleNav}>Dashboard</NavLink>
                     <NavLink to='/projects' className='hover:text-ocean w-[100px]' onClick={handleNav}>Projects</NavLink>

@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom'
 function App() {
   return (
     <div className='text-2xl roboto-slab select-none'>
-      <Nav />
+      <Nav /> 
       <Outlet />
     </div>
   );
