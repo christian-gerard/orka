@@ -10,36 +10,46 @@ function Nav() {
     }
 
     return(
-        <div className='bg-black text-white'>
-            <h1 
-            className='
-                text-4xl
-                tracking-[0.8em]
-                p-4
-                '> 
-                    <MenuIcon onClick={handleNav} className='h-[600px] w-[auto] mr-6 hover:text-ocean' />
-                    ORKA 
+        <>
+            <div className='bg-black text-white'>
+
+                <h1 className='text-4xl tracking-[0.8em] p-4 flex flex-row'> 
+
+                    <span className='mr-6 hover:text-ocean flex items-center '>
+                        <MenuIcon fontSize='xl' onClick={handleNav} />   
+                    </span>
+
+                    ORKA
                 </h1>
 
-            { navOpen ?
-
-                <div className='pb-4 ml-12 tracking-[0.2em] flex flex-col z-0'>
-                
-                    <NavLink to='/dashboard' className='hover:text-ocean w-[100px]' onClick={handleNav}>Dashboard</NavLink>
-                    <NavLink to='/projects' className='hover:text-ocean w-[100px]' onClick={handleNav}>Projects</NavLink>
-                    <NavLink to='/clients' className='hover:text-ocean w-[100px]' onClick={handleNav}>Clients</NavLink>
-                    <NavLink to='/login' className='hover:text-ocean text-2xl underline w-[150px]' onClick={handleNav}>Sign Out</NavLink>
-                
-                </div>
-
-                :
-
-                <>
-                </>
             
-            }
+            </div>
+
+            <div className='z-10'>
+
+
+                { navOpen ?
+
+                    <div className='fixed text-[0.8em] mx-6 my-4 p-2 bg-ocean tracking-[0.1em] flex flex-col'>
+                    
+                        <NavLink to='/dashboard' className='hover:text-ocean w-[100px]' onClick={handleNav}>Dashboard</NavLink>
+                        <NavLink to='/projects' className='hover:text-ocean w-[100px]' onClick={handleNav}>Projects</NavLink>
+                        <NavLink to='/clients' className='hover:text-ocean w-[100px]' onClick={handleNav}>Clients</NavLink>
+                        <NavLink to='/login' className='hover:text-ocean underline w-[150px]' onClick={handleNav}>Sign Out</NavLink>
+                    
+                    </div>
+
+                    :
+
+                    <>
+                    </>
+                
+                }
+
+
+            </div>
         
-        </div>
+        </>
     )
 }
 
