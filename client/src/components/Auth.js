@@ -3,47 +3,48 @@ import { Formik, Form, Field, useFormik } from "formik";
 
 
 
-function Auth() {
+function Auth({handleLogin}) {
 
     const formik = useFormik({
         initialValues: {
           email: '',
         },
         onSubmit: formData => {
-          console.log(formData);
+          handleLogin()
         },
       });
 
 
       return (
-        <div className='bg-black text-white m-12 rounded-lg p-4 '>
+        <div className='bg-black text-white py-12 px-8 flex flex-col items-center '>
 
-            <h1 className='text-4xl p-2'> Log In</h1>
+            <h1 className='text-4xl p-2 tracking-[0.8em] reddit-mono italic'> ORKA </h1>
 
             <form onSubmit={formik.handleSubmit} className='flex flex-col p-2'>
 
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email" className='text-xl'>Email</label>
                 <input
                     id="email"
                     name="email"
                     type="email"
                     onChange={formik.handleChange}
                     value={formik.values.email}
-                    className='text-black rounded-lg m-2'
+                    className='text-black my-2 p-1 text-lg'
                     placeholder='email'
                 />
 
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password" className='text-xl'>Password</label>
                 <input
                     id="password"
                     name="password"
                     type="password"
                     onChange={formik.handleChange}
                     value={formik.values.password}
-                    className='text-black rounded-lg m-2'
+                    className='text-black my-2 p-1 text-lg'
+                    placeholder='password'
                 />
             
-                <button type="submit">Log In</button>
+                <button type="submit" className='mt-4 bg-white text-black'>Log In</button>
 
             </form>
 
