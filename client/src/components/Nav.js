@@ -1,6 +1,11 @@
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import MenuIcon from '@mui/icons-material/Menu';
+import GridViewIcon from '@mui/icons-material/GridView';
+import DetailsIcon from '@mui/icons-material/Details';
+import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
+import PermIdentityIcon from '@mui/icons-material/PermIdentity';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 function Nav() {
     const [navOpen, setNavOpen] = useState(false)
@@ -84,11 +89,28 @@ function Nav() {
 
                 { navOpen ?
 
-                    <div className='text-[0.8em] mx-6 border-2 text-white mt-2 p-2 bg-ocean tracking-[0.1em] flex flex-col'>
+                    <div className='text-[0.8em] mx-6 text-white mt-2 p-2 tracking-[0.1em] flex flex-col'>
 
-                        <NavLink to='/dashboard' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-black w-[100px]' onClick={handleNav}>Dashboard</NavLink>
-                        <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-black w-[100px]' onClick={handleNav}>Projects</NavLink>
-                        <NavLink to='/clients' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-black w-[100px]' onClick={handleNav}>Clients</NavLink>
+                        <NavLink to='/dashboard' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] flex flex-row items-center' onClick={handleNav}>
+                            <GridViewIcon className='mr-2'/>
+                            Dashboard
+                        </NavLink>
+                        <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] flex flex-row items-center' onClick={handleNav}>
+                            <DetailsIcon className='mr-2' />
+                            Projects
+                        </NavLink>
+                        <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] flex flex-row items-center' onClick={handleNav}>
+                            <PeopleOutlineIcon className='mr-2' />
+                            Clients
+                        </NavLink>
+                        <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] flex flex-row items-center' onClick={handleNav}>
+                            <PermIdentityIcon className='mr-2' />
+                            Profile
+                        </NavLink>
+                        <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] flex flex-row items-center' onClick={handleNav}>
+                            <SettingsIcon className='mr-2' />
+                            Settings
+                        </NavLink>
 
                     </div>
 
