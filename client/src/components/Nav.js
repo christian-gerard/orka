@@ -76,26 +76,26 @@ function Nav() {
 
                 { navOpen ?
 
-                    <div className='text-[1em] mx-6 text-white mt-2 p-2 tracking-[0.1em] flex flex-col'>
+                    <div className='text-[1em] mx-6 text-white w-[175px] mt-2 p-2 tracking-[0.1em] flex flex-col'>
 
                         <NavLink to='/dashboard' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] py-1 flex flex-row items-center' onClick={handleNav}>
-                            <GridViewIcon className='mr-2'/>
+                            <GridViewIcon className='mr-2 my-4'/>
                             Dashboard
                         </NavLink>
                         <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] py-1 flex flex-row items-center' onClick={handleNav}>
-                            <DetailsIcon className='mr-2' />
+                            <DetailsIcon className='mr-2 my-4' />
                             Projects
                         </NavLink>
                         <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] py-1 flex flex-row items-center' onClick={handleNav}>
-                            <PeopleOutlineIcon className='mr-2' />
+                            <PeopleOutlineIcon className='mr-2 my-4' />
                             Clients
                         </NavLink>
                         <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] py-1  flex flex-row items-center' onClick={handleNav}>
-                            <PermIdentityIcon className='mr-2' />
+                            <PermIdentityIcon className='mr-2 my-4' />
                             Profile
                         </NavLink>
                         <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] py-1  flex flex-row items-center' onClick={handleNav}>
-                            <SettingsIcon className='mr-2' />
+                            <SettingsIcon className='mr-2 my-4' />
                             Settings
                         </NavLink>
 
