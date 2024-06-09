@@ -6,6 +6,8 @@ import DetailsIcon from '@mui/icons-material/Details';
 import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import SettingsIcon from '@mui/icons-material/Settings';
+import WavesIcon from '@mui/icons-material/Waves';
+
 
 function Nav() {
     const [navOpen, setNavOpen] = useState(false)
@@ -123,6 +125,8 @@ function Nav() {
 
                 }
 
+
+                <WavesIcon fontSize='100px' />
 
             </div>
 
