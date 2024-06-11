@@ -93,11 +93,11 @@ function Nav() {
                                 <DetailsIcon className='mr-2 my-4' />
                                 Projects
                             </NavLink>
-                            <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] py-1 flex flex-row items-center' onClick={handleNav}>
+                            <NavLink to='/clients' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] py-1 flex flex-row items-center' onClick={handleNav}>
                                 <PeopleOutlineIcon className='mr-2 my-4' />
                                 Clients
                             </NavLink>
-                            <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] py-1  flex flex-row items-center' onClick={handleNav}>
+                            <NavLink to='/settings' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] py-1  flex flex-row items-center' onClick={handleNav}>
                                 <SettingsIcon className='mr-2 my-4' />
                                 Settings
                             </NavLink>
@@ -114,10 +114,10 @@ function Nav() {
                             <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean  py-1 flex flex-row items-center' onClick={handleNav}>
                                 <DetailsIcon className='my-4' />
                             </NavLink>
-                            <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean  py-1 flex flex-row items-center' onClick={handleNav}>
+                            <NavLink to='/clients' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean  py-1 flex flex-row items-center' onClick={handleNav}>
                                 <PeopleOutlineIcon className='my-4' />
                             </NavLink>
-                            <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean  py-1  flex flex-row items-center' onClick={handleNav}>
+                            <NavLink to='/settings' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean  py-1  flex flex-row items-center' onClick={handleNav}>
                                 <SettingsIcon className='my-4' />
                             </NavLink>
 
