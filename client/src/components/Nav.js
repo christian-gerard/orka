@@ -63,70 +63,75 @@ function Nav() {
         </div>
 
         <div className='hidden sm:block'>
-            <div className='bg-black text-white h-full'>
+            <div className='bg-black text-white h-full flex flex-col justify-between'>
+                <div>
 
-                <h1 className='text-4xl tracking-[0.8em] p-4 flex flex-row reddit-mono italic flex items-center justify-left'> 
+                    <h1 className={ navOpen ? "text-4xl tracking-[0.8em] p-4 flex flex-row reddit-mono italic flex items-center justify-left ml-2.5" : "text-4xl tracking-[0.8em] p-4 flex flex-row reddit-mono italic flex items-center justify-center "  }> 
 
-                    <span className='hover:text-ocean '>
-                        <MenuIcon fontSize='xl' onClick={handleNav} />   
-                    </span>
-
-
-                </h1>
-
-                { navOpen ?
-
-                    <div className='text-[1em] mx-6 text-white w-[175px] mt-2 p-2 tracking-[0.1em] flex flex-col'>
-
-                        <NavLink to='/dashboard' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] py-1 flex flex-row items-center' onClick={handleNav}>
-                            <GridViewIcon className='mr-2 my-4'/>
-                            Dashboard
-                        </NavLink>
-                        <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] py-1 flex flex-row items-center' onClick={handleNav}>
-                            <DetailsIcon className='mr-2 my-4' />
-                            Projects
-                        </NavLink>
-                        <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] py-1 flex flex-row items-center' onClick={handleNav}>
-                            <PeopleOutlineIcon className='mr-2 my-4' />
-                            Clients
-                        </NavLink>
-                        <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] py-1  flex flex-row items-center' onClick={handleNav}>
-                            <PermIdentityIcon className='mr-2 my-4' />
-                            Profile
-                        </NavLink>
-                        <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] py-1  flex flex-row items-center' onClick={handleNav}>
-                            <SettingsIcon className='mr-2 my-4' />
-                            Settings
-                        </NavLink>
-
-                    </div>
-
-                    :
-
-                    <div className='text-[1em] mx-6 text-white mt-2 p-2 tracking-[0.1em] flex flex-col'>
-
-                        <NavLink to='/dashboard' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean py-1 flex flex-row items-center' onClick={handleNav}>
-                            <GridViewIcon className='my-4'/>
-                        </NavLink>
-                        <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean  py-1 flex flex-row items-center' onClick={handleNav}>
-                            <DetailsIcon className='my-4' />
-                        </NavLink>
-                        <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean  py-1 flex flex-row items-center' onClick={handleNav}>
-                            <PeopleOutlineIcon className='my-4' />
-                        </NavLink>
-                        <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean  py-1  flex flex-row items-center' onClick={handleNav}>
-                            <PermIdentityIcon className='my-4' />
-                        </NavLink>
-                        <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean  py-1  flex flex-row items-center' onClick={handleNav}>
-                            <SettingsIcon className='my-4' />
-                        </NavLink>
-
-                    </div>
-
-                }
+                        <span className='hover:text-ocean flex flex-row items-center h-[50px] '>
+                            <MenuIcon fontSize='xl' onClick={handleNav} className={navOpen ? "mr-6" : ""} />   
+                            {
+                                navOpen ?
+                                <p>ORKA</p>
+                                :
+                                <></>
+                            }
+                        </span>
 
 
-                <WavesIcon fontSize='100px' />
+                    </h1>
+
+                    { navOpen ?
+
+                        <div className='text-[1em] mx-6 text-white w-[175px] mt-2 p-2 tracking-[0.1em] flex flex-col'>
+
+                            <NavLink to='/dashboard' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] py-1 flex flex-row items-center' onClick={handleNav}>
+                                <GridViewIcon className='mr-2 my-4'/>
+                                Dashboard
+                            </NavLink>
+                            <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] py-1 flex flex-row items-center' onClick={handleNav}>
+                                <DetailsIcon className='mr-2 my-4' />
+                                Projects
+                            </NavLink>
+                            <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] py-1 flex flex-row items-center' onClick={handleNav}>
+                                <PeopleOutlineIcon className='mr-2 my-4' />
+                                Clients
+                            </NavLink>
+                            <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] py-1  flex flex-row items-center' onClick={handleNav}>
+                                <SettingsIcon className='mr-2 my-4' />
+                                Settings
+                            </NavLink>
+
+                        </div>
+
+                        :
+
+                        <div className='text-[1em] mx-6 text-white mt-2 p-2 tracking-[0.1em] flex flex-col'>
+
+                            <NavLink to='/dashboard' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean py-1 flex flex-row items-center' onClick={handleNav}>
+                                <GridViewIcon className='my-4'/>
+                            </NavLink>
+                            <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean  py-1 flex flex-row items-center' onClick={handleNav}>
+                                <DetailsIcon className='my-4' />
+                            </NavLink>
+                            <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean  py-1 flex flex-row items-center' onClick={handleNav}>
+                                <PeopleOutlineIcon className='my-4' />
+                            </NavLink>
+                            <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean  py-1  flex flex-row items-center' onClick={handleNav}>
+                                <SettingsIcon className='my-4' />
+                            </NavLink>
+
+                        </div>
+
+                    }
+
+
+
+
+                </div>
+
+
+
 
             </div>
 

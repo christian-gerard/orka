@@ -3,7 +3,7 @@
 function Dashboard() {
 
     return(
-        <div>
+        <div className='bg-black text-white'>
             <h1>Dashboard</h1>
             <div>
                 <h1 className='underline'>Action Items</h1>

@@ -15,7 +15,7 @@ function App() {
       { loggedIn ? 
         <div className='h-full w-full flex flex-col sm:flex-row'>
             <Nav /> 
-            <div className='bg-ocean p-4'>
+            <div className='bg-ocean p-4 w-full'>
               <Outlet />
             </div>
         </div>
