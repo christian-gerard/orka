@@ -1,11 +1,21 @@
-
+import Client from '../components/Client'
 
 
 function Clients() {
 
     return (
-        <div>
-            <h1>Clients</h1>
+        <div className=''>
+            <div className='text-4xl'>
+                <h1 className='underline'>Clients</h1>
+            </div>
+            <div>
+
+                <Client />
+                <Client />
+                <Client />
+
+            </div>
+
         </div>
     )
 }
