@@ -5,5 +5,7 @@ urlpatterns = [
     path("user", views.user),
     path("client", views.client),
     path("project", views.project),
-    path("productionneed", views.productionneed)
+    path("project/<int:id>/", views.projectbyid),
+    path("productionneed", views.productionneed),
+    path("productionneed/<int:id>/", views.productionneedbyid)
 ]
