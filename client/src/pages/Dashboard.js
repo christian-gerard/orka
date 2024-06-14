@@ -8,10 +8,11 @@ function Dashboard() {
 
     useEffect(() => {
 
-        fetch('/productionneed')
-        .then((resp) => { 
-            debugger
+        fetch('/client/')
+        .then((resp) => {
+            resp.json()
         })
+        .catch(error => console.error('Error:', error));
 
 
     },[])
