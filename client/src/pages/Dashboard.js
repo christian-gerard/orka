@@ -1,8 +1,21 @@
+import { useState,useEffect } from 'react'
 import Project from '../components/Project'
 import Client from '../components/Client'
 import ToDo from '../components/ToDo'
 
 function Dashboard() {
+    const [prodNeeds, setProdNeeds] = useState([])
+
+    useEffect(() => {
+
+        fetch('/productionneed')
+        .then((resp) => { 
+            debugger
+        })
+
+
+    },[])
+
 
     return(
         <div className=' flex flex-col h-full'>
@@ -18,9 +31,13 @@ function Dashboard() {
                 <div className='w-full h-[25%]'>
                     <h1>To Do</h1>
                     <div>
-                        <ToDo/>
-                        <ToDo/>
-                        <ToDo/>
+                        {
+                            prodNeeds ?
+                            <h1>Prod Needs Available</h1>
+                            :
+                            <h1>Prod Needs Unavailable</h1>
+
+                        }
                     </div>
                 </div>
 
