@@ -19,5 +19,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", include("orka.urls"))
+    path("", include("orka.api.url"))
 ]
