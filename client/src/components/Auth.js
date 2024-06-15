@@ -28,6 +28,19 @@ function Auth({handleLogin}) {
                 login(data)
                 nav('/dashboard')
                 toast.success('Login Successful')
+
+                fetch('http://127.0.0.1:8000/user/1/', {
+                  headers: {
+                    "Authorization": `Token ${user.token}`
+                  }
+                })
+                .then(resp => {
+                  if(resp.ok){
+                    return resp.json().then((data) => {
+                      console.log(data)
+                    })
+                  }
+                })
               })}
             else{
               toast.error('Invalid Login')
@@ -47,15 +60,15 @@ function Auth({handleLogin}) {
 
             <form onSubmit={formik.handleSubmit} className='flex flex-col p-2'>
 
-                <label htmlFor="email" className='text-xl'>UserName</label>
+                <label htmlFor="username" className='text-xl'>Email</label>
                 <input
                     id="username"
                     name="username"
-                    type=""
+                    type="email"
                     onChange={formik.handleChange}
                     value={formik.values.username}
                     className='text-black my-2 p-1 text-lg'
-                    placeholder='username'
+                    placeholder='email'
                 />
 
                 <label htmlFor="password" className='text-xl'>Password</label>
