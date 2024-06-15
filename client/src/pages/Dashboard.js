@@ -43,18 +43,27 @@ function Dashboard() {
                 </div>
 
                 <div className='flex flex-row w-full h-[75%] '>
-                    <div className='w-[80%]'>
+                    <div className='w-[70%]'>
                         <h1>Projects</h1>
-                        <Project />
-                        <Project />
-                        <Project />
+                        <Project 
+                            name={'Liquid Death Commercial'} 
+                            deadline={'04/30/2024'}
+                            company={'Liquid Death'}
+                            status={'In Progress'}
+                        />
+                        <Project 
+                            name={'F1 Las Vegas'} 
+                            deadline={'06/17/2024'}
+                            company={'DropBox'}
+                            status={'In Progress'}
+                        />
                     </div>
 
-                    <div className='w-[20%]'>
+                    <div className='w-[30%]'>
                         <h1>Clients</h1>
                         <div className='flex flex-col items-center justify-center'>
-                            <Client />
-                            <Client />
+                            <Client name={'Liquid Death'}/>
+                            <Client name={'DropBox'}/>
 
                         </div>
                     </div>
