@@ -1,17 +1,46 @@
 import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
+import { Toaster } from 'react-hot-toast'
 import Nav from '../src/components/Nav' 
 import Auth from '../src/components/Auth'
 
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false)
+ 
   const handleLogin = () => {
     setLoggedIn(!loggedIn)
   }
 
   return (
     <div className='text-2xl inconsolata select-none h-screen w-screen '>
+        <Toaster
+          position='top-center'
+          containerClassName='toaster-style'
+          toastOptions={{
+            success: {
+              style: {
+                background: '#000000',
+                color: 'white'
+              },
+              iconTheme: {
+                primary: '#ffffff',
+                secondary: '#000000'
+              },
+            },
+            error: {
+              iconTheme: {
+                primary: '#ffffff',
+                secondary: '#000000'
+              },
+              style: {
+                background: '#000000',
+                color: '#ffffff',
+              },
+            },
+
+          }}
+        />
       { loggedIn ? 
         <div className='h-full w-full flex flex-col sm:flex-row'>
             <Nav /> 
