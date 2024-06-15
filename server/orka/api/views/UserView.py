@@ -3,8 +3,11 @@ from rest_framework.response import Response
 from django.http import Http404
 from orka.models.User import User
 from orka.api.serializers.UserSerializer import UserSerializer
+from rest_framework import permissions
+
 
 class UserList(APIView):
+
 
     def get_object(self, pk):
         try:
