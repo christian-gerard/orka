@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useContext } from 'react'
+import {UserContext} from './context/UserContext'
 import { Outlet } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import Nav from '../src/components/Nav' 
@@ -6,11 +7,7 @@ import Auth from '../src/components/Auth'
 
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false)
- 
-  const handleLogin = () => {
-    setLoggedIn(!loggedIn)
-  }
+  const { user } = useContext(UserContext)
 
   return (
     <div className='text-2xl inconsolata select-none h-screen w-screen '>
@@ -41,7 +38,7 @@ function App() {
 
           }}
         />
-      { loggedIn ? 
+      { user ? 
         <div className='h-full w-full flex flex-col sm:flex-row'>
             <Nav /> 
             <div className='p-4 w-full'>
@@ -50,7 +47,7 @@ function App() {
         </div>
         :
         <div className='h-full flex items-center justify-center'>
-          <Auth handleLogin={handleLogin}/>
+          <Auth />
         </div>
         }
     </div>
