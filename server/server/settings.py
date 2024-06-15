@@ -33,9 +33,10 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'orka',
+    'user_app',
     'corsheaders',
     'rest_framework',
-    'rest_framework_simplejwt',
+    'rest_framework.authtoken',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -62,6 +63,9 @@ REST_FRAMEWORK = {
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
     ],
     
 }
