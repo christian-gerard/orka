@@ -1,7 +1,7 @@
 import Client from '../components/Client'
 
 
-function Clients({name, status}) {
+function Clients() {
 
     return (
         <div className=''>
