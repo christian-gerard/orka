@@ -1,15 +1,13 @@
 
 import {useContext} from 'react'
 import { Formik, Form, Field, useFormik, ErrorMessage } from "formik";
-import {UserContext} from '../context/UserContext'
+import { useNavigate } from 'react-router-dom'
+import { UserContext } from '../context/UserContext'
 import toast from 'react-hot-toast'
-
-
-
 
 function Auth({handleLogin}) {
   const { user,login } = useContext(UserContext)
-
+  const nav = useNavigate()
 
     const formik = useFormik({
         initialValues: {
@@ -28,9 +26,8 @@ function Auth({handleLogin}) {
             if(resp.ok){
               return resp.json().then(data => {
                 login(data)
-                console.log(`${user.token} is the user data`)
+                nav('/dashboard')
                 toast.success('Login Successful')
-                handleLogin()
               })}
             else{
               toast.error('Invalid Login')

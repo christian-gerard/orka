@@ -1,15 +1,18 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { NavLink } from 'react-router-dom'
+import { UserContext } from '../context/UserContext'
 import MenuIcon from '@mui/icons-material/Menu';
 import GridViewIcon from '@mui/icons-material/GridView';
 import DetailsIcon from '@mui/icons-material/Details';
 import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import SettingsIcon from '@mui/icons-material/Settings';
 import WavesIcon from '@mui/icons-material/Waves';
 
 
 function Nav() {
+    const { logout } = useContext(UserContext)
     const [navOpen, setNavOpen] = useState(false)
 
     const handleNav = () => {
@@ -47,7 +50,7 @@ function Nav() {
                         <NavLink to='/dashboard' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-black w-[100px]' onClick={handleNav}>Dashboard</NavLink>
                         <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-black w-[100px]' onClick={handleNav}>Projects</NavLink>
                         <NavLink to='/clients' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-black w-[100px]' onClick={handleNav}>Clients</NavLink>
-                    
+                        <NavLink to='/' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-black w-[100px]' onClick={logout}>Logout</NavLink>                   
                     </div>
 
                     :
@@ -101,6 +104,10 @@ function Nav() {
                                 <SettingsIcon className='mr-2 my-4' />
                                 Settings
                             </NavLink>
+                            <NavLink to='/' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] py-1  flex flex-row items-center' onClick={logout}>
+                                <ExitToAppIcon className='mr-2 my-4' />
+                                Logout
+                            </NavLink>
 
                         </div>
 
@@ -119,6 +126,9 @@ function Nav() {
                             </NavLink>
                             <NavLink to='/settings' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean  py-1  flex flex-row items-center' onClick={handleNav}>
                                 <SettingsIcon className='my-4' />
+                            </NavLink>
+                            <NavLink to='/' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean  py-1  flex flex-row items-center' onClick={logout}>
+                                <ExitToAppIcon className='my-4' />
                             </NavLink>
 
                         </div>

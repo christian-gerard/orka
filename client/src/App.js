@@ -1,5 +1,5 @@
-import { useState,useContext,useEffect } from 'react'
-import UserContext from './context/UserContext'
+import { useContext } from 'react'
+import {UserContext} from './context/UserContext'
 import { Outlet } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import Nav from '../src/components/Nav' 
@@ -7,16 +7,7 @@ import Auth from '../src/components/Auth'
 
 
 function App() {
-  const user = useContext(UserContext)
-
-  
-  const handleLogin = () => {
-
-  }
-
-  useEffect(() => {
-
-  },[user])
+  const { user } = useContext(UserContext)
 
   return (
     <div className='text-2xl inconsolata select-none h-screen w-screen '>
@@ -56,7 +47,7 @@ function App() {
         </div>
         :
         <div className='h-full flex items-center justify-center'>
-          <Auth handleLogin={handleLogin}/>
+          <Auth />
         </div>
         }
     </div>
