@@ -22,7 +22,7 @@ function Dashboard() {
         <div className=' flex flex-col h-full'>
 
             <div className='mb-4'>
-                <h1 className='text-4xl underline'>Dashboard</h1>
+                <h1 className='text-5xl underline'>Dashboard</h1>
             </div>
 
 
@@ -30,7 +30,7 @@ function Dashboard() {
             <div className='h-full'>
 
                 <div className='w-full h-[25%]'>
-                    <h1>To Do</h1>
+                    <h1 className='text-4xl'>To Do</h1>
                     <div>
                         {
                             prodNeeds ?
@@ -44,7 +44,7 @@ function Dashboard() {
 
                 <div className='flex flex-row w-full h-[75%] '>
                     <div className='w-[70%]'>
-                        <h1>Projects</h1>
+                        <h1 className='text-4xl'>Projects</h1>
                         <Project 
                             name={'Liquid Death Commercial'} 
                             deadline={'04/30/2024'}
@@ -60,7 +60,7 @@ function Dashboard() {
                     </div>
 
                     <div className='w-[30%]'>
-                        <h1>Clients</h1>
+                        <h1 className='text-4xl'>Clients</h1>
                         <div className='flex flex-col items-center justify-center'>
                             <Client name={'Liquid Death'}/>
                             <Client name={'DropBox'}/>
