@@ -13,7 +13,7 @@ import WavesIcon from '@mui/icons-material/Waves';
 
 function Nav() {
     const { logout } = useContext(UserContext)
-    const [navOpen, setNavOpen] = useState(false)
+    const [navOpen, setNavOpen] = useState(true)
 
     const handleNav = () => {
         setNavOpen(!navOpen)
@@ -88,19 +88,19 @@ function Nav() {
 
                         <div className='text-[1em] mx-6 text-white w-[175px] mt-2 p-2 tracking-[0.1em] flex flex-col'>
 
-                            <NavLink to='/dashboard' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] py-1 flex flex-row items-center' onClick={handleNav}>
+                            <NavLink to='/dashboard' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] py-1 flex flex-row items-center' >
                                 <GridViewIcon className='mr-2 my-4'/>
                                 Dashboard
                             </NavLink>
-                            <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] py-1 flex flex-row items-center' onClick={handleNav}>
+                            <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] py-1 flex flex-row items-center' >
                                 <DetailsIcon className='mr-2 my-4' />
                                 Projects
                             </NavLink>
-                            <NavLink to='/clients' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] py-1 flex flex-row items-center' onClick={handleNav}>
+                            <NavLink to='/clients' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] py-1 flex flex-row items-center'>
                                 <PeopleOutlineIcon className='mr-2 my-4' />
                                 Clients
                             </NavLink>
-                            <NavLink to='/settings' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] py-1  flex flex-row items-center' onClick={handleNav}>
+                            <NavLink to='/settings' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] py-1  flex flex-row items-center' >
                                 <SettingsIcon className='mr-2 my-4' />
                                 Settings
                             </NavLink>

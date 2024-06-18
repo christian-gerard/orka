@@ -60,7 +60,7 @@ function Dashboard() {
                     </div>
 
                     <div className='w-[30%]'>
-                        <h1 className='text-4xl'>Clients</h1>
+                        <h1 className='text-4xlg'>Clients</h1>
                         <div className='flex flex-col items-center justify-center'>
                             <Client name={'Liquid Death'}/>
                             <Client name={'DropBox'}/>
