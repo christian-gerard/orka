@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import Project from '../components/Project'
 import Client from '../components/Client'
 import ToDo from '../components/ToDo'
@@ -8,11 +8,7 @@ function Dashboard() {
 
     useEffect(() => {
 
-        fetch('/client/')
-        .then((resp) => {
-            resp.json()
-        })
-        .catch(error => console.error('Error:', error));
+
 
 
     },[])
