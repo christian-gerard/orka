@@ -1,6 +1,5 @@
 from django.db import models
 from django.utils.timezone import now
-from orka.models.Client import Client
 
 
 class Account(models.Model):

@@ -4,7 +4,8 @@ from orka.api.serializers.ClientSerializer import ClientSerializer
 
 class AccountSerializer(serializers.ModelSerializer):
 
-
+    clients = ClientSerializer(many=True, read_only=True)
+    
     class Meta:
         model = Account
         fields = '__all__'
