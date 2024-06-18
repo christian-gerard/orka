@@ -1,9 +1,11 @@
 from rest_framework import serializers
 from orka.models.Project import Project
-from orka.models.Client import Client
+from orka.api.serializers.ProductionNeedSerializer import ProductionNeedSerializer
+from orka.api.serializers.BudgetItemSerializer import BudgetItemSerializer
 
 class ProjectSerializer(serializers.ModelSerializer):
-    client = serializers.PrimaryKeyRelatedField(queryset=Client.objects.all())
+    budg_items = BudgetItemSerializer(many=True, read_only=True)
+    prod_needs = ProductionNeedSerializer(many=True, read_only=True)
 
     class Meta:
         model = Project
