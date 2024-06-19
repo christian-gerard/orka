@@ -4,7 +4,6 @@ import Client from '../components/Client'
 import ToDo from '../components/ToDo'
 
 function Dashboard() {
-    const [prodNeeds, setProdNeeds] = useState([])
 
     useEffect(() => {
 
@@ -29,10 +28,7 @@ function Dashboard() {
                     <h1 className='text-4xl'>To Do</h1>
                     <div>
                         {
-                            prodNeeds ?
-                            <h1>Prod Needs Available</h1>
-                            :
-                            <h1>Prod Needs Unavailable</h1>
+  
 
                         }
                     </div>

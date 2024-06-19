@@ -4,13 +4,14 @@ from rest_framework.authtoken.models import Token
 from rest_framework import status
 from django.http import Http404
 from user_app.api.serializer import RegistrationSerializer
+from pdb import set_trace
 
-# Create your views here.
 
 class RegistrationView(APIView):
 
     def post(self,request):
         serializer = RegistrationSerializer(data=request.data)
+
         data = { }
         
         if serializer.is_valid():

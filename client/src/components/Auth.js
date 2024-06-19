@@ -6,7 +6,7 @@ import { UserContext } from '../context/UserContext'
 import toast from 'react-hot-toast'
 
 function Auth({handleLogin}) {
-  const { user,login } = useContext(UserContext)
+  const { user, login } = useContext(UserContext)
   const nav = useNavigate()
 
     const formik = useFormik({
@@ -31,6 +31,9 @@ function Auth({handleLogin}) {
                 toast.success('Login Successful')
 
               })}
+          })
+          .then(() => {
+
           })
           .catch(err => {
             toast.error('Unable to Login')
