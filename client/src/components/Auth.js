@@ -6,7 +6,7 @@ import { UserContext } from '../context/UserContext'
 import toast from 'react-hot-toast'
 
 function Auth({handleLogin}) {
-  const { user,login } = useContext(UserContext)
+  const { user, login } = useContext(UserContext)
   const nav = useNavigate()
 
     const formik = useFormik({
@@ -15,6 +15,7 @@ function Auth({handleLogin}) {
           password: ''
         },
         onSubmit: formData => {
+
           fetch('http://127.0.0.1:8000/auth/login/',{
             method: 'POST',
             headers: {
@@ -29,22 +30,10 @@ function Auth({handleLogin}) {
                 nav('/dashboard')
                 toast.success('Login Successful')
 
-                fetch('http://127.0.0.1:8000/user/1/', {
-                  headers: {
-                    "Authorization": `Token ${user.token}`
-                  }
-                })
-                .then(resp => {
-                  if(resp.ok){
-                    return resp.json().then((data) => {
-                      console.log(data)
-                    })
-                  }
-                })
               })}
-            else{
-              toast.error('Invalid Login')
-            }
+          })
+          .then(() => {
+
           })
           .catch(err => {
             toast.error('Unable to Login')

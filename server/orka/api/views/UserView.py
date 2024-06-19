@@ -8,7 +8,6 @@ from rest_framework import permissions
 
 class UserList(APIView):
 
-
     def get_object(self, pk):
         try:
             return User.objects.get(pk=pk)

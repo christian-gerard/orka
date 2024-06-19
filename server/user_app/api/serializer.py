@@ -1,7 +1,9 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
+from pdb import set_trace
 
 class RegistrationSerializer(serializers.ModelSerializer):
+
     password2 = serializers.CharField(style={'input_type': 'password'},write_only = True)
 
 
@@ -15,6 +17,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
     def save(self):
         password = self.validated_data['password']
         password2 = self.validated_data['password2']
+        set_trace() 
 
         if password != password2:
             raise serializers.ValidationError({'error': 'P1 and P2 should be the same'})
