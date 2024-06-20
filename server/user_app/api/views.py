@@ -1,36 +1,34 @@
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from rest_framework import status
 from django.http import Http404
-from user_app.api.serializer import RegistrationSerializer
+from orka.api.serializers.UserSerializer import UserSerializer
 from pdb import set_trace
 
 
-class RegistrationView(APIView):
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def login(request):
+    return Response({"MESSAGRE": "MESSAGE"})
 
-    def post(self,request):
-        serializer = RegistrationSerializer(data=request.data)
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def signup(request):
 
-        data = { }
-        
-        if serializer.is_valid():
-            account = serializer.save()
-            data['response'] = 'Registration Successful'
-            data['username'] = account.username
-            data['email'] = account.email
+    serializer = UserSerializer(data=request.data)
 
-            token = Token.objects.get(user=account).key
-            data['token'] = token
-        else:
-            data['error'] = serializer.errors
+    if serializer.is_valid():
 
-        return Response(data)
+        return Response("AVALID")
     
+    
+    return Response(serializer.errors, 401)
 
-class LogoutView(APIView):
+@api_view(['POST'])
+def signout(request):
+    return Response({"MESSAGRE": "MESSAGE"})
 
-    def post(self, request):
-        request.user.auth_token.delete()
-        return Response(status=status.HTTP_200_OK)
 
