@@ -4,7 +4,7 @@ from orka.models.Account import Account
 from orka.api.serializers.AccountSerializer import AccountSerializer
 
 class UserSerializer(serializers.ModelSerializer):
-    account = serializers.PrimaryKeyRelatedField(queryset=Account.objects.all(), write_only=True)
+    account = serializers.PrimaryKeyRelatedField(queryset=Account.objects.all(), default=1, write_only=True)
     account_details = AccountSerializer(source='account', read_only=True)
     
     class Meta:
