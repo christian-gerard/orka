@@ -7,7 +7,7 @@ function Project({name, company, description, status, deadline}) {
             <p>{name ? name : 'UNNAMED'}</p>
             <p>{company ? company : '___'}</p>
             <p>{status ? status : 'No Status'}</p>
-            <p>{deadline ? deadline : 'No Deadline'}</p>
+            <p>{deadline ? deadline.slice(0,-10) : 'No Deadline'}</p>
         </div>
     )
 }
