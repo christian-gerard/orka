@@ -4,10 +4,10 @@ from orka.models.Account import Account
 from orka.api.serializers.AccountSerializer import AccountSerializer
 
 class UserSerializer(serializers.ModelSerializer):
-    account = AccountSerializer(Account.objects.get(id=1))
+    account = serializers.PrimaryKeyRelatedField(queryset=Account.objects.all(), write_only=True)
+    account_details = AccountSerializer(source='account', read_only=True)
     
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ['username','email','password','account','account_details']
 
- 

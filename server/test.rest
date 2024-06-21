@@ -2,7 +2,7 @@
 POST http://127.0.0.1:8000/auth/signup/
 content-type: application/json
 
-{ "username": "1@christiangerard.me", "password": "password"}
+{ "email": "332@christiangerard.me", "username": "332@christiangerard.me", "password": "password", "account": 1}
 
 ###
 

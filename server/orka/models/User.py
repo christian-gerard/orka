@@ -6,7 +6,6 @@ from orka.models.Account import Account
 
 class User(AbstractUser):
     email = models.EmailField(
-        default='email@email.com',
         max_length=200,
         unique=True
     )
@@ -16,9 +15,10 @@ class User(AbstractUser):
     password = models.CharField(
         max_length=20
     )
+
     admin = models.BooleanField(default=False)
 
-    account = models.ForeignKey(Account, default=1, on_delete=models.CASCADE)
+    account = models.ForeignKey(Account, on_delete=models.CASCADE)
 
     REQUIRED_FIELDS = ['username'] 
     
