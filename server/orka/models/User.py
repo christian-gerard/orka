@@ -18,7 +18,7 @@ class User(AbstractUser):
 
     admin = models.BooleanField(default=False)
 
-    account = models.ForeignKey(Account, on_delete=models.CASCADE)
+    account = models.ForeignKey(Account,default=1, on_delete=models.CASCADE)
 
     REQUIRED_FIELDS = ['username'] 
     

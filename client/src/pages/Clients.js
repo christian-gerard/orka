@@ -1,7 +1,13 @@
 import Client from '../components/Client'
+import { useContext } from 'react'
+import { UserContext } from '../context/UserContext'
 
 
 function Clients() {
+    const { user } = useContext(UserContext)
+    const clients = user.user.account_details.clients.flatMap(client => {
+        return <Client name={client.name}/>
+    })
 
     return (
         <div className=''>
@@ -10,9 +16,11 @@ function Clients() {
             </div>
             <div>
 
-                <Client />
-                <Client />
-                <Client />
+                {
+                    clients ? 
+                    clients : 
+                    <h1>No Clients</h1>
+                }
 
             </div>
 

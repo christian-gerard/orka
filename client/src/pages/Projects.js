@@ -1,5 +1,14 @@
 import Project from '../components/Project'
+import { useContext } from 'react'
+import { UserContext } from '../context/UserContext'
 function Projects() {
+    const { user } = useContext(UserContext)
+
+    const projects = user.user.account_details.clients.flatMap(client => {
+        return client.projects.map((project) => {
+            return <Project name={project.name} deadline={project.deadline} company={client.name} />
+        })
+    })
 
     return (
         <div className=''>
@@ -7,9 +16,11 @@ function Projects() {
                 <h1 className='underline'>Projects</h1>
 
             </div>
-            <Project />
-            <Project />
-            <Project />
+            {
+                projects ? 
+                projects :
+                <h1>No Name</h1>
+            }
         </div>
     )
 }
