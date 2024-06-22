@@ -1,8 +1,17 @@
 import Project from '../components/Project'
-import { useContext } from 'react'
+import { NavLink } from 'react-router-dom'
+import { useContext, useState } from 'react'
 import { UserContext } from '../context/UserContext'
+import AddIcon from '@mui/icons-material/Add';
+import CloseIcon from '@mui/icons-material/Close';
+
 function Projects() {
     const { user } = useContext(UserContext)
+    const [newProject, setNewProject] = useState(false)
+
+    const handleNewProject = () => {
+        setNewProject(!newProject)
+    }
 
     const projects = user.user.account_details.clients.flatMap(client => {
         return client.projects.map((project) => {
@@ -12,15 +21,48 @@ function Projects() {
     })
 
     return (
-        <div className=''>
-            <div className='text-4xl'>
+
+        <div className='w-full'>
+
+            <div className='text-4xl w-full flex flex-row justiy-end'>
+
                 <h1 className='underline'>Projects</h1>
 
+                <div className='border border-2 flex flex-row' onClick={handleNewProject}>
+                    <p>New</p>
+                    <AddIcon />
+                </div>
+
             </div>
+
             {
-                projects ? 
-                projects :
+                projects 
+                
+                ? 
+
+                projects 
+                
+                :
+
                 <h1>No Name</h1>
+            }
+
+            {
+                newProject ?
+
+                <div className='fixed inset-0 flex flex-col justify-center items-center transition-colors backdrop-blur'>
+
+                    <div className='bg-white border'> 
+                        <CloseIcon onClick={handleNewProject}/>
+                        <h2>New Project</h2>
+                        <input placeholder='Name'></input>
+                        <button type='submit'>Submit+</button>
+                    </div>
+
+                </div>
+                :
+                <>
+                </>
             }
         </div>
     )
