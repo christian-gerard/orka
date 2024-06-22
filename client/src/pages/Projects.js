@@ -52,11 +52,33 @@ function Projects() {
 
                 <div className='fixed inset-0 flex flex-col justify-center items-center transition-colors backdrop-blur'>
 
-                    <div className='bg-white border'> 
+                    <div className='bg-white border flex flex-col'> 
                         <CloseIcon onClick={handleNewProject}/>
-                        <h2>New Project</h2>
-                        <input placeholder='Name'></input>
-                        <button type='submit'>Submit+</button>
+                        <h2 className='m-2 underline'>New Project</h2>
+                        <input 
+                        placeholder='Name'
+                        className='border m-2 p-1'
+                        />
+                        <input 
+                        placeholder='Deadline'
+                        className='border m-2 p-1'
+                        />
+                        <input 
+                        placeholder='Status'
+                        className='border m-2 p-1'
+                        />
+                        <input 
+                        placeholder='Company'
+                        className='border m-2 p-1'
+                        />
+               
+                        <button 
+                        type='submit'
+                        className='border m-2'
+                        >
+                            Submit+
+                    
+                        </button>
                     </div>
 
                 </div>
