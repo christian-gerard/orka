@@ -3,11 +3,20 @@ import { UserContext } from '../context/UserContext'
 import { NavLink } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import CloseIcon from '@mui/icons-material/Close';
+import Close from '@mui/icons-material/Close';
 
 function Project({id, name, company, description, status, deadline}) {
     const { user } = useContext(UserContext)
     const route = useParams();
     const [currentProject, setCurrentProject] = useState(null)
+    const [editMode, setEditMode] = useState(false)
+
+    const handleEditMode = () => {
+        setEditMode(!editMode)
+    }
 
     const handleCurrentProject = (data) => {
         setCurrentProject(data)
@@ -38,16 +47,41 @@ function Project({id, name, company, description, status, deadline}) {
         {
             route.id ?
 
-            <div className='border border-black rounded-xl my-4 mx-4 p-4'>
+            <>
+            
+            {
+                editMode ?
+                <div className='fixed inset-0 flex justify-center items-center transition-colors backdrop-blur'>
+                    <h1>EDIT FORM</h1>
+                    <CloseIcon onClick={handleEditMode}/>
+                </div>
+                :
 
-                <NavLink to={'/projects'} >
-                    <ArrowBackIcon/>
-                </NavLink>
+                <></>
+            }
+
+            <div className='border border-black rounded-xl my-4 mx-4 p-4'>
+                <div className='flex flex-row justify-between'>
+                    <NavLink to={'/projects'} >
+                        <ArrowBackIcon/>
+                    </NavLink>
+
+                    <div>
+                        <EditIcon onClick={handleEditMode}/>
+                        <DeleteIcon />
+                    </div>
+
+                </div>
                 <p>{currentProject ? currentProject.name : 'UNNAMED'}</p>
                 <p>{company ? company : '___'}</p>
                 <p>{status ? status : 'No Status'}</p>
                 <p>{currentProject ? currentProject.deadline.slice(0,-10) : 'No Deadline'}</p>
             </div>
+            
+            
+            
+            </>
+
             
             
             :
