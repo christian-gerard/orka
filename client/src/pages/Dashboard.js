@@ -9,7 +9,7 @@ function Dashboard() {
     const { user } = useContext(UserContext)
     const projects = user.user.account_details.clients.flatMap(client => {
         return client.projects.map((project) => {
-            return <Project name={project.name} deadline={project.deadline} company={client.name} />
+            return <Project key={project.id} {...project} company={client.name} />
         })
     })
     const clients = user.user.account_details.clients.flatMap(client => {

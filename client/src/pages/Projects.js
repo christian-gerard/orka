@@ -6,7 +6,8 @@ function Projects() {
 
     const projects = user.user.account_details.clients.flatMap(client => {
         return client.projects.map((project) => {
-            return <Project name={project.name} deadline={project.deadline} company={client.name} />
+            console.log(project.id)
+            return <Project key={project.id} company={client.name} {...project}  />
         })
     })
 
