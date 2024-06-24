@@ -67,16 +67,19 @@ function Projects() {
                         placeholder='Status'
                         className='border m-2 p-1'
                         />
-                        <input 
-                        placeholder='Company'
+                        <select
                         className='border m-2 p-1'
-                        />
-               
+                        >
+                            <option>Select Company</option>
+                            <option>Jackson & Moran</option>
+                            <option>Company</option>
+                        </select>
                         <button 
                         type='submit'
                         className='border m-2'
                         >
-                            Submit+
+                           Add Project
+                           <AddIcon/>
                     
                         </button>
                     </div>
