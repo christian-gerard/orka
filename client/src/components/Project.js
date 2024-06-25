@@ -51,7 +51,7 @@ function Project({id, name, company, description, status, deadline}) {
             
             {
                 editMode ?
-                <div className='fixed inset-0 flex justify-center items-center transition-colors backdrop-blur'>
+                <div className=''>
                     <h1>EDIT FORM</h1>
                     <CloseIcon onClick={handleEditMode}/>
                 </div>

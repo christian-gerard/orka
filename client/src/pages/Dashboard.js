@@ -48,7 +48,7 @@ function Dashboard() {
                     </div>
                 </div>
 
-                <div className='flex flex-row w-full h-[75%] '>
+                <div className='flex flex-col sm:flex-row w-full h-[75%] '>
                     <div className='w-[70%]'>
                         <h1 className='text-4xl'>Projects</h1>
                         {
