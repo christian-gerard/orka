@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from django.http import Http404
 from orka.models.Project import Project
 from orka.api.serializers.ProjectSerializer import ProjectSerializer
+from pdb import set_trace
 
 class ProjectList(APIView):
 
@@ -16,6 +17,17 @@ class ProjectList(APIView):
         project = self.get_object()
         serializer = ProjectSerializer(project, many=True)
         return Response(serializer.data)
+    
+    def post(self, request):
+        serializer = ProjectSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(request.data)
+
+
+
+        return Response(serializer.errors)
     
 
 class ProjectDetail(APIView):
