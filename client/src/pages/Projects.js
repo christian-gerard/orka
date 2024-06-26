@@ -54,12 +54,20 @@ function Projects() {
                 <div className='fixed inset-0 flex flex-col justify-center items-center transition-colors backdrop-blur'>
 
                     <Formik
-                        initialValues={{name: '', deadline: '', status: '', company: ''}}
+                        initialValues={{name: '', deadline: '', status: '', client: ''}}
                         onSubmit={(values) => {
-                            console.log(values)
+                            fetch('http://127.0.0.1:8000/project/', {
+                                method: "POST",
+                                body: JSON.stringify(values),
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Authorization': `Token ${user.token}`
+                                }
+                            })
                         }}
                     >
                         <Form className='bg-white border flex flex-col'>
+                            <CloseIcon onClick={handleNewProject} />
                             <label className='p-2'>
                                 New Project
                             </label>
@@ -71,18 +79,20 @@ function Projects() {
                             className='border m-2 p-1'/>
 
                             <Field 
-                            name='name' 
+                            name='deadline' 
                             type='text'
                             placeholder='Deadline'
                             className='border m-2 p-1'/>
 
                             <Field 
-                            name='name' 
+                            name='client' 
                             type='select'
                             as='select'
-                            placeholder='Name'
+                            placeholder='client'
                             className='border m-2 p-1'>
-                                <option value=''>Select</option>
+                                <option value=''>Select Client</option>
+                                <option value='DropBox'>Dropbox</option>
+                                <option value='Liquid Death'>Liquid Death</option>
                             </Field>
 
                             <button type='submit'>Submit +</button>
