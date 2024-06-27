@@ -1,4 +1,5 @@
 from django.db import models
+from  django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 from orka.models.Client import Client
 from django.utils.timezone import now
@@ -11,8 +12,9 @@ class Project(models.Model):
 
     name = models.CharField(max_length=100)
     deadline = models.DateField(default=date.today, blank=True)
-    type = models.CharField(max_length=30)
-    status = models.CharField(max_length=30)
+    type = models.CharField(max_length=30, default='Ad Campaign')
+    status = models.CharField(max_length=30, default='Not Started')
+
 
     def __str__(self):
-        return f"{self.name} || {self.deadline} + {self.type}"
+        return f"{self.name} || {self.deadline} + {self.type} + {self.client}"
