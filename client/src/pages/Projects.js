@@ -1,14 +1,58 @@
 import Project from '../components/Project'
 import { NavLink } from 'react-router-dom'
 import { useContext, useState } from 'react'
+import { toast } from 'react-hot-toast'
 import { UserContext } from '../context/UserContext'
-import { Formik, Form, Field } from 'formik'
+import { useFormik, Formik, Form, Field } from 'formik'
+import { object, string, array, number } from "yup";
+import DatePicker from 'react-date-picker'
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 
 function Projects() {
     const { user } = useContext(UserContext)
     const [newProject, setNewProject] = useState(false)
+    const [date, dateChange] = useState(null)
+
+    const projectSchema = object({
+        name: string(),
+        type: string(),
+        status: string(),
+        deadline: string(),
+        client: number()
+      });
+
+    const initialValues = {
+        name: '', 
+        type: '',
+        deadline: '', 
+        status: '', 
+        client: ''
+    }
+
+      const formik = useFormik({
+        initialValues,
+        validationSchema: projectSchema,
+        onSubmit: (formData) => {
+
+            fetch('http://127.0.0.1:8000/project/', {
+                method: "POST",
+                body: JSON.stringify(formData),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Token ${user.token}`
+                }
+            })
+            .then(resp => {
+                if(resp.ok){
+
+                    handleNewProject()
+                    toast.success("Project Added")
+                }
+            })
+    
+        },
+      });
 
     const handleNewProject = () => {
         setNewProject(!newProject)
@@ -21,8 +65,12 @@ function Projects() {
         })
     })
 
-    return (
+    const clients = user.user.account_details.clients.map(client => {
+        return <option value={client.id}>{client.name}</option>
+    })
 
+    return (
+ 
         <div className='w-full'>
 
             <div className='text-4xl w-full flex flex-row justify-between'>
@@ -40,8 +88,8 @@ function Projects() {
                 projects 
                 
                 ? 
-                <div className='overflow-y-scroll'>
-                    projects 
+                <div className='overflow-y-scroll h-full'>
+                    {projects}
                 </div>
 
                 
@@ -56,30 +104,17 @@ function Projects() {
                 <div className='fixed inset-0 flex flex-col justify-center items-center transition-colors backdrop-blur'>
 
                     <Formik
-                        initialValues={{
-                            name: '', 
-                            deadline: '', 
-                            status: '', 
-                            client: 1, 
-                            created_at: '2024-04-04', 
-                            updated_at:'2024-04-04',
-                            type: 'Advertising'
-                        }}
-                        onSubmit={(values) => {
-                            fetch('http://127.0.0.1:8000/project/', {
-                                method: "POST",
-                                body: JSON.stringify(values),
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'Authorization': `Token ${user.token}`
-                                }
-                            })
-                        }}
+                        onSubmit={formik.handleSubmit}
+                        initialValues={initialValues}
                     >
                         <Form className='bg-white border flex flex-col'>
                             <CloseIcon onClick={handleNewProject} />
-                            <label className='p-2'>
+                            <label className='p-2 text-4xl'>
                                 New Project
+                            </label>
+
+                            <label className='ml-2'>
+                                Name
                             </label>
 
                             <Field 
@@ -88,12 +123,80 @@ function Projects() {
                             placeholder='Name'
                             className='border m-2 p-1'/>
 
+                            {formik.errors.name && formik.touched.name && (
+                                <div className="text-sm text-ocean ml-2"> **{formik.errors.name.toUpperCase()}</div>
+                            )}
+
+                            <label className='ml-2'>
+                                Type
+                            </label>
+
+                            <Field 
+                            name='type' 
+                            type='text'
+                            as='select'
+                            placeholder='Type'
+                            className='border m-2 p-1'>
+                                <option>Select Type</option>
+                                <option value='Ad Campaign'>Ad Campaign</option>
+                                <option>Social Media</option>
+                                <option>Billboard</option>
+
+                            </Field>
+                            {formik.errors.type && formik.touched.type && (
+                                <div className="text-sm text-ocean ml-2"> **{formik.errors.type.toUpperCase()}</div>
+                            )}
+                            <label className='ml-2'>
+                                Status
+                            </label>
+
+                            <Field 
+                            name='status' 
+                            as='select'
+                            placeholder='Status'
+                            className='border m-2 p-1'>
+                                <option>Select Status</option>
+                                <option value='Planning'>Planning</option>
+                                <option>In Progress</option>
+                                <option>Completed</option>
+                            </Field>
+                            {formik.errors.status && formik.touched.status && (
+                                <div className="text-sm text-ocean ml-2"> **{formik.errors.status.toUpperCase()}</div>
+                            )}
+
+                            <label className='ml-2'>
+                                Deadline
+                            </label>
+
                             <Field 
                             name='deadline' 
                             type='text'
-                            placeholder='Deadline'
-                            className='border m-2 p-1'/>
+                            placeholder='YYYY-MM-DD'
+                            className='border m-2 p-1'>
 
+                            </Field>
+
+                            {formik.errors.deadline && formik.touched.deadline && (
+                                <div className="text-sm text-ocean ml-2"> **{formik.errors.deadline.toUpperCase()}</div>
+                            )}
+
+                            <label className='ml-2'>
+                                Client
+                            </label>
+                            <Field 
+                            name='client' 
+                            as='select'
+                            placeholder='Client'
+                            className='border m-2 p-1'>
+                                <option value=''>Select Client</option>
+                                {
+                                    clients
+                                }
+                                
+                            </Field>
+                            {formik.errors.client && formik.touched.client && (
+                                <div className="text-sm text-ocean ml-2"> **{formik.errors.client.toUpperCase()}</div>
+                            )}
 
                             <button type='submit'>Submit +</button>
                         </Form>

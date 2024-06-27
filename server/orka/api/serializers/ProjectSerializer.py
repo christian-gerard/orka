@@ -13,8 +13,7 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     id = serializers.IntegerField(read_only=True)
     name = serializers.CharField()
-    deadline = serializers.DateTimeField()
-    created_at = serializers.DateTimeField()
-    updated_at = serializers.DateTimeField()
-    type = serializers.CharField()
+    deadline = serializers.DateField(required=False)
+    status = serializers.CharField(required=False, default='Not Started')
+    type = serializers.CharField(required=False, default='Ad Campaign')
     
