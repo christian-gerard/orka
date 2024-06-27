@@ -10,24 +10,26 @@ const UserProvider = ({children}) => {
     const login = (user) => setUser(user)
 
     const logout = () => {
-          try {
-              fetch('http://127.0.0.1:8000/auth/logout/', { 
-                method: 'POST', 
-                headers: {
-                    "Authorization": `Token ${user.token}`,
-                } 
-            }).then((res) => {
-                if(res.ok){
-                    toast.success('Logged Out')
-                    setUser(null)
-                }
-              })
-          } catch (err) {
-              throw err
-    }}
+          // try {
+          //     fetch('http://127.0.0.1:8000/auth/logout/', { 
+          //       method: 'POST', 
+          //       headers: {
+          //           "Authorization": `Token ${user.token}`,
+          //       } 
+          //   }).then((res) => {
+          //       if(res.ok){
+          //           toast.success('Logged Out')
+          //           setUser(null)
+          //       }
+          //     })
+          // } catch (err) {
+          //     throw err
+          setUser(null)
+          toast.success('Logged Out')
+    }
 
     const updateUser = (data) => {
-      
+
     }
   
 
