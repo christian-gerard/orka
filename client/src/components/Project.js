@@ -7,10 +7,9 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CloseIcon from '@mui/icons-material/Close';
-import Close from '@mui/icons-material/Close';
 
 function Project({id, name, company, description, status, deadline}) {
-    const { user } = useContext(UserContext)
+    const { user, updateUser } = useContext(UserContext)
     const route = useParams();
     const [currentProject, setCurrentProject] = useState(null)
     const [editMode, setEditMode] = useState(false)

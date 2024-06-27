@@ -29,7 +29,7 @@ const UserProvider = ({children}) => {
     }
 
     const updateUser = (data) => {
-
+      setUser(data)
     }
   
 

@@ -45,6 +45,7 @@ function Projects() {
             })
             .then(resp => {
                 if(resp.ok){
+
                     handleNewProject()
                     toast.success("Project Added")
                 }
