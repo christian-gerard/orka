@@ -40,8 +40,10 @@ function Projects() {
                 projects 
                 
                 ? 
+                <div className='overflow-y-scroll'>
+                    projects 
+                </div>
 
-                projects 
                 
                 :
 
@@ -54,7 +56,15 @@ function Projects() {
                 <div className='fixed inset-0 flex flex-col justify-center items-center transition-colors backdrop-blur'>
 
                     <Formik
-                        initialValues={{name: '', deadline: '', status: '', client: ''}}
+                        initialValues={{
+                            name: '', 
+                            deadline: '', 
+                            status: '', 
+                            client: 1, 
+                            created_at: '2024-04-04', 
+                            updated_at:'2024-04-04',
+                            type: 'Advertising'
+                        }}
                         onSubmit={(values) => {
                             fetch('http://127.0.0.1:8000/project/', {
                                 method: "POST",
@@ -84,16 +94,6 @@ function Projects() {
                             placeholder='Deadline'
                             className='border m-2 p-1'/>
 
-                            <Field 
-                            name='client' 
-                            type='select'
-                            as='select'
-                            placeholder='client'
-                            className='border m-2 p-1'>
-                                <option value=''>Select Client</option>
-                                <option value='DropBox'>Dropbox</option>
-                                <option value='Liquid Death'>Liquid Death</option>
-                            </Field>
 
                             <button type='submit'>Submit +</button>
                         </Form>
