@@ -25,6 +25,10 @@ const UserProvider = ({children}) => {
           } catch (err) {
               throw err
     }}
+
+    const updateUser = (data) => {
+      
+    }
   
 
   return (

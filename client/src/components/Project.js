@@ -1,7 +1,8 @@
 import { useEffect, useState, useContext } from 'react'
 import { UserContext } from '../context/UserContext'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
+import { toast } from 'react-hot-toast'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -13,6 +14,7 @@ function Project({id, name, company, description, status, deadline}) {
     const route = useParams();
     const [currentProject, setCurrentProject] = useState(null)
     const [editMode, setEditMode] = useState(false)
+    const nav = useNavigate()
 
     const handleEditMode = () => {
         setEditMode(!editMode)
@@ -21,7 +23,22 @@ function Project({id, name, company, description, status, deadline}) {
     const handleCurrentProject = (data) => {
         setCurrentProject(data)
     }
-    console.log(user)
+
+    const handleDelete = () => {
+        fetch(`http://127.0.0.1:8000/project/${route.id}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Token ${user.token}`
+            }
+        })
+        .then(resp => {
+            if(resp.ok) {
+                nav('/projects/')
+                toast.success('Project Deleted')
+            }
+        })
+    }
+
     useEffect(() => {
         if (route.id) { 
             fetch(`http://127.0.0.1:8000/project/${route.id}`,{
@@ -68,14 +85,14 @@ function Project({id, name, company, description, status, deadline}) {
 
                     <div>
                         <EditIcon onClick={handleEditMode}/>
-                        <DeleteIcon />
+                        <DeleteIcon onClick={handleDelete}/>
                     </div>
 
                 </div>
                 <p>{currentProject ? currentProject.name : 'UNNAMED'}</p>
                 <p>{company ? company : '___'}</p>
                 <p>{status ? status : 'No Status'}</p>
-                <p>{currentProject ? currentProject.deadline.slice(0,-10) : 'No Deadline'}</p>
+                <p>{currentProject ? currentProject.deadline : 'No Deadline'}</p>
             </div>
             
             

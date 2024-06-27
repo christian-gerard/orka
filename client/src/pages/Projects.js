@@ -69,7 +69,7 @@ function Projects() {
     })
 
     return (
-
+ 
         <div className='w-full'>
 
             <div className='text-4xl w-full flex flex-row justify-between'>
@@ -87,8 +87,8 @@ function Projects() {
                 projects 
                 
                 ? 
-                <div className='overflow-y-scroll'>
-                    projects 
+                <div className='overflow-y-scroll h-full'>
+                    {projects}
                 </div>
 
                 
