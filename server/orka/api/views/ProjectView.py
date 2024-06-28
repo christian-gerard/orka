@@ -22,8 +22,8 @@ class ProjectList(APIView):
         serializer = ProjectSerializer(data=request.data)
 
         if serializer.is_valid():
-            serializer.save()
-            return Response(request.data)
+            project = serializer.save()
+            return Response(ProjectSerializer(project).data)
 
 
 

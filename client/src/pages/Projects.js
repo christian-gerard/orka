@@ -10,16 +10,21 @@ import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 
 function Projects() {
-    const { user } = useContext(UserContext)
+    const { user, updateUser } = useContext(UserContext)
     const [newProject, setNewProject] = useState(false)
     const [date, dateChange] = useState(null)
 
     const projectSchema = object({
-        name: string(),
-        type: string(),
-        status: string(),
-        deadline: string(),
+        name: string()
+        .required(),
+        type: string()
+        .required(),
+        status: string()
+        .required(),
+        deadline: string()
+        .required(),
         client: number()
+        .required()
       });
 
     const initialValues = {
@@ -46,8 +51,35 @@ function Projects() {
             .then(resp => {
                 if(resp.ok){
 
-                    handleNewProject()
-                    toast.success("Project Added")
+                    return resp.json().then(data => {
+                        const updatedUser = {
+                            ...user,
+                            user: {
+                                ...user.user,
+                                account_details: {
+                                    ...user.user.account_details,
+                                    clients: user.user.account_details.clients.map(client => {
+                                        if(client.id === data.client) {
+                                            return {
+                                                ...client,
+                                                projects: [...client.projects, data]
+                                            };
+                                        }
+                                        return client;
+                                    })
+                                }
+                            }
+                        };
+
+                        updateUser(updatedUser)
+
+                        handleNewProject()
+                        toast.success("Project Added")
+
+                    })
+
+
+
                 }
             })
     
@@ -60,7 +92,6 @@ function Projects() {
 
     const projects = user.user.account_details.clients.flatMap(client => {
         return client.projects.map((project) => {
-            console.log(project.id)
             return <Project key={project.id} company={client.name} {...project}  />
         })
     })
@@ -107,7 +138,10 @@ function Projects() {
                         onSubmit={formik.handleSubmit}
                         initialValues={initialValues}
                     >
-                        <Form className='bg-white border flex flex-col'>
+                        <Form 
+                            className='bg-white border flex flex-col'
+                            onSubmit={formik.handleSubmit}
+                            initialValues={initialValues}>
                             <CloseIcon onClick={handleNewProject} />
                             <label className='p-2 text-4xl'>
                                 New Project
@@ -119,6 +153,8 @@ function Projects() {
 
                             <Field 
                             name='name' 
+                            value={formik.values.name}
+                            onChange={formik.handleChange}
                             type='text'
                             placeholder='Name'
                             className='border m-2 p-1'/>
@@ -134,6 +170,8 @@ function Projects() {
                             <Field 
                             name='type' 
                             type='text'
+                            value={formik.values.type}
+                            onChange={formik.handleChange}
                             as='select'
                             placeholder='Type'
                             className='border m-2 p-1'>
@@ -154,6 +192,8 @@ function Projects() {
                             name='status' 
                             as='select'
                             placeholder='Status'
+                            value={formik.values.status}
+                            onChange={formik.handleChange}
                             className='border m-2 p-1'>
                                 <option>Select Status</option>
                                 <option value='Planning'>Planning</option>
@@ -171,6 +211,8 @@ function Projects() {
                             <Field 
                             name='deadline' 
                             type='text'
+                            value={formik.values.deadline}
+                            onChange={formik.handleChange}
                             placeholder='YYYY-MM-DD'
                             className='border m-2 p-1'>
 
@@ -186,6 +228,8 @@ function Projects() {
                             <Field 
                             name='client' 
                             as='select'
+                            value={formik.values.client}
+                            onChange={formik.handleChange}
                             placeholder='Client'
                             className='border m-2 p-1'>
                                 <option value=''>Select Client</option>

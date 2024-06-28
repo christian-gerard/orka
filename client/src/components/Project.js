@@ -15,6 +15,7 @@ function Project({id, name, company, description, status, deadline}) {
     const [editMode, setEditMode] = useState(false)
     const nav = useNavigate()
 
+    console.log(currentProject)
     const handleEditMode = () => {
         setEditMode(!editMode)
     }
@@ -32,8 +33,33 @@ function Project({id, name, company, description, status, deadline}) {
         })
         .then(resp => {
             if(resp.ok) {
-                nav('/projects/')
-                toast.success('Project Deleted')
+
+                return resp.json().then(data => {
+                    const updatedUser = {
+                        ...user,
+                        user: {
+                            ...user.user,
+                            account_details: {
+                                ...user.user.account_details,
+                                clients: user.user.account_details.clients.map(client => {
+                                    if (client.id == currentProject.client) {
+                                        return {
+                                            ...client,
+                                            projects: client.projects.filter(project => project.id != currentProject.id)
+                                        };
+                                    }
+                                    return client; // Ensure the original client object is returned if no match is found
+                                })
+                            }
+                        }
+                    };
+
+                    updateUser(updatedUser)
+
+                    nav('/projects/')
+                    toast.success('Project Deleted')
+
+                })
             }
         })
     }
