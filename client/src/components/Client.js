@@ -45,7 +45,7 @@ function Client({id, name, status}) {
                 <NavLink to={'/clients'}>
                     <ArrowBackIcon />
                 </NavLink>
-                <h1>Indiviidual CLIENT</h1>
+                <h1>{name ? name : 'untitled'}</h1>
             </div>
 
             :
