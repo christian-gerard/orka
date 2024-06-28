@@ -15,7 +15,9 @@ function Client({id, name, status}) {
     const [editMode, setEditMode] = useState(false)
     const nav = useNavigate()
 
-
+    const handleEdit = () => {
+        setEditMode(!editMode)
+    }
     useEffect(() => {
         if (route.id) { 
             fetch(`http://127.0.0.1:8000/client/${route.id}`,{
@@ -26,6 +28,7 @@ function Client({id, name, status}) {
             .then(resp => {
                 if(resp.ok){
                     return resp.json().then((data) => {
+                        console.log(data)
                         setCurrentClient(data)
                     })
                 }
@@ -41,12 +44,33 @@ function Client({id, name, status}) {
         {
             route.id ?
 
+            <>
+
+            {
+                editMode ?
+                <div>
+                    <h1>EDIT FORM</h1>
+                </div>
+
+                :
+                <></>
+            }
+            
             <div>
                 <NavLink to={'/clients'}>
                     <ArrowBackIcon />
                 </NavLink>
-                <h1>{name ? name : 'untitled'}</h1>
+                <DeleteIcon />
+                <EditIcon onClick={handleEdit}/>
+                <h1>{currentClient ? currentClient.name : 'untitled'}</h1>
+                <p>{currentClient ? currentClient.type : 'Inactive'}</p>
+                <p>{currentClient ? currentClient.client_img : 'Inactive'}</p>
+                <p>{currentClient ? currentClient.isActive : 'Inactive'}</p>
             </div>
+            
+            
+            </>
+
 
             :
                 <NavLink to={`/clients/${id}`}>
