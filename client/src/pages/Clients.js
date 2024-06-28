@@ -5,27 +5,37 @@ import { useFormik, Formik, Form, Field } from 'formik'
 import { UserContext } from '../context/UserContext'
 import CloseIcon from '@mui/icons-material/Close';
 import { object, string, array, number } from "yup";
+import { useDropzone} from 'react-dropzone'
+import UploadFileIcon from '@mui/icons-material/UploadFile';
 
 
 function Clients() {
     const { user,updateUser } = useContext(UserContext)
     const [newClient, setNewClient] = useState(false)
+    const [files, setFiles] = useState([]);
+    const {getRootProps, getInputProps, isDragActive} = useDropzone({
+        accept: 'image/*',
+        onDrop: acceptedFiles => {
+          setFiles(acceptedFiles.map(file => Object.assign(file, {
+            preview: URL.createObjectURL(file)
+          })));
+        }
+      });
     const clients = user.user.account_details.clients.flatMap(client => {
         return <Client key={client.id} {...client}/>
     })
 
     const clientSchema = object({
-        name: string()
-        .required(),
-        type: string()
-        .required(),
-        account: number()
-        .required()
+        name: string(),
+        type: string(),
+        account: number(),
+
       });
 
     const initialValues = {
         name: '', 
         type: '',
+        isActive: null,
         account: ''
     }
 
@@ -76,6 +86,9 @@ function Clients() {
     })
 
 
+    const removeFile = (name) => {
+        setFiles(files => files.filter(file => file.name !== name ))
+      }
 
 
     const handleNewClient = () => {
@@ -93,8 +106,12 @@ function Clients() {
                     onSubmit={formik.handleSubmit}
                     initialValues={initialValues}
                 >
-                    <Form className='bg-white border flex flex-col'>
-
+                    <Form 
+                    className='bg-white border flex flex-col'
+                    onSubmit={formik.handleSubmit}
+                    initialValues={initialValues}
+                    >
+                        <label> New Client </label>
                         <Field
                             name='name'
                             value={formik.values.name}
@@ -136,19 +153,48 @@ function Clients() {
                             <div className="text-sm text-ocean ml-2"> **{formik.errors.isActive.toUpperCase()}</div>
                         )}
 
+                <div  {...getRootProps({className: 'dropzone'})}>
+                  <input {...getInputProps()} />
+                  <p className='bg-ocean border text-black m-2 p-2rounded-lg'>
 
-                        <Field
-                            name='Client Image'
-                            value={formik.values.name}
-                            onChange={formik.handleChange}
-                            type='text'
-                            placeholder='Name'
-                            className='border m-2 p-2'
-                        />
+                    <UploadFileIcon />
+                    Drag or Click Here 
+                    
+                    </p>
+                </div>
 
-                        {formik.errors.name && formik.touched.name && (
-                            <div className="text-sm text-ocean ml-2"> **{formik.errors.name.toUpperCase()}</div>
-                        )}
+                  {files[0] ? 
+                  <div className='flex flex-row justify-between bg-champagne p-2 m-2 rounded-lg '> 
+
+                    <div clasName='flex flex-row'>
+                      <img alt='img_preview' src={files[0].preview} className='h-[50px] w-[50px]' />
+
+                      <div className='flex flex-col'> 
+
+                        <p>{files[0].name}</p>
+                        <p>{files[0].size}</p>
+                        
+                      </div>
+
+                    </div>
+
+
+                    <div className='flex flex-col'>
+
+                      <button 
+                        className='bg-shittake text-black rounded-lg p-1'
+                        onClick={() => removeFile(files[0].name)}
+                      >
+                        Remove
+                      </button>
+
+                    </div>
+
+                  </div>
+                  : 
+                  <h1>No file Uploaded</h1>}
+
+
 
                         <button type='submit'> + Add Client </button>
 
