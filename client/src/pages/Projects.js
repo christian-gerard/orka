@@ -103,9 +103,9 @@ function Projects() {
 
     return (
  
-        <div className='w-full'>
+        <div className='w-full h-full overflow-hidden'>
 
-            <div className='text-4xl w-full flex flex-row justify-between'>
+            <div className='text-4xl  flex flex-row justify-between'>
 
                 <h1 className='underline'>Projects</h1>
 
@@ -121,7 +121,7 @@ function Projects() {
                 
                 ? 
 
-                <div className='overflow-y-scroll h-full'>
+                <div className='overflow-y-scroll bottom-0'>
                     {projects}
                 </div>
                 :
