@@ -13,7 +13,6 @@ function Projects() {
     const { user, updateUser } = useContext(UserContext)
     const [newProject, setNewProject] = useState(false)
     const [date, dateChange] = useState(null)
-    console.log(user)
 
     const projectSchema = object({
         name: string()
@@ -51,10 +50,28 @@ function Projects() {
             })
             .then(resp => {
                 if(resp.ok){
-                    console.log(resp)
 
                     return resp.json().then(data => {
-                        console.log(data)
+                        const updatedUser = {
+                            ...user,
+                            user: {
+                                ...user.user,
+                                account_details: {
+                                    ...user.user.account_details,
+                                    clients: user.user.account_details.clients.map(client => {
+                                        if(client.id === data.client) {
+                                            return {
+                                                ...client,
+                                                projects: [...client.projects, data]
+                                            };
+                                        }
+                                        return client;
+                                    })
+                                }
+                            }
+                        };
+
+                        updateUser(updatedUser)
 
                         handleNewProject()
                         toast.success("Project Added")
