@@ -17,6 +17,17 @@ class ClientList(APIView):
         serializer = ClientSerializer(client, many=True)
         return Response(serializer.data)
     
+    def post(self,request):
+        serializer = ClientSerializer(data=request.data)
+
+        if serializer.is_valid():
+            client = serializer.save()
+            return Response(ClientSerializer(client).data)
+
+
+
+        return Response(serializer.errors)
+    
 
 class ClientDetail(APIView):
 
