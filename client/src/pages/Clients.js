@@ -110,35 +110,35 @@ function Clients() {
 
 
                         <Field
-                            name='name'
-                            value={formik.values.name}
+                            name='type'
+                            value={formik.values.type}
                             onChange={formik.handleChange}
                             type='text'
-                            placeholder='Name'
+                            placeholder='type'
                             className='border m-2 p-2'
                         />
 
-                        {formik.errors.name && formik.touched.name && (
-                            <div className="text-sm text-ocean ml-2"> **{formik.errors.name.toUpperCase()}</div>
+                        {formik.errors.type && formik.touched.type && (
+                            <div className="text-sm text-ocean ml-2"> **{formik.errors.type.toUpperCase()}</div>
                         )}
 
 
                         <Field
-                            name='name'
-                            value={formik.values.name}
+                            name='isActive'
+                            value={formik.values.isActive}
                             onChange={formik.handleChange}
                             type='text'
-                            placeholder='Name'
+                            placeholder='Active?'
                             className='border m-2 p-2'
                         />
 
-                        {formik.errors.name && formik.touched.name && (
-                            <div className="text-sm text-ocean ml-2"> **{formik.errors.name.toUpperCase()}</div>
+                        {formik.errors.isActive && formik.touched.isActive && (
+                            <div className="text-sm text-ocean ml-2"> **{formik.errors.isActive.toUpperCase()}</div>
                         )}
 
 
                         <Field
-                            name='name'
+                            name='Client Image'
                             value={formik.values.name}
                             onChange={formik.handleChange}
                             type='text'
@@ -150,19 +150,8 @@ function Clients() {
                             <div className="text-sm text-ocean ml-2"> **{formik.errors.name.toUpperCase()}</div>
                         )}
 
+                        <button type='submit'> + Add Client </button>
 
-                        <Field
-                            name='name'
-                            value={formik.values.name}
-                            onChange={formik.handleChange}
-                            type='text'
-                            placeholder='Name'
-                            className='border m-2 p-2'
-                        />
-
-                        {formik.errors.name && formik.touched.name && (
-                            <div className="text-sm text-ocean ml-2"> **{formik.errors.name.toUpperCase()}</div>
-                        )}
 
                     </Form>
 
