@@ -24,9 +24,7 @@ class ClientList(APIView):
             client = serializer.save()
             return Response(ClientSerializer(client).data)
 
-
-
-        return Response(serializer.errors)
+        return Response(serializer.errors,status=404)
     
 
 class ClientDetail(APIView):
@@ -41,3 +39,8 @@ class ClientDetail(APIView):
         client = self.get_object(pk)
         serializer = ClientSerializer(client)
         return Response(serializer.data)
+    
+    def delete(self, request, pk, format=None):
+        client = self.get_object(pk)
+        client.delete()
+        return Response('DELETE SUCCESSFUL')

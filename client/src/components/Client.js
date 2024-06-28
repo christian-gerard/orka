@@ -19,6 +19,39 @@ function Client({id, name, status}) {
     const handleEdit = () => {
         setEditMode(!editMode)
     }
+
+    const handleDelete = () => {
+        fetch(`http://127.0.0.1:8000/client/${route.id}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Token ${user.token}`
+            }
+        })
+        .then(resp => {
+            if(resp.ok) {
+
+                return resp.json().then(data => {
+                    const updatedUser = {
+                        ...user,
+                        user: {
+                            ...user.user,
+                            account_details: {
+                                ...user.user.account_details,
+                                clients: user.user.account_details.clients.filter( client => client.id !== currentClient.id)
+                            }
+                        }
+                    };
+
+                    updateUser(updatedUser)
+
+                    nav('/clients/')
+                    toast.success('Client Deleted')
+
+                })
+            }
+        })
+    }
+
     useEffect(() => {
         if (route.id) { 
             fetch(`http://127.0.0.1:8000/client/${route.id}`,{
@@ -61,7 +94,7 @@ function Client({id, name, status}) {
                 <NavLink to={'/clients'}>
                     <ArrowBackIcon />
                 </NavLink>
-                <DeleteIcon />
+                <DeleteIcon onClick={handleDelete} />
                 <EditIcon onClick={handleEdit}/>
                 <h1>{currentClient ? currentClient.name : 'untitled'}</h1>
                 <p>{currentClient ? currentClient.type : 'Inactive'}</p>

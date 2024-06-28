@@ -4,13 +4,14 @@ import { toast } from 'react-hot-toast'
 import { useFormik, Formik, Form, Field } from 'formik'
 import { UserContext } from '../context/UserContext'
 import CloseIcon from '@mui/icons-material/Close';
-import { object, string, array, number } from "yup";
+import { object, string, array, number, bool } from "yup";
 import { useDropzone} from 'react-dropzone'
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 
 
 function Clients() {
     const { user,updateUser } = useContext(UserContext)
+    console.log(user)
     const [newClient, setNewClient] = useState(false)
     const [files, setFiles] = useState([]);
     const {getRootProps, getInputProps, isDragActive} = useDropzone({
@@ -26,8 +27,10 @@ function Clients() {
     })
 
     const clientSchema = object({
-        name: string(),
+        name: string()
+        .required(),
         type: string(),
+        isActive: bool(),
         account: number(),
 
       });
@@ -36,13 +39,15 @@ function Clients() {
         name: '', 
         type: '',
         isActive: null,
-        account: ''
+        account: user.user.account_details.id
     }
+    console.log(initialValues)
 
     const formik = useFormik({
         initialValues,
         validationSchema: clientSchema,
         onSubmit: (formData) => {
+
 
             fetch('http://127.0.0.1:8000/client/', {
                 method: "POST",
@@ -145,9 +150,13 @@ function Clients() {
                             value={formik.values.isActive}
                             onChange={formik.handleChange}
                             type='text'
+                            as='select'
                             placeholder='Active?'
                             className='border m-2 p-2'
-                        />
+                        >
+                            <option value='true'>Yes</option>
+                            <option value='false'>No</option>
+                        </Field>
 
                         {formik.errors.isActive && formik.touched.isActive && (
                             <div className="text-sm text-ocean ml-2"> **{formik.errors.isActive.toUpperCase()}</div>
