@@ -28,7 +28,7 @@ function Dashboard() {
 
     console.log(projects)
     return(
-        <div className=' flex flex-col h-full'>
+        <div className=' flex flex-col h-full overflow-hidden'>
 
             <div className='mb-4'>
                 <h1 className='text-5xl underline'>Dashboard</h1>
@@ -49,7 +49,7 @@ function Dashboard() {
                 </div>
 
                 <div className='flex flex-col sm:flex-row w-full h-[75%] '>
-                    <div className='w-[70%]'>
+                    <div className='w-[70%] overflow-y-scroll'>
                         <h1 className='text-4xl'>Projects</h1>
                         {
                             user ?

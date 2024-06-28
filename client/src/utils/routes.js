@@ -6,6 +6,7 @@ import Project from '../components/Project'
 import Dashboard from '../pages/Dashboard'
 import Projects from '../pages/Projects'
 import Clients from '../pages/Clients'
+import Client from '../components/Client'
 import Settings from '../pages/Settings'
 
 
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
             {
                 path: '/clients',
                 element: <Clients />,
+            },
+            {
+                path:'/clients/:id',
+                element: <Client />
             },
             {
                 path: '/settings',

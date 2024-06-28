@@ -15,7 +15,6 @@ function Project({id, name, company, description, status, deadline}) {
     const [editMode, setEditMode] = useState(false)
     const nav = useNavigate()
 
-    console.log(currentProject)
     const handleEditMode = () => {
         setEditMode(!editMode)
     }
