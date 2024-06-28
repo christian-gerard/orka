@@ -96,15 +96,16 @@ function Projects() {
         })
     })
 
+
     const clients = user.user.account_details.clients.map(client => {
         return <option value={client.id}>{client.name}</option>
     })
 
     return (
  
-        <div className='w-full'>
+        <div className='w-full h-full overflow-hidden'>
 
-            <div className='text-4xl w-full flex flex-row justify-between'>
+            <div className='text-4xl  flex flex-row justify-between'>
 
                 <h1 className='underline'>Projects</h1>
 
@@ -116,17 +117,16 @@ function Projects() {
             </div>
 
             {
-                projects 
+                projects.length !== 0
                 
                 ? 
-                <div className='overflow-y-scroll h-full'>
+
+                <div className='overflow-y-scroll bottom-0'>
                     {projects}
                 </div>
-
-                
                 :
 
-                <h1>No Name</h1>
+                <h1 className='text-3xl w-full h-full flex justify-center align-center'>No Projects</h1>
             }
 
             {
