@@ -22,10 +22,7 @@ function Project({id, name, company, description, status, deadline}) {
         return <option value={client.id}>{client.name}</option>
     })
 
-    const prodneeds = user.user.account_details.clients.map(client => {
-        return  <ProductionNeed/>
-
-    })
+    const prodneeds = <ProductionNeed />
 
     const projectSchema = object({
         name: string()
@@ -165,7 +162,6 @@ function Project({id, name, company, description, status, deadline}) {
             .then(resp => {
                 if(resp.ok){
                     return resp.json().then((data) => {
-                        console.log(data)
 
                         formik.setValues({
                             name: data.name,
