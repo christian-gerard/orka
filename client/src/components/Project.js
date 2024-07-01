@@ -22,7 +22,10 @@ function Project({id, name, company, description, status, deadline}) {
         return <option value={client.id}>{client.name}</option>
     })
 
-    const prodneeds = user.user.account_details
+    const prodneeds = user.user.account_details.clients.map(client => {
+        return  <ProductionNeed/>
+
+    })
 
     const projectSchema = object({
         name: string()
@@ -335,6 +338,7 @@ function Project({id, name, company, description, status, deadline}) {
 
             <div className='border border-black rounded-xl my-4 mx-4 p-4'>
                 <h1>Prod Needs</h1>
+                {prodneeds ? prodneeds : "No Project Tasks"}
             </div>
             
             
