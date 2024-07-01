@@ -32,7 +32,7 @@ function Nav() {
                     </span>
 
                     <NavLink to='/dashboard' className='animate-spacing-reverse hover:animate-spacing-forward hover:text-ocean'>
-                        ORKA
+                        ORKA FOREVER
                     </NavLink>
 
                 </h1>

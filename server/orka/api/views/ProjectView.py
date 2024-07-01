@@ -42,6 +42,14 @@ class ProjectDetail(APIView):
         project = self.get_object(pk)
         serializer = ProjectSerializer(project)
         return Response(serializer.data)
+
+    def patch(self, request, pk, format=None):
+        project = self.get_object(pk)
+        serializer = ProjectSerializer(project, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors)
     
     def delete(self, request, pk, format=None):
         project = self.get_object(pk)
