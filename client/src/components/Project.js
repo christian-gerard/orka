@@ -7,6 +7,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { object, string, array, number } from "yup";
 import { useFormik, Field, Form, Formik } from "formik";
 import EditIcon from '@mui/icons-material/Edit';
+import ProductionNeed from './ProductionNeed'
 import DeleteIcon from '@mui/icons-material/Delete';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -20,6 +21,8 @@ function Project({id, name, company, description, status, deadline}) {
     const clients = user.user.account_details.clients.map(client => {
         return <option value={client.id}>{client.name}</option>
     })
+
+    const prodneeds = user.user.account_details
 
     const projectSchema = object({
         name: string()
@@ -48,7 +51,7 @@ function Project({id, name, company, description, status, deadline}) {
         validationSchema: projectSchema,
         onSubmit: (formData) => {
 
-            fetch('http://127.0.0.1:8000/project/', {
+            fetch(`http://127.0.0.1:8000/project/${route.id}`, {
                 method: "PATCH",
                 body: JSON.stringify(formData),
                 headers: {
@@ -70,7 +73,12 @@ function Project({id, name, company, description, status, deadline}) {
                                         if(client.id === data.client) {
                                             return {
                                                 ...client,
-                                                projects: [...client.projects, data]
+                                                projects: client.projects.map((project) => {
+                                                    if (project.id === data.id) {
+                                                        return data
+                                                    }
+                                                    return project
+                                                })
                                             };
                                         }
                                         return client;
@@ -79,11 +87,12 @@ function Project({id, name, company, description, status, deadline}) {
                             }
                         };
 
-                        debugger
-
                         updateUser(updatedUser)
+                        handleEditMode()
 
                         toast.success("Project Updated")
+
+                        
 
                     })
 
@@ -169,7 +178,7 @@ function Project({id, name, company, description, status, deadline}) {
             })
         }
 
-        }, [route.id]);
+        }, [route.id, editMode]);
 
 
     return(
@@ -243,8 +252,8 @@ function Project({id, name, company, description, status, deadline}) {
                             className='border m-2 p-1'>
                                 <option>Select Status</option>
                                 <option value='Planning'>Planning</option>
-                                <option>In Progress</option>
-                                <option>Completed</option>
+                                <option value='In Progress'>In Progress</option>
+                                <option value='Completed'>Completed</option>
                             </Field>
                             {formik.errors.status && formik.touched.status && (
                                 <div className="text-sm text-ocean ml-2"> **{formik.errors.status.toUpperCase()}</div>
@@ -318,9 +327,14 @@ function Project({id, name, company, description, status, deadline}) {
 
                 </div>
                 <p>{currentProject ? currentProject.name : 'UNNAMED'}</p>
-                <p>{company ? company : '___'}</p>
-                <p>{status ? status : 'No Status'}</p>
+                <p>{company ? currentProject.client : '___'}</p>
+                <p>{status ? currentProject.status : 'No Status'}</p>
                 <p>{currentProject ? currentProject.deadline : 'No Deadline'}</p>
+            </div>
+
+
+            <div className='border border-black rounded-xl my-4 mx-4 p-4'>
+                <h1>Prod Needs</h1>
             </div>
             
             
