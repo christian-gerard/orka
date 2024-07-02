@@ -22,7 +22,8 @@ function Project({id, name, company, description, status, deadline}) {
         return <option value={client.id}>{client.name}</option>
     })
 
-    const prodneeds = <ProductionNeed />
+    const prodneeds = user.user.account_details.clients
+        .filter(client => client.id === currentProject.client)
 
     const projectSchema = object({
         name: string()
