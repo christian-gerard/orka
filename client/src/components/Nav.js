@@ -12,7 +12,7 @@ import WavesIcon from '@mui/icons-material/Waves';
 
 
 function Nav() {
-    const { logout } = useContext(UserContext)
+    const { logout, user } = useContext(UserContext)
     const [navOpen, setNavOpen] = useState(true)
 
     const handleNav = () => {
@@ -32,13 +32,14 @@ function Nav() {
                     </span>
 
                     <NavLink to='/dashboard' className='animate-spacing-reverse hover:animate-spacing-forward hover:text-ocean'>
-                        ORKA FOREVER
+                        ORKA
                     </NavLink>
 
                 </h1>
 
             
             </div>
+
 
             <div className='z-10'>
 
@@ -83,6 +84,8 @@ function Nav() {
 
 
                     </h1>
+
+                    <h1>{user.user.account_details.name}</h1>
 
                     { navOpen ?
 
