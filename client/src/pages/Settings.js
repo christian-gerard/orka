@@ -11,7 +11,16 @@ function Settings() {
 
             </div>
 
-            <div></div>
+            <div>
+
+                <div>
+                    <h1>Manage Users</h1>
+
+                    <h1>Manage Account Info</h1>
+
+                    <h1></h1>
+                </div>
+            </div>
 
         </div>
     )

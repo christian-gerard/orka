@@ -32,6 +32,8 @@ function Dashboard() {
 
             <div className='mb-4'>
                 <h1 className='text-5xl underline'>Dashboard</h1>
+
+                <h1>{user.user.account_details.name}</h1>
             </div>
 
 

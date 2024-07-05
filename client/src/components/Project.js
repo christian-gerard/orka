@@ -22,7 +22,7 @@ function Project({id, name, company, description, status, deadline}) {
         return <option value={client.id}>{client.name}</option>
     })
 
-    const prod_needs = 3
+    const prod_needs = currentProject.prod_needs
     
    
     
@@ -47,7 +47,6 @@ function Project({id, name, company, description, status, deadline}) {
         status: '', 
         client: ''
     }
-    console.log(currentProject)
 
     const formik = useFormik({
         initialValues,
@@ -337,7 +336,7 @@ function Project({id, name, company, description, status, deadline}) {
 
             <div className='border border-black rounded-xl my-4 mx-4 p-4'>
                 <h1>Prod Needs</h1>
-                {prod_needs ? prod_needs : "No Project Tasks"}
+                {prod_needs.length === 0 ? prod_needs : "No Project Tasks"}
             </div>
             
             
