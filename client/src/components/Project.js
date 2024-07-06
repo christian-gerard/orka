@@ -19,14 +19,12 @@ function Project({id, name, company, description, status, deadline}) {
     const [budgItems, setBudgItems] = useState([])
     const [editMode, setEditMode] = useState(false)
     const [newProdNeed, setNewProdNeed] = useState(false)
+    const [newBudgItem, setNewBudgItem] = useState(false)
     const nav = useNavigate()
 
     const clients = user.user.account_details.clients.map(client => {
         return <option value={client.id}>{client.name}</option>
     })
-
-
-    
 
     const projectSchema = object({
         name: string()
@@ -41,12 +39,33 @@ function Project({id, name, company, description, status, deadline}) {
         .required()
       });
 
+      const prodNeedSchema = object({
+        description: string()
+        .required(),
+        type: string()
+        .required(),
+        note: string()
+        .required(),
+        deadline: string()
+        .required(),
+        project: number()
+        .required()
+      });
+
     const initialValues = {
         name: '', 
         type: '',
         deadline: '', 
         status: '', 
         client: ''
+    }
+
+    const prodNeedInitialValues = {
+        description: '',
+        type: '',
+        note: '',
+        deadline: '',
+        project:''
     }
 
     const formik = useFormik({
@@ -107,6 +126,14 @@ function Project({id, name, company, description, status, deadline}) {
         },
       });
 
+      const prodNeedFormik = useFormik({
+        prodNeedInitialValues,
+        validationSchema: prodNeedSchema,
+        onSubmit: (formData) => { 
+
+        }
+      });
+
     const handleEditMode = () => {
         setEditMode(!editMode)
     }
@@ -157,6 +184,10 @@ function Project({id, name, company, description, status, deadline}) {
 
     const handleNewProdNeed = () => {
         setNewProdNeed(!newProdNeed)
+    }
+
+    const handleNewBudgItem = () => {
+        setNewBudgItem(!newBudgItem)
     }
 
     useEffect(() => {
@@ -383,19 +414,27 @@ function Project({id, name, company, description, status, deadline}) {
                 <div className='flex flex-row justify-between'>
                     <h1>Budget Items</h1>
                     <div className='border'>
-                        <button onClick={handleNewProdNeed}>
+                        <button onClick={handleNewBudgItem}>
                         New +
                         </button>
                     </div>
                 </div>
-                {budgItems? budgItems : "No Budget ITems"}
-                { newProdNeed ?
-                    <div>
-                        <input 
-                            className='border my-2 p-1'
-                            placeholder='Description'
-                        />
-                    </div>
+
+                {budgItems? budgItems : "No Budget Items"}
+                { newBudgItem ?
+                    <Formik>
+                        <Form>
+                            <Field 
+                                name='deadline' 
+                                type='text'
+                                value={prodNeedFormik.values.deadline}
+                                onChange={prodNeedFormik.handleChange}
+                                placeholder='YYYY-MM-DD'
+                                className='border m-2 p-1'>
+
+                            </Field>
+                        </Form>
+                    </Formik>
                     :
                     <>
                     </>
