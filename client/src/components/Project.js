@@ -15,15 +15,16 @@ function Project({id, name, company, description, status, deadline}) {
     const { user, updateUser } = useContext(UserContext)
     const route = useParams();
     const [currentProject, setCurrentProject] = useState(null)
+    const [prodNeeds, setProdNeeds] = useState([])
+    const [budgItems, setBudgItems] = useState([])
     const [editMode, setEditMode] = useState(false)
+    const [newProdNeed, setNewProdNeed] = useState(false)
+    const [newBudgItem, setNewBudgItem] = useState(false)
     const nav = useNavigate()
 
     const clients = user.user.account_details.clients.map(client => {
         return <option value={client.id}>{client.name}</option>
     })
-
-    const prodneeds = user.user.account_details.clients
-        .filter(client => client.id === currentProject.client)
 
     const projectSchema = object({
         name: string()
@@ -38,6 +39,19 @@ function Project({id, name, company, description, status, deadline}) {
         .required()
       });
 
+      const prodNeedSchema = object({
+        description: string()
+        .required(),
+        type: string()
+        .required(),
+        note: string()
+        .required(),
+        deadline: string()
+        .required(),
+        project: number()
+        .required()
+      });
+
     const initialValues = {
         name: '', 
         type: '',
@@ -45,7 +59,14 @@ function Project({id, name, company, description, status, deadline}) {
         status: '', 
         client: ''
     }
-    console.log(currentProject)
+
+    const prodNeedInitialValues = {
+        description: '',
+        type: '',
+        note: '',
+        deadline: '',
+        project:''
+    }
 
     const formik = useFormik({
         initialValues,
@@ -105,6 +126,14 @@ function Project({id, name, company, description, status, deadline}) {
         },
       });
 
+      const prodNeedFormik = useFormik({
+        prodNeedInitialValues,
+        validationSchema: prodNeedSchema,
+        onSubmit: (formData) => { 
+
+        }
+      });
+
     const handleEditMode = () => {
         setEditMode(!editMode)
     }
@@ -153,6 +182,14 @@ function Project({id, name, company, description, status, deadline}) {
         })
     }
 
+    const handleNewProdNeed = () => {
+        setNewProdNeed(!newProdNeed)
+    }
+
+    const handleNewBudgItem = () => {
+        setNewBudgItem(!newBudgItem)
+    }
+
     useEffect(() => {
         if (route.id) { 
             fetch(`http://127.0.0.1:8000/project/${route.id}`,{
@@ -179,6 +216,23 @@ function Project({id, name, company, description, status, deadline}) {
         }
 
         }, [route.id, editMode]);
+
+    useEffect(() => {
+        if (currentProject) {
+            const updatedProdNeeds = currentProject.prod_needs.map(prod_need => {
+                return <ProductionNeed key={prod_need.id} {...prod_need} />
+            });
+
+            const updatedBudgItems = currentProject.budg_items.map(budg_item => {
+                // return <ProductionNeed key={budg_item.id} {...budg_item} />
+                return "BUDG ITEM"
+            });
+
+            setProdNeeds(updatedProdNeeds);
+            setBudgItems(updatedBudgItems)
+        }
+    }, [currentProject]);
+
 
 
     return(
@@ -334,8 +388,57 @@ function Project({id, name, company, description, status, deadline}) {
 
 
             <div className='border border-black rounded-xl my-4 mx-4 p-4'>
-                <h1>Prod Needs</h1>
-                {prodneeds ? prodneeds : "No Project Tasks"}
+                <div className='flex flex-row justify-between'>
+                    <h1>Prod Needs</h1>
+                    <div className='border'>
+                        <button onClick={handleNewProdNeed}>
+                        New +
+                        </button>
+                    </div>
+                </div>
+                {prodNeeds ? prodNeeds : "No Project Tasks"}
+                { newProdNeed ?
+                    <div>
+                        <input 
+                            className='border my-2 p-1'
+                            placeholder='Description'
+                        />
+                    </div>
+                    :
+                    <>
+                    </>
+                }
+            </div>
+
+            <div className='border border-black rounded-xl my-4 mx-4 p-4'>
+                <div className='flex flex-row justify-between'>
+                    <h1>Budget Items</h1>
+                    <div className='border'>
+                        <button onClick={handleNewBudgItem}>
+                        New +
+                        </button>
+                    </div>
+                </div>
+
+                {budgItems? budgItems : "No Budget Items"}
+                { newBudgItem ?
+                    <Formik>
+                        <Form>
+                            <Field 
+                                name='deadline' 
+                                type='text'
+                                value={prodNeedFormik.values.deadline}
+                                onChange={prodNeedFormik.handleChange}
+                                placeholder='YYYY-MM-DD'
+                                className='border m-2 p-1'>
+
+                            </Field>
+                        </Form>
+                    </Formik>
+                    :
+                    <>
+                    </>
+                }
             </div>
             
             
