@@ -15,16 +15,17 @@ function Project({id, name, company, description, status, deadline}) {
     const { user, updateUser } = useContext(UserContext)
     const route = useParams();
     const [currentProject, setCurrentProject] = useState(null)
+    const [prodNeeds, setProdNeeds] = useState([])
+    const [budgItems, setBudgItems] = useState([])
     const [editMode, setEditMode] = useState(false)
+    const [newProdNeed, setNewProdNeed] = useState(false)
     const nav = useNavigate()
 
     const clients = user.user.account_details.clients.map(client => {
         return <option value={client.id}>{client.name}</option>
     })
 
-    const prod_needs = currentProject.prod_needs
-    
-   
+
     
 
     const projectSchema = object({
@@ -154,6 +155,10 @@ function Project({id, name, company, description, status, deadline}) {
         })
     }
 
+    const handleNewProdNeed = () => {
+        setNewProdNeed(!newProdNeed)
+    }
+
     useEffect(() => {
         if (route.id) { 
             fetch(`http://127.0.0.1:8000/project/${route.id}`,{
@@ -180,6 +185,23 @@ function Project({id, name, company, description, status, deadline}) {
         }
 
         }, [route.id, editMode]);
+
+    useEffect(() => {
+        if (currentProject) {
+            const updatedProdNeeds = currentProject.prod_needs.map(prod_need => {
+                return <ProductionNeed key={prod_need.id} {...prod_need} />
+            });
+
+            const updatedBudgItems = currentProject.budg_items.map(budg_item => {
+                // return <ProductionNeed key={budg_item.id} {...budg_item} />
+                return "BUDG ITEM"
+            });
+
+            setProdNeeds(updatedProdNeeds);
+            setBudgItems(updatedBudgItems)
+        }
+    }, [currentProject]);
+
 
 
     return(
@@ -335,8 +357,49 @@ function Project({id, name, company, description, status, deadline}) {
 
 
             <div className='border border-black rounded-xl my-4 mx-4 p-4'>
-                <h1>Prod Needs</h1>
-                {prod_needs.length === 0 ? prod_needs : "No Project Tasks"}
+                <div className='flex flex-row justify-between'>
+                    <h1>Prod Needs</h1>
+                    <div className='border'>
+                        <button onClick={handleNewProdNeed}>
+                        New +
+                        </button>
+                    </div>
+                </div>
+                {prodNeeds ? prodNeeds : "No Project Tasks"}
+                { newProdNeed ?
+                    <div>
+                        <input 
+                            className='border my-2 p-1'
+                            placeholder='Description'
+                        />
+                    </div>
+                    :
+                    <>
+                    </>
+                }
+            </div>
+
+            <div className='border border-black rounded-xl my-4 mx-4 p-4'>
+                <div className='flex flex-row justify-between'>
+                    <h1>Budget Items</h1>
+                    <div className='border'>
+                        <button onClick={handleNewProdNeed}>
+                        New +
+                        </button>
+                    </div>
+                </div>
+                {budgItems? budgItems : "No Budget ITems"}
+                { newProdNeed ?
+                    <div>
+                        <input 
+                            className='border my-2 p-1'
+                            placeholder='Description'
+                        />
+                    </div>
+                    :
+                    <>
+                    </>
+                }
             </div>
             
             
