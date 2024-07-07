@@ -126,7 +126,7 @@ function Project({id, name, company, description, status, deadline}) {
         },
       });
 
-      const prodNeedFormik = useFormik({
+    const prodNeedFormik = useFormik({
         prodNeedInitialValues,
         validationSchema: prodNeedSchema,
         onSubmit: (formData) => { 
@@ -233,7 +233,7 @@ function Project({id, name, company, description, status, deadline}) {
         }
     }, [currentProject]);
 
-
+    console.log(prodNeedFormik.values)
 
     return(
         <>
@@ -427,8 +427,8 @@ function Project({id, name, company, description, status, deadline}) {
                             <Field 
                                 name='deadline' 
                                 type='text'
-                                value={prodNeedFormik.values.deadline}
-                                onChange={prodNeedFormik.handleChange}
+                                // value={prodNeedFormik.values.deadline}
+                                // onChange={prodNeedFormik.handleChange}
                                 placeholder='YYYY-MM-DD'
                                 className='border m-2 p-1'>
 
