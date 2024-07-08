@@ -40,8 +40,6 @@ function ProductionNeed({description, deadline, note, type }) {
         validationSchema: prodNeedSchema,
         onSubmit: (formData) => { 
 
-
-
             // Add Project to Form Data
 
             formData['project'] = parseInt(route.id)
@@ -104,6 +102,9 @@ function ProductionNeed({description, deadline, note, type }) {
       });
 
 
+    const handleDelete = () => {
+        
+    }
     useEffect(() => {
         fetch('http://127.0.0.1:8000/productionneed/', {
             headers: {
