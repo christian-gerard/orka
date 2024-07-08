@@ -105,7 +105,7 @@ function BudgetItem({}) {
 
 
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/productionneed/', {
+        fetch('http://127.0.0.1:8000/budgetitems/', {
             headers: {
                 'Authorization': `Token ${user.token}`
             }
