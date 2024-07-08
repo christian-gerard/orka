@@ -6,12 +6,12 @@ import { object, string, array, number } from "yup";
 import { toast } from 'react-hot-toast'
 
 
-function ProductionNeed({description, deadline, note, type }) {
+function BudgetItem({}) {
 
     const route = useParams();
 
     const { user, updateUser } = useContext(UserContext)
-    const [prodNeeds, setProdNeeds] = useState([])
+    const [budgItems, setBudgItems] = useState([])
     const [newProdNeed, setNewProdNeed] = useState(false)
 
     const handleNewProdNeed = () => {
@@ -114,7 +114,7 @@ function ProductionNeed({description, deadline, note, type }) {
         .then(resp => {
             if(resp.ok){
                 return  resp.json().then(data => {
-                    setProdNeeds(data)
+                    setBudgItems(data)
                 })
             }
         })
@@ -130,30 +130,17 @@ function ProductionNeed({description, deadline, note, type }) {
             
             <div className='border border-black rounded-xl my-4 mx-4 p-4'>
                 <div className='flex flex-row justify-between'>
-                    <h1>Prod Needs</h1>
+                    <h1>Budget Items</h1>
                     <div className='border'>
                         <button onClick={handleNewProdNeed}>
                         New +
                         </button>
                     </div>
                 </div>
-                {prodNeeds ? 
-                    prodNeeds.map( prod_need => {
+                {budgItems ? 
+                    budgItems.map( prod_need => {
                         return (
-                            <div className='border my-2 flex-col'>
-
-                                <div className='flex flex-row justify-between'>
-                                    <p>{prod_need.description}</p>
-                                    <p>{prod_need.deadline.slice(5,10)}</p>
-                                </div>
-
-                                <div className='flex flex-row justify-between'>
-
-                                    <p>{prod_need.note}</p>
-                                    <p>{prod_need.type}</p>
-
-                                </div>
-                            </div>
+                            <h1>BUDGET ITEM</h1>
                         )
                     })
                     : 
@@ -242,10 +229,10 @@ function ProductionNeed({description, deadline, note, type }) {
             :
 
             <div className='border my-2'>
-                <h1>{description ? description : 'No Description'}</h1>
+                {/* <h1>{description ? description : 'No Description'}</h1>
                 <p>{deadline ? deadline : 'No Deadline'}</p>
                 <p>{note ? note : 'No Note'}</p>
-                <p>{type ? type : 'No Type'}</p>
+                <p>{type ? type : 'No Type'}</p> */}
             </div>
 
         }
@@ -254,4 +241,4 @@ function ProductionNeed({description, deadline, note, type }) {
     )
 }
 
-export default ProductionNeed
+export default BudgetItem

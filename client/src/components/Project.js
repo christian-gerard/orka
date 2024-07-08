@@ -8,6 +8,7 @@ import { object, string, array, number } from "yup";
 import { useFormik, Field, Form, Formik } from "formik";
 import EditIcon from '@mui/icons-material/Edit';
 import ProductionNeed from './ProductionNeed'
+import BudgetItem from './BudgetItem'
 import DeleteIcon from '@mui/icons-material/Delete';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -389,36 +390,9 @@ function Project({id, name, company, description, status, deadline}) {
 
 
             <ProductionNeed />
-            <div className='border border-black rounded-xl my-4 mx-4 p-4'>
-                <div className='flex flex-row justify-between'>
-                    <h1>Budget Items</h1>
-                    <div className='border'>
-                        <button onClick={handleNewBudgItem}>
-                        New +
-                        </button>
-                    </div>
-                </div>
+            <BudgetItem />
 
-                {budgItems? budgItems : "No Budget Items"}
-                { newBudgItem ?
-                    <Formik>
-                        <Form>
-                            <Field 
-                                name='deadline' 
-                                type='text'
-                                // value={prodNeedFormik.values.deadline}
-                                // onChange={prodNeedFormik.handleChange}
-                                placeholder='YYYY-MM-DD'
-                                className='border m-2 p-1'>
-
-                            </Field>
-                        </Form>
-                    </Formik>
-                    :
-                    <>
-                    </>
-                }
-            </div>
+      
             
             
             
