@@ -145,13 +145,26 @@ function BudgetItem({}) {
                 {budgItems ? 
                     budgItems.map( budg_item => {
                         return (
-                            <div>
+                            <div className='border-b flex flex-row justify-between'>
+                                <p>{budg_item.name}</p>
                                 <p>{budg_item.description}</p>
+                                <p>${budg_item.amount}</p>
                             </div>
                         )
                     })
                     : 
                     "No Project Tasks"}
+
+                { budgItems ? 
+                    budgItems.map(item => {
+                        return 2
+                    }
+                    )
+                    :
+                    <>
+                    </>
+                    
+                }
                 { newProdNeed ?
                     <Formik>
                         <Form
