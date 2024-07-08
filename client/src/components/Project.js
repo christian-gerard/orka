@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from 'react'
 import { UserContext } from '../context/UserContext'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -15,6 +15,7 @@ import CloseIcon from '@mui/icons-material/Close';
 function Project({id, name, company, description, status, deadline}) {
     const { user, updateUser } = useContext(UserContext)
     const route = useParams();
+    const routeType = useLocation()
     const [currentProject, setCurrentProject] = useState(null)
     const [prodNeeds, setProdNeeds] = useState([])
     const [budgItems, setBudgItems] = useState([])
@@ -234,11 +235,12 @@ function Project({id, name, company, description, status, deadline}) {
         }
     }, [currentProject]);
 
+    console.log(routeType)
 
     return(
         <>
         {
-            route.id ?
+            route.id && routeType.pathname.includes('projects') ?
 
             <>
             

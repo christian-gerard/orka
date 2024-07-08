@@ -7,6 +7,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CloseIcon from '@mui/icons-material/Close';
+import Project from './Project'
 
 
 function Client({id, name, status}) {
@@ -19,6 +20,12 @@ function Client({id, name, status}) {
     const handleEdit = () => {
         setEditMode(!editMode)
     }
+
+    const projects = user.user.account_details.clients.flatMap(client => {
+        return client.projects.map((project) => {
+            return <Project key={project.id} {...project} company={client.name} />
+        })
+    })
 
     const handleDelete = () => {
         fetch(`http://127.0.0.1:8000/client/${route.id}`, {
@@ -100,6 +107,13 @@ function Client({id, name, status}) {
                 <p>{currentClient ? currentClient.type : 'Inactive'}</p>
                 <p>{currentClient ? currentClient.client_img : 'Inactive'}</p>
                 <p>{currentClient ? currentClient.isActive : 'Inactive'}</p>
+            </div>
+
+            <div>
+                <h1>Projects</h1>
+                {
+                    projects ? projects : <h1>NONE</h1>
+                }
             </div>
             
             

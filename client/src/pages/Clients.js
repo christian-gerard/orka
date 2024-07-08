@@ -1,4 +1,5 @@
 import Client from '../components/Client'
+import Project from '../components/Project'
 import { useContext, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { useFormik, Formik, Form, Field } from 'formik'
@@ -14,6 +15,7 @@ function Clients() {
     console.log(user)
     const [newClient, setNewClient] = useState(false)
     const [files, setFiles] = useState([]);
+
     const {getRootProps, getInputProps, isDragActive} = useDropzone({
         accept: 'image/*',
         onDrop: acceptedFiles => {
@@ -22,9 +24,12 @@ function Clients() {
           })));
         }
       });
+
     const clients = user.user.account_details.clients.flatMap(client => {
         return <Client key={client.id} {...client}/>
     })
+
+
 
     const clientSchema = object({
         name: string()
