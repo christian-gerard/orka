@@ -233,7 +233,6 @@ function Project({id, name, company, description, status, deadline}) {
         }
     }, [currentProject]);
 
-    console.log(prodNeedFormik.values)
 
     return(
         <>
@@ -387,29 +386,9 @@ function Project({id, name, company, description, status, deadline}) {
             </div>
 
 
-            <div className='border border-black rounded-xl my-4 mx-4 p-4'>
-                <div className='flex flex-row justify-between'>
-                    <h1>Prod Needs</h1>
-                    <div className='border'>
-                        <button onClick={handleNewProdNeed}>
-                        New +
-                        </button>
-                    </div>
-                </div>
-                {prodNeeds ? prodNeeds : "No Project Tasks"}
-                { newProdNeed ?
-                    <div>
-                        <input 
-                            className='border my-2 p-1'
-                            placeholder='Description'
-                        />
-                    </div>
-                    :
-                    <>
-                    </>
-                }
-            </div>
 
+
+            <ProductionNeed />
             <div className='border border-black rounded-xl my-4 mx-4 p-4'>
                 <div className='flex flex-row justify-between'>
                     <h1>Budget Items</h1>
