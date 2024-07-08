@@ -19,8 +19,9 @@ function BudgetItem({}) {
     }
 
     const prodNeedSchema = object({
-        description: string()
-        .required(),
+        name: string(),
+        amount: number(),
+        description: string(),
         type: string(),
         note: string(),
         deadline: string(),
@@ -28,6 +29,8 @@ function BudgetItem({}) {
       });
 
     const initialValues = {
+        name: '',
+        amount: 0,
         description: '',
         type: '',
         note: '',
@@ -46,60 +49,62 @@ function BudgetItem({}) {
 
             formData['project'] = parseInt(route.id)
 
-
-            fetch('http://127.0.0.1:8000/productionneed/', {
-                method: "POST",
-                body: JSON.stringify(formData),
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Token ${user.token}`
-                }
-            })
-            .then(resp => {
-                if(resp.ok){
-
-                    return resp.json().then(data => {
+            console.log(formData)
 
 
-                        const updatedUser = {
-                            ...user,
-                            user: {
-                                ...user.user,
-                                account_details: {
-                                    ...user.user.account_details,
-                                    clients: user.user.account_details.clients.map(client => {
-                                        if(client.id === data.client) {
-                                            return {
-                                                ...client,
-                                                projects: client.projects.map((project) => {
-                                                    if (project.id === data.id) {
-                                                        return {
-                                                            ...project,
-                                                            prod_needs: [...project.prod_needs, data]
-                                                        }
-                                                    }
-                                                    return project
-                                                })
-                                            };
-                                        }
-                                        return client;
-                                    })
-                                }
-                            }
-                        };
+            // fetch('http://127.0.0.1:8000/productionneed/', {
+            //     method: "POST",
+            //     body: JSON.stringify(formData),
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //         'Authorization': `Token ${user.token}`
+            //     }
+            // })
+            // .then(resp => {
+            //     if(resp.ok){
 
-                        updateUser(updatedUser)
+            //         return resp.json().then(data => {
 
-                        toast.success("Production Need Added")
+
+            //             const updatedUser = {
+            //                 ...user,
+            //                 user: {
+            //                     ...user.user,
+            //                     account_details: {
+            //                         ...user.user.account_details,
+            //                         clients: user.user.account_details.clients.map(client => {
+            //                             if(client.id === data.client) {
+            //                                 return {
+            //                                     ...client,
+            //                                     projects: client.projects.map((project) => {
+            //                                         if (project.id === data.id) {
+            //                                             return {
+            //                                                 ...project,
+            //                                                 prod_needs: [...project.prod_needs, data]
+            //                                             }
+            //                                         }
+            //                                         return project
+            //                                     })
+            //                                 };
+            //                             }
+            //                             return client;
+            //                         })
+            //                     }
+            //                 }
+            //             };
+
+            //             updateUser(updatedUser)
+
+            //             toast.success("Production Need Added")
 
                         
 
-                    })
+            //         })
 
 
 
-                }
-            })
+            //     }
+            // })
         }
       });
 
