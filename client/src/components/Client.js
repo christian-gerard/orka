@@ -22,9 +22,13 @@ function Client({id, name, status}) {
     }
 
     const projects = user.user.account_details.clients.flatMap(client => {
-        return client.projects.map((project) => {
-            return <Project key={project.id} {...project} company={client.name} />
-        })
+        console.log(client)
+        console.log(currentClient)
+        if(currentClient && currentClient.id === client.id){
+            return client.projects.map((project) => {
+                return <Project key={project.id} {...project} company={client.name} />
+            })
+        }
     })
 
     const handleDelete = () => {
