@@ -43,9 +43,11 @@ function ProductionNeed({description, deadline, note, type }) {
 
             // Add Project to Form Data
 
+            formData['project'] = parseInt(route.id)
 
-            fetch(`http://127.0.0.1:8000/project/${route.id}`, {
-                method: "PATCH",
+
+            fetch('http://127.0.0.1:8000/productionneed/', {
+                method: "POST",
                 body: JSON.stringify(formData),
                 headers: {
                     'Content-Type': 'application/json',
@@ -56,6 +58,8 @@ function ProductionNeed({description, deadline, note, type }) {
                 if(resp.ok){
 
                     return resp.json().then(data => {
+
+
                         const updatedUser = {
                             ...user,
                             user: {
@@ -82,7 +86,7 @@ function ProductionNeed({description, deadline, note, type }) {
 
                         updateUser(updatedUser)
 
-                        toast.success("Production Need  Added")
+                        toast.success("Production Need Added")
 
                         
 
@@ -116,7 +120,7 @@ function ProductionNeed({description, deadline, note, type }) {
                 { newProdNeed ?
                     <Formik>
                         <Form
-                            className=''
+                            className='flex flex-row'
                             onSubmit={formik.handleSubmit}
                             initialValues={initialValues}
                         >
@@ -125,7 +129,7 @@ function ProductionNeed({description, deadline, note, type }) {
                                 value={formik.values.description}
                                 onChange={formik.handleChange}
                                 type='text'
-                                className='border m-2 p-1'
+                                className='border m-2 p-1 w-[30px]'
                                 placeholder='description'
                                 
                             >
@@ -141,7 +145,7 @@ function ProductionNeed({description, deadline, note, type }) {
                                 onChange={formik.handleChange}
                                 as='select'
                                 type='text'
-                                className='border m-2 p-1'
+                                className='border m-2 p-1 w-[20px]'
                                 placeholder='type'
                             >
                                 <option>Select Here</option>
@@ -172,7 +176,9 @@ function ProductionNeed({description, deadline, note, type }) {
                             <button type='submit'>+</button>
                         </Form>
                     </Formik>
+
                     :
+
                     <>
                     </>
                 }
