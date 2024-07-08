@@ -102,8 +102,13 @@ function ProductionNeed({description, deadline, note, type }) {
       });
 
 
-    const handleDelete = () => {
-        
+    const handleDelete = (id) => {
+        fetch(`http://127.0.0.1:8000/productionneed/${id}/`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Token ${user.Token}`
+            }
+        })
     }
     useEffect(() => {
         fetch('http://127.0.0.1:8000/productionneed/', {
