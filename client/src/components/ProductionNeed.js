@@ -1,9 +1,10 @@
 import { useState, useEffect, useContext } from 'react'
 import { UserContext } from '../context/UserContext'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { Formik, useFormik, Form, Field } from 'formik'
 import { object, string, array, number } from "yup";
 import { toast } from 'react-hot-toast'
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 function ProductionNeed({description, deadline, note, type }) {
@@ -11,6 +12,7 @@ function ProductionNeed({description, deadline, note, type }) {
     const route = useParams();
 
     const { user, updateUser } = useContext(UserContext)
+    const nav = useNavigate()
     const [prodNeeds, setProdNeeds] = useState([])
     const [newProdNeed, setNewProdNeed] = useState(false)
 
@@ -109,6 +111,20 @@ function ProductionNeed({description, deadline, note, type }) {
                 'Authorization': `Token ${user.Token}`
             }
         })
+        .then(resp => {
+            if(resp.ok) {
+
+                return resp.json().then(data => {
+                    const updatedUser = data
+
+                    updateUser(updatedUser)
+
+                    nav('/clients/')
+                    toast.success('Client Deleted')
+
+                })
+            }
+        })
     }
     useEffect(() => {
         fetch('http://127.0.0.1:8000/productionneed/', {
@@ -151,6 +167,10 @@ function ProductionNeed({description, deadline, note, type }) {
                                 <div className='flex flex-row justify-between'>
                                     <p>{prod_need.description}</p>
                                     <p>{prod_need.deadline.slice(5,10)}</p>
+                                    <button onClick={handleDelete(() => prod_need.project)}>
+
+                                        <DeleteIcon />
+                                    </button>
                                 </div>
 
                                 <div className='flex flex-row justify-between'>

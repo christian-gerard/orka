@@ -46,7 +46,6 @@ function Clients() {
         isActive: null,
         account: user.user.account_details.id
     }
-    console.log(initialValues)
 
     const formik = useFormik({
         initialValues,
