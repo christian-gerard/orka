@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from 'react'
 import { UserContext } from '../context/UserContext'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -8,12 +8,14 @@ import { object, string, array, number } from "yup";
 import { useFormik, Field, Form, Formik } from "formik";
 import EditIcon from '@mui/icons-material/Edit';
 import ProductionNeed from './ProductionNeed'
+import BudgetItem from './BudgetItem'
 import DeleteIcon from '@mui/icons-material/Delete';
 import CloseIcon from '@mui/icons-material/Close';
 
 function Project({id, name, company, description, status, deadline}) {
     const { user, updateUser } = useContext(UserContext)
     const route = useParams();
+    const routeType = useLocation()
     const [currentProject, setCurrentProject] = useState(null)
     const [prodNeeds, setProdNeeds] = useState([])
     const [budgItems, setBudgItems] = useState([])
@@ -233,11 +235,12 @@ function Project({id, name, company, description, status, deadline}) {
         }
     }, [currentProject]);
 
+    console.log(routeType)
 
     return(
         <>
         {
-            route.id ?
+            route.id && routeType.pathname.includes('projects') ?
 
             <>
             
@@ -389,36 +392,9 @@ function Project({id, name, company, description, status, deadline}) {
 
 
             <ProductionNeed />
-            <div className='border border-black rounded-xl my-4 mx-4 p-4'>
-                <div className='flex flex-row justify-between'>
-                    <h1>Budget Items</h1>
-                    <div className='border'>
-                        <button onClick={handleNewBudgItem}>
-                        New +
-                        </button>
-                    </div>
-                </div>
+            <BudgetItem />
 
-                {budgItems? budgItems : "No Budget Items"}
-                { newBudgItem ?
-                    <Formik>
-                        <Form>
-                            <Field 
-                                name='deadline' 
-                                type='text'
-                                // value={prodNeedFormik.values.deadline}
-                                // onChange={prodNeedFormik.handleChange}
-                                placeholder='YYYY-MM-DD'
-                                className='border m-2 p-1'>
-
-                            </Field>
-                        </Form>
-                    </Formik>
-                    :
-                    <>
-                    </>
-                }
-            </div>
+      
             
             
             

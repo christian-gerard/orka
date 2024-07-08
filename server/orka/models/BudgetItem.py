@@ -13,8 +13,6 @@ class BudgetItem(models.Model):
     note = models.CharField(max_length=100)
     type = models.CharField(max_length=100)
     deadline = models.DateTimeField(default=now, blank=True)
-    created_at = models.DateTimeField(default=now, blank=True)
-    updated_at = models.DateTimeField(default=now, blank=True)
 
 
     def __str__(self):

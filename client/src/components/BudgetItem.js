@@ -1,19 +1,17 @@
 import { useState, useEffect, useContext } from 'react'
 import { UserContext } from '../context/UserContext'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { Formik, useFormik, Form, Field } from 'formik'
 import { object, string, array, number } from "yup";
 import { toast } from 'react-hot-toast'
-import DeleteIcon from '@mui/icons-material/Delete';
 
 
-function ProductionNeed({description, deadline, note, type }) {
+function BudgetItem({}) {
 
     const route = useParams();
 
     const { user, updateUser } = useContext(UserContext)
-    const nav = useNavigate()
-    const [prodNeeds, setProdNeeds] = useState([])
+    const [budgItems, setBudgItems] = useState([])
     const [newProdNeed, setNewProdNeed] = useState(false)
 
     const handleNewProdNeed = () => {
@@ -21,8 +19,9 @@ function ProductionNeed({description, deadline, note, type }) {
     }
 
     const prodNeedSchema = object({
-        description: string()
-        .required(),
+        name: string(),
+        amount: number(),
+        description: string(),
         type: string(),
         note: string(),
         deadline: string(),
@@ -30,6 +29,8 @@ function ProductionNeed({description, deadline, note, type }) {
       });
 
     const initialValues = {
+        name: '',
+        amount: 0,
         description: '',
         type: '',
         note: '',
@@ -42,12 +43,16 @@ function ProductionNeed({description, deadline, note, type }) {
         validationSchema: prodNeedSchema,
         onSubmit: (formData) => { 
 
+
+
             // Add Project to Form Data
 
             formData['project'] = parseInt(route.id)
 
+            console.log(formData)
 
-            fetch('http://127.0.0.1:8000/productionneed/', {
+
+            fetch('http://127.0.0.1:8000/budgetitem/', {
                 method: "POST",
                 body: JSON.stringify(formData),
                 headers: {
@@ -75,7 +80,7 @@ function ProductionNeed({description, deadline, note, type }) {
                                                     if (project.id === data.id) {
                                                         return {
                                                             ...project,
-                                                            prod_needs: [...project.prod_needs, data]
+                                                            budg_items: [...project.budg_items, data]
                                                         }
                                                     }
                                                     return project
@@ -90,7 +95,7 @@ function ProductionNeed({description, deadline, note, type }) {
 
                         updateUser(updatedUser)
 
-                        toast.success("Production Need Added")
+                        toast.success("Budget Item Added")
 
                         
 
@@ -104,30 +109,8 @@ function ProductionNeed({description, deadline, note, type }) {
       });
 
 
-    const handleDelete = (id) => {
-        fetch(`http://127.0.0.1:8000/productionneed/${id}/`, {
-            method: 'DELETE',
-            headers: {
-                'Authorization': `Token ${user.Token}`
-            }
-        })
-        .then(resp => {
-            if(resp.ok) {
-
-                return resp.json().then(data => {
-                    const updatedUser = data
-
-                    updateUser(updatedUser)
-
-                    nav('/clients/')
-                    toast.success('Client Deleted')
-
-                })
-            }
-        })
-    }
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/productionneed/', {
+        fetch('http://127.0.0.1:8000/budgetitem/', {
             headers: {
                 'Authorization': `Token ${user.token}`
             }
@@ -136,7 +119,7 @@ function ProductionNeed({description, deadline, note, type }) {
         .then(resp => {
             if(resp.ok){
                 return  resp.json().then(data => {
-                    setProdNeeds(data)
+                    setBudgItems(data)
                 })
             }
         })
@@ -152,38 +135,36 @@ function ProductionNeed({description, deadline, note, type }) {
             
             <div className='border border-black rounded-xl my-4 mx-4 p-4'>
                 <div className='flex flex-row justify-between'>
-                    <h1>Prod Needs</h1>
+                    <h1>Budget Items</h1>
                     <div className='border'>
                         <button onClick={handleNewProdNeed}>
                         New +
                         </button>
                     </div>
                 </div>
-                {prodNeeds ? 
-                    prodNeeds.map( prod_need => {
+                {budgItems ? 
+                    budgItems.map( budg_item => {
                         return (
-                            <div className='border my-2 flex-col'>
-
-                                <div className='flex flex-row justify-between'>
-                                    <p>{prod_need.description}</p>
-                                    <p>{prod_need.deadline.slice(5,10)}</p>
-                                    <button onClick={handleDelete(() => prod_need.project)}>
-
-                                        <DeleteIcon />
-                                    </button>
-                                </div>
-
-                                <div className='flex flex-row justify-between'>
-
-                                    <p>{prod_need.note}</p>
-                                    <p>{prod_need.type}</p>
-
-                                </div>
+                            <div className='border-b flex flex-row justify-between'>
+                                <p>{budg_item.name}</p>
+                                <p>{budg_item.description}</p>
+                                <p>${budg_item.amount}</p>
                             </div>
                         )
                     })
                     : 
                     "No Project Tasks"}
+
+                { budgItems ? 
+                    budgItems.map(item => {
+                        return 2
+                    }
+                    )
+                    :
+                    <>
+                    </>
+                    
+                }
                 { newProdNeed ?
                     <Formik>
                         <Form
@@ -191,6 +172,21 @@ function ProductionNeed({description, deadline, note, type }) {
                             onSubmit={formik.handleSubmit}
                             initialValues={initialValues}
                         >
+
+                            <Field 
+                                name='name'
+                                value={formik.values.name}
+                                onChange={formik.handleChange}
+                                type='text'
+                                className='border my-2 p-1 w-[200px]'
+                                placeholder='name'
+                                
+                            >
+                            </Field>
+
+                            {formik.errors.name && formik.touched.name && (
+                                <div className="text-sm text-ocean ml-2"> **{formik.errors.name.toUpperCase()}</div>
+                            )}
                             <Field 
                                 name='description'
                                 value={formik.values.description}
@@ -268,10 +264,10 @@ function ProductionNeed({description, deadline, note, type }) {
             :
 
             <div className='border my-2'>
-                <h1>{description ? description : 'No Description'}</h1>
+                {/* <h1>{description ? description : 'No Description'}</h1>
                 <p>{deadline ? deadline : 'No Deadline'}</p>
                 <p>{note ? note : 'No Note'}</p>
-                <p>{type ? type : 'No Type'}</p>
+                <p>{type ? type : 'No Type'}</p> */}
             </div>
 
         }
@@ -280,4 +276,4 @@ function ProductionNeed({description, deadline, note, type }) {
     )
 }
 
-export default ProductionNeed
+export default BudgetItem
