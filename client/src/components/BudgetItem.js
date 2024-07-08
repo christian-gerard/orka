@@ -52,65 +52,65 @@ function BudgetItem({}) {
             console.log(formData)
 
 
-            // fetch('http://127.0.0.1:8000/productionneed/', {
-            //     method: "POST",
-            //     body: JSON.stringify(formData),
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //         'Authorization': `Token ${user.token}`
-            //     }
-            // })
-            // .then(resp => {
-            //     if(resp.ok){
+            fetch('http://127.0.0.1:8000/budgetitem/', {
+                method: "POST",
+                body: JSON.stringify(formData),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Token ${user.token}`
+                }
+            })
+            .then(resp => {
+                if(resp.ok){
 
-            //         return resp.json().then(data => {
+                    return resp.json().then(data => {
 
 
-            //             const updatedUser = {
-            //                 ...user,
-            //                 user: {
-            //                     ...user.user,
-            //                     account_details: {
-            //                         ...user.user.account_details,
-            //                         clients: user.user.account_details.clients.map(client => {
-            //                             if(client.id === data.client) {
-            //                                 return {
-            //                                     ...client,
-            //                                     projects: client.projects.map((project) => {
-            //                                         if (project.id === data.id) {
-            //                                             return {
-            //                                                 ...project,
-            //                                                 prod_needs: [...project.prod_needs, data]
-            //                                             }
-            //                                         }
-            //                                         return project
-            //                                     })
-            //                                 };
-            //                             }
-            //                             return client;
-            //                         })
-            //                     }
-            //                 }
-            //             };
+                        const updatedUser = {
+                            ...user,
+                            user: {
+                                ...user.user,
+                                account_details: {
+                                    ...user.user.account_details,
+                                    clients: user.user.account_details.clients.map(client => {
+                                        if(client.id === data.client) {
+                                            return {
+                                                ...client,
+                                                projects: client.projects.map((project) => {
+                                                    if (project.id === data.id) {
+                                                        return {
+                                                            ...project,
+                                                            budg_items: [...project.budg_items, data]
+                                                        }
+                                                    }
+                                                    return project
+                                                })
+                                            };
+                                        }
+                                        return client;
+                                    })
+                                }
+                            }
+                        };
 
-            //             updateUser(updatedUser)
+                        updateUser(updatedUser)
 
-            //             toast.success("Production Need Added")
+                        toast.success("Budget Item Added")
 
                         
 
-            //         })
+                    })
 
 
 
-            //     }
-            // })
+                }
+            })
         }
       });
 
 
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/budgetitems/', {
+        fetch('http://127.0.0.1:8000/budgetitem/', {
             headers: {
                 'Authorization': `Token ${user.token}`
             }
@@ -143,9 +143,11 @@ function BudgetItem({}) {
                     </div>
                 </div>
                 {budgItems ? 
-                    budgItems.map( prod_need => {
+                    budgItems.map( budg_item => {
                         return (
-                            <h1>BUDGET ITEM</h1>
+                            <div>
+                                <p>{budg_item.description}</p>
+                            </div>
                         )
                     })
                     : 
@@ -157,6 +159,21 @@ function BudgetItem({}) {
                             onSubmit={formik.handleSubmit}
                             initialValues={initialValues}
                         >
+
+                            <Field 
+                                name='name'
+                                value={formik.values.name}
+                                onChange={formik.handleChange}
+                                type='text'
+                                className='border my-2 p-1 w-[200px]'
+                                placeholder='name'
+                                
+                            >
+                            </Field>
+
+                            {formik.errors.name && formik.touched.name && (
+                                <div className="text-sm text-ocean ml-2"> **{formik.errors.name.toUpperCase()}</div>
+                            )}
                             <Field 
                                 name='description'
                                 value={formik.values.description}
