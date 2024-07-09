@@ -157,7 +157,7 @@ function BudgetItem({}) {
 
                 { budgItems ? 
                     budgItems.map(item => {
-                        return 2
+                        return 3
                     }
                     )
                     :
