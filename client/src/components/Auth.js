@@ -80,7 +80,19 @@ function Auth({handleLogin}) {
                   placeholder='password'
               />
 
-              <button type="submit" className='mt-4 bg-white text-black'>Log In</button>
+
+              <label htmlFor="password" className='text-xl'>Account Name</label>
+              <input
+                  id="accountName"
+                  name="accountName"
+                  type="accountName"
+                  onChange={formik.handleChange}
+                  value={formik.values.accountName}
+                  className='text-black my-2 p-1 text-lg'
+                  placeholder='Account Name'
+              />
+
+              <button type="submit" className='mt-4 bg-white text-black'>Create Account + User</button>
 
 
 
