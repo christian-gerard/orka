@@ -31,19 +31,33 @@ def login(request):
 @permission_classes([AllowAny])
 def signup(request):
 
-    serializer = UserSerializer(data=request.data)
+    user_data = {
+        "username": request.data['username'],
+        "email": request.data['email'],
+        "password": request.data['password']
+    }
 
-    if serializer.is_valid():
-        serializer.save()
+    account_data = {
+        "name": request.data['account_name']
+    }
+
+    user_serializer = UserSerializer(data=user_data)
+    account__serializer = AccountSerializer(data=account_data)
+
+    if user_serializer.is_valid() and account__serializer.is_valid():
+        user_serializer.save()
+        account__serializer.save()
+
+
         user = User.objects.get(username=request.data['username'])
         user.set_password(request.data['password'])
         user.save()
         token,created = Token.objects.get_or_create(user=user)
 
-        return Response({"token": token.key, "user": serializer.data})
+        return Response({"token": token.key, "user": user_serializer.data})
     
     
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
 def signout(request):
