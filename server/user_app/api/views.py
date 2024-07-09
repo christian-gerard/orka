@@ -38,7 +38,7 @@ def signup(request):
     }
 
     account_data = {
-        "name": request.data['name']
+        "name": request.data['account_name']
     }
 
     user_serializer = UserSerializer(data=user_data)
@@ -48,16 +48,16 @@ def signup(request):
         user_serializer.save()
         account__serializer.save()
 
-        
+
         user = User.objects.get(username=request.data['username'])
         user.set_password(request.data['password'])
         user.save()
         token,created = Token.objects.get_or_create(user=user)
 
-        return Response({"token": token.key, "user": serializer.data})
+        return Response({"token": token.key, "user": user_serializer.data})
     
     
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
 def signout(request):

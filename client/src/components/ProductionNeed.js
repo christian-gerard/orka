@@ -144,7 +144,7 @@ function ProductionNeed({description, deadline, note, type, project }) {
             }
         })
 
-    }, [prodNeeds, user])
+    }, [prodNeeds])
 
 
     return (
