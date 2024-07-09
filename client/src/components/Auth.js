@@ -15,11 +15,32 @@ function Auth({handleLogin}) {
   }
 
     const formik = useFormik({
-        initialValues: {
+        initialValues: newUser ? 
+        {
+          username: '',
+          password: '',
+          account_name: ''
+        } 
+        : 
+        {
           username: '',
           password: ''
         },
-        onSubmit: formData => {
+        onSubmit: newUser ? 
+        
+        formData => 
+        
+        {
+          console.log(formData)
+
+
+        } 
+        
+        : 
+        
+        formData => 
+        
+        {
 
           fetch('http://127.0.0.1:8000/auth/login/',{
             method: 'POST',
@@ -81,20 +102,18 @@ function Auth({handleLogin}) {
               />
 
 
-              <label htmlFor="password" className='text-xl'>Account Name</label>
+              <label htmlFor="account_name" className='text-xl'>Account Name</label>
               <input
-                  id="accountName"
-                  name="accountName"
-                  type="accountName"
+                  id="account_name"
+                  name="account_name"
+                  type="account_name"
                   onChange={formik.handleChange}
-                  value={formik.values.accountName}
+                  value={formik.values.account_name}
                   className='text-black my-2 p-1 text-lg'
                   placeholder='Account Name'
               />
 
               <button type="submit" className='mt-4 bg-white text-black'>Create Account + User</button>
-
-
 
             </form>
 
