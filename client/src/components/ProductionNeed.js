@@ -116,8 +116,10 @@ function ProductionNeed({description, deadline, note, type, project }) {
 
                 return resp.json().then(data => {
 
-                    setProdNeeds([...prodNeeds, data])
-                    debugger
+                    const updatedProdNeeds = prodNeeds.filter(prod_need => prod_need.id !== id)
+
+                    setProdNeeds(updatedProdNeeds)
+
                     toast.success('Task Deleted')
 
                 })
