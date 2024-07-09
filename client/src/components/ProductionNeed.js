@@ -105,27 +105,32 @@ function ProductionNeed({description, deadline, note, type }) {
 
 
     const handleDelete = (id) => {
-        fetch(`http://127.0.0.1:8000/productionneed/${id}/`, {
+        fetch(`http://127.0.0.1:8000/productionneed/${id}`, {
             method: 'DELETE',
             headers: {
-                'Authorization': `Token ${user.Token}`
+                'Authorization': `Token ${user.token}`
             }
         })
         .then(resp => {
             if(resp.ok) {
 
                 return resp.json().then(data => {
+
                     const updatedUser = data
 
-                    updateUser(updatedUser)
+                    // updateUser(updatedUser)
 
-                    nav('/clients/')
-                    toast.success('Client Deleted')
+                    // nav('/clients/')
+
+                    toast.success('Task Deleted')
 
                 })
             }
         })
     }
+
+
+
     useEffect(() => {
         fetch('http://127.0.0.1:8000/productionneed/', {
             headers: {
@@ -167,7 +172,7 @@ function ProductionNeed({description, deadline, note, type }) {
                                 <div className='flex flex-row justify-between'>
                                     <p>{prod_need.description}</p>
                                     <p>{prod_need.deadline.slice(5,10)}</p>
-                                    <button onClick={handleDelete(() => prod_need.project)}>
+                                    <button onClick={() => handleDelete(prod_need.id)}>
 
                                         <DeleteIcon />
                                     </button>
