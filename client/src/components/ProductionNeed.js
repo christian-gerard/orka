@@ -117,7 +117,7 @@ function ProductionNeed({description, deadline, note, type, project }) {
                 return resp.json().then(data => {
 
                     setProdNeeds([...prodNeeds, data])
-
+                    debugger
                     toast.success('Task Deleted')
 
                 })
@@ -166,8 +166,8 @@ function ProductionNeed({description, deadline, note, type, project }) {
                             <div className='border my-2 flex-col'>
 
                                 <div className='flex flex-row justify-between'>
-                                    <p>{prod_need.description}</p>
-                                    <p>{prod_need.deadline.slice(5,10)}</p>
+                                    <p>{prod_need ? prod_need.description : 'None'}</p>
+                                    <p>{prod_need ? prod_need.deadline.slice(5,10) : 'deadline'}</p>
                                     <button onClick={() => handleDelete(prod_need.id)}>
 
                                         <DeleteIcon />
