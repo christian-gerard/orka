@@ -7,7 +7,7 @@ import { toast } from 'react-hot-toast'
 import DeleteIcon from '@mui/icons-material/Delete';
 
 
-function ProductionNeed({description, deadline, note, type }) {
+function ProductionNeed({description, deadline, note, type, project }) {
 
     const route = useParams();
 
@@ -116,11 +116,7 @@ function ProductionNeed({description, deadline, note, type }) {
 
                 return resp.json().then(data => {
 
-                    const updatedUser = data
-
-                    // updateUser(updatedUser)
-
-                    // nav('/clients/')
+                    setProdNeeds([...prodNeeds, data])
 
                     toast.success('Task Deleted')
 
@@ -146,7 +142,7 @@ function ProductionNeed({description, deadline, note, type }) {
             }
         })
 
-    }, [])
+    }, [prodNeeds, user])
 
 
     return (
