@@ -31,10 +31,24 @@ def login(request):
 @permission_classes([AllowAny])
 def signup(request):
 
-    serializer = UserSerializer(data=request.data)
+    user_data = {
+        "username": request.data['username'],
+        "email": request.data['email'],
+        "password": request.data['password']
+    }
 
-    if serializer.is_valid():
-        serializer.save()
+    account_data = {
+        "name": request.data['name']
+    }
+
+    user_serializer = UserSerializer(data=user_data)
+    account__serializer = AccountSerializer(data=account_data)
+
+    if user_serializer.is_valid() and account__serializer.is_valid():
+        user_serializer.save()
+        account__serializer.save()
+
+        
         user = User.objects.get(username=request.data['username'])
         user.set_password(request.data['password'])
         user.save()
