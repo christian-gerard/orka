@@ -1,7 +1,7 @@
 
 import {useContext} from 'react'
 import { Formik, Form, Field, useFormik, ErrorMessage } from "formik";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, NavLink } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
 import toast from 'react-hot-toast'
 
@@ -72,7 +72,9 @@ function Auth({handleLogin}) {
                 />
             
                 <button type="submit" className='mt-4 bg-white text-black'>Log In</button>
-                <button type='button' className='text-[0.8em] mt-4'>Create New User</button>
+                <NavLink to='/signup' className='text-[0.8em] mt-4'>
+                  Create New User
+                </NavLink>
 
             </form>
 
