@@ -7,7 +7,7 @@ import { toast } from 'react-hot-toast'
 import DeleteIcon from '@mui/icons-material/Delete';
 
 
-function ProductionNeed({description, deadline, note, type }) {
+function ProductionNeed({description, deadline, note, type, project }) {
 
     const route = useParams();
 
@@ -105,27 +105,30 @@ function ProductionNeed({description, deadline, note, type }) {
 
 
     const handleDelete = (id) => {
-        fetch(`http://127.0.0.1:8000/productionneed/${id}/`, {
+        fetch(`http://127.0.0.1:8000/productionneed/${id}`, {
             method: 'DELETE',
             headers: {
-                'Authorization': `Token ${user.Token}`
+                'Authorization': `Token ${user.token}`
             }
         })
         .then(resp => {
             if(resp.ok) {
 
                 return resp.json().then(data => {
-                    const updatedUser = data
 
-                    updateUser(updatedUser)
+                    const updatedProdNeeds = prodNeeds.filter(prod_need => prod_need.id !== id)
 
-                    nav('/clients/')
-                    toast.success('Client Deleted')
+                    setProdNeeds(updatedProdNeeds)
+
+                    toast.success('Task Deleted')
 
                 })
             }
         })
     }
+
+
+
     useEffect(() => {
         fetch('http://127.0.0.1:8000/productionneed/', {
             headers: {
@@ -141,7 +144,7 @@ function ProductionNeed({description, deadline, note, type }) {
             }
         })
 
-    }, [])
+    }, [prodNeeds, user])
 
 
     return (
@@ -165,9 +168,9 @@ function ProductionNeed({description, deadline, note, type }) {
                             <div className='border my-2 flex-col'>
 
                                 <div className='flex flex-row justify-between'>
-                                    <p>{prod_need.description}</p>
-                                    <p>{prod_need.deadline.slice(5,10)}</p>
-                                    <button onClick={handleDelete(() => prod_need.project)}>
+                                    <p>{prod_need ? prod_need.description : 'None'}</p>
+                                    <p>{prod_need ? prod_need.deadline.slice(5,10) : 'deadline'}</p>
+                                    <button onClick={() => handleDelete(prod_need.id)}>
 
                                         <DeleteIcon />
                                     </button>
