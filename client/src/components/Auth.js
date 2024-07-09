@@ -98,7 +98,7 @@ function Auth({handleLogin}) {
           
           <div className='bg-black text-white py-12 px-8 flex flex-col items-center '>
             <h1 className='text-4xl p-2 tracking-[0.8em] reddit-mono italic'> ORKA </h1>
-            <h3>Create New Account</h3>
+            <h3>SIGNUP</h3>
 
             <form onSubmit={formik.handleSubmit} className='flex flex-col p-2'>
   
@@ -136,7 +136,7 @@ function Auth({handleLogin}) {
                   placeholder='Account Name'
               />
 
-              <button type="submit" className='mt-4 bg-white text-black'>Create Account + User</button>
+              <button type="submit" className='mt-4 bg-white text-black'>Create Account</button>
 
             </form>
 
