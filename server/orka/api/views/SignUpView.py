@@ -24,23 +24,5 @@ class SignupDetail(APIView):
             project = serializer.save()
             return Response(AccountSerializer(project).data)
 
-
-
         return Response(serializer.errors)
     
-
-class SignUpDetail(APIView):
-
-    def get_object(self, pk):
-        try:
-            return Account.objects.get(pk=pk)
-        except Account.DoesNotExist:
-            raise Http404
-
-    def get(self, request, pk, format=None):
-        account = self.get_object(pk)
-        serializer = AccountSerializer(account)
-        return Response(serializer.data)
-    
-    def post(self,request, pk, format=None):
-        pass

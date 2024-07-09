@@ -17,7 +17,7 @@ function Auth({handleLogin}) {
     const formik = useFormik({
         initialValues: newUser ? 
         {
-          username: '',
+          email: '',
           password: '',
           account_name: ''
         } 
@@ -31,7 +31,30 @@ function Auth({handleLogin}) {
         formData => 
         
         {
-          console.log(formData)
+          formData['username'] = formData['email']
+
+          fetch('http://127.0.0.1:8000/auth/signup/',{
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+          })
+          .then(resp => {
+            if(resp.ok){
+              return resp.json().then(data => {
+                login(data)
+                nav('/dashboard')
+                toast.success('Login Successful')
+
+              })}
+          })
+          .then(() => {
+
+          })
+          .catch(err => {
+            toast.error('Unable to Login')
+          })
 
 
         } 
@@ -81,11 +104,11 @@ function Auth({handleLogin}) {
   
               <label htmlFor="username" className='text-xl'>Email</label>
               <input
-                  id="username"
-                  name="username"
+                  id="email"
+                  name="email"
                   type="email"
                   onChange={formik.handleChange}
-                  value={formik.values.username}
+                  value={formik.values.email}
                   className='text-black my-2 p-1 text-lg'
                   placeholder='email'
               />
