@@ -382,22 +382,19 @@ function Project({id, name, company, description, status, deadline}) {
                     </div>
 
                 </div>
-                <p>{currentProject ? currentProject.name : 'UNNAMED'}</p>
-                <p>{company ? currentProject.client : '___'}</p>
-                <p>{status ? currentProject.status : 'No Status'}</p>
-                <p>{currentProject ? currentProject.deadline : 'No Deadline'}</p>
+
+                <div className='flex flex-row justify-between'>
+                    <p className='text-4xl bold spacing-[0.5em]'>{currentProject ? currentProject.name : 'UNNAMED'}</p>
+                    <p className='text-2xl border text-white p-1 bg-ocean'>{currentProject ? currentProject.deadline.slice(5,12) : 'No Deadline'}</p>
+                </div>
+
+                <p>{currentProject ? currentProject.client : '___'}</p>
+                <p>{currentProject ? currentProject.status : 'No Status'}</p>
             </div>
-
-
-
 
             <ProductionNeed />
             <BudgetItem />
 
-      
-            
-            
-            
             </>
 
             
@@ -407,7 +404,7 @@ function Project({id, name, company, description, status, deadline}) {
 
             <NavLink to={`/projects/${id}`}>
                 <div className='border border-black rounded-xl my-4 mx-4 p-4'>
-                    <p>{name ? name : 'UNNAMED'}</p>
+                    <p className='text-2xl bold spacing-[0.5em]'>{name ? name : 'UNNAMED'}</p>
                     <p>{company ? company : '___'}</p>
                     <p>{status ? status : 'No Status'}</p>
                     <p>{deadline ? deadline.slice(0,-10) : 'No Deadline'}</p>
