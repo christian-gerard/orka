@@ -130,7 +130,6 @@ function Client({id, name, status}) {
                         <p>{name ? name : 'untitled'}</p>
                         <p>{status ? status : 'Active'}</p>
                     </div>
-
                 </NavLink>
 
 
