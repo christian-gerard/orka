@@ -412,6 +412,7 @@ function Project({id, name, company, description, status, deadline}) {
     
                     <p>{currentProject ? currentProject.client : '___'}</p>
                     <p>{currentProject ? currentProject.status : 'No Status'}</p>
+                    
                 </div>
     
                 <ProductionNeed />
