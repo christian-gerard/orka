@@ -14,11 +14,13 @@ class Project(models.Model):
     client = models.ForeignKey(Client, related_name='projects', on_delete=models.CASCADE)
 
     name = models.CharField(max_length=100)
+    
     deadline = models.DateField(
         default=date.today, 
         blank=True,
         validators=[validate_deadline]
-        )
+    )
+
     type = models.CharField(max_length=30, default='Ad Campaign')
     status = models.CharField(max_length=30, default='Not Started')
 

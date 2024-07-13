@@ -12,7 +12,6 @@ import UploadFileIcon from '@mui/icons-material/UploadFile';
 
 function Clients() {
     const { user,updateUser } = useContext(UserContext)
-    console.log(user)
     const [newClient, setNewClient] = useState(false)
     const [files, setFiles] = useState([]);
 
