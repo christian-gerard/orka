@@ -3,9 +3,9 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from orka.models.Project import Project
 from django.utils.timezone import now
 
-class BudgetItem(models.Model):
+class Expense(models.Model):
 
-    project = models.ForeignKey(Project, related_name='budg_items', on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, related_name='expense', on_delete=models.CASCADE)
 
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=300, blank=True)
