@@ -4,7 +4,7 @@ from orka.api.views.ProjectView import ProjectList, ProjectDetail
 from orka.api.views.ClientView import ClientList, ClientDetail
 from orka.api.views.AccountView import AccountDetail
 from orka.api.views.TaskView import TaskList, TaskDetail
-from orka.api.views.BudgetItemView import BudgetItemList
+from orka.api.views.ExpenseView import ExpenseDetail, ExpenseList
 
 urlpatterns = [
     path("user/", UserList.as_view()),
@@ -16,7 +16,7 @@ urlpatterns = [
     path("client/<int:pk>/", ClientDetail.as_view()),
     path("task/", TaskList.as_view()),
     path("task/<int:pk>/", TaskDetail.as_view()),
-    path("budgetitem/", BudgetItemList.as_view())
+    path("expense/", ExpenseList.as_view())
     
 
 ]

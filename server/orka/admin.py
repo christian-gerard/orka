@@ -4,7 +4,7 @@ from orka.models.Account import Account
 from orka.models.Client import Client
 from orka.models.Project import Project
 from orka.models.Task import Task
-from orka.models.BudgetItem import BudgetItem
+from orka.models.Expense import Expense
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from orka.forms import UserChangeForm, UserCreationForm
@@ -23,4 +23,4 @@ admin.site.register(Account)
 admin.site.register(Client)
 admin.site.register(Project)
 admin.site.register(Task)
-admin.site.register(BudgetItem)
+admin.site.register(Expense)
