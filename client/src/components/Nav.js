@@ -28,7 +28,7 @@ function Nav() {
         <div className='sm:hidden'>
             <div className='bg-black text-white'>
 
-                <h1 className='text-4xl tracking-[0.8em] p-4 flex flex-row reddit-mono italic'> 
+                <h1 className='text-4xl tracking-[0.6em] p-4 flex flex-row reddit-mono italic'> 
 
                     <span className='mr-6 hover:text-ocean flex items-center'>
                         <MenuIcon fontSize='xl' onClick={handleNav} />   
