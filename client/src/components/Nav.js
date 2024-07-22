@@ -82,9 +82,10 @@ function Nav() {
                                 <AttachMoneyIcon className='mr-2 my-4' />
                                 Budgets
                             </NavLink>
-
                                              
                         </div>
+
+
 
                         <div className='bg-black border-t border-white text-white'>
 
@@ -125,8 +126,11 @@ function Nav() {
                             <MenuIcon fontSize='xl' onClick={handleNav} className={navOpen ? "mr-6" : ""} />   
                             {
                                 navOpen ?
+
                                 <p>ORKA</p>
+
                                 :
+
                                 <></>
                             }
                         </span>
