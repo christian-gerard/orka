@@ -130,7 +130,7 @@ function ProductionNeed({description, deadline, note, type, project }) {
 
 
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/productionneed/', {
+        fetch(`http://127.0.0.1:8000/productionneed/${route.id}`, {
             headers: {
                 'Authorization': `Token ${user.token}`
             }
@@ -167,16 +167,17 @@ function ProductionNeed({description, deadline, note, type, project }) {
                         return (
                             <div className='border my-2 flex-col'>
 
-                                <div className='flex flex-row justify-between'>
-                                    <p>{prod_need ? prod_need.description : 'None'}</p>
-                                    <p>{prod_need ? prod_need.deadline.slice(5,10) : 'deadline'}</p>
-                                    <button onClick={() => handleDelete(prod_need.id)}>
-
-                                        <DeleteIcon />
-                                    </button>
+                                <div className='flex flex-row justify-between '>
+                                    <p className='w-[80%]'>{prod_need ? prod_need.description : 'None'}</p>
+                                    <div className='flex flex-row justify-end w-[20%]'>
+                                        <p>{prod_need ? prod_need.deadline.slice(5,10) : 'deadline'}</p>
+                                        <button className='bg-ocean w-[25px]' onClick={() => handleDelete(prod_need.id)}>
+                                            X
+                                        </button>
+                                    </div>
                                 </div>
 
-                                <div className='flex flex-row justify-between'>
+                                <div className='flex flex-row justify-between text-sm '>
 
                                     <p>{prod_need.note}</p>
                                     <p>{prod_need.type}</p>

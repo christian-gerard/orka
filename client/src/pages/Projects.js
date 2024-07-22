@@ -7,6 +7,7 @@ import { useFormik, Formik, Form, Field } from 'formik'
 import { object, string, array, number } from "yup";
 import DatePicker from 'react-date-picker'
 import AddIcon from '@mui/icons-material/Add';
+import DetailsIcon from '@mui/icons-material/Details';
 import CloseIcon from '@mui/icons-material/Close';
 
 function Projects() {
@@ -25,7 +26,7 @@ function Projects() {
         .required(),
         client: number()
         .required()
-      });
+    });
 
     const initialValues = {
         name: '', 
@@ -35,7 +36,7 @@ function Projects() {
         client: ''
     }
 
-      const formik = useFormik({
+    const formik = useFormik({
         initialValues,
         validationSchema: projectSchema,
         onSubmit: (formData) => {
@@ -84,7 +85,7 @@ function Projects() {
             })
     
         },
-      });
+    });
 
     const handleNewProject = () => {
         setNewProject(!newProject)
@@ -96,7 +97,6 @@ function Projects() {
         })
     })
 
-
     const clients = user.user.account_details.clients.map(client => {
         return <option value={client.id}>{client.name}</option>
     })
@@ -105,9 +105,12 @@ function Projects() {
  
         <div className='w-full h-full overflow-hidden'>
 
-            <div className='text-4xl  flex flex-row justify-between'>
+            <div className='text-4xl flex flex-row justify-between'>
 
-                <h1 className='underline'>Projects</h1>
+                <h1 className='text-lg'>
+                    <DetailsIcon className='mr-2 my-4' />
+                    Projects
+                </h1>
 
                 <div className='border border-2 flex flex-row text-lg p-1' onClick={handleNewProject}>
                     <p>New</p>

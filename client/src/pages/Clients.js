@@ -12,7 +12,6 @@ import UploadFileIcon from '@mui/icons-material/UploadFile';
 
 function Clients() {
     const { user,updateUser } = useContext(UserContext)
-    console.log(user)
     const [newClient, setNewClient] = useState(false)
     const [files, setFiles] = useState([]);
 
@@ -28,8 +27,6 @@ function Clients() {
     const clients = user.user.account_details.clients.flatMap(client => {
         return <Client key={client.id} {...client}/>
     })
-
-
 
     const clientSchema = object({
         name: string()
@@ -220,12 +217,13 @@ function Clients() {
             :
 
             <>
+
             </>
 
         }
         <div className=''>
             <div className='text-4xl flex flex-row justify-between'>
-                <h1 className='underline'>Clients</h1>
+                <h1 className='text-lg'>Clients</h1>
                 <div onClick={handleNewClient} className='border p-2 rounded-lg'>
                     <h1>+ NEW</h1>
                 </div>
