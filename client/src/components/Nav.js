@@ -44,8 +44,10 @@ function Nav() {
                 {/* Mobile Dropdown Menu */}
                 { navOpen ?
 
+                    // Background Blur
                     <div className='fixed inset-0 backdrop-blur'>
 
+                        {/* Menu */}
                         <div className='bg-black'>
 
                             {/* Menu Bar + App Title */}
@@ -67,29 +69,29 @@ function Nav() {
                             </div>
 
                             {/* Page Navigation */}
-                            <div className=''>
+                            <div className='py-4'>
 
-                                <NavLink to='/dashboard' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] flex items-center ml-4' onClick={handleNav}>
+                                <NavLink to='/dashboard' className='transition ease-in-out delay-75 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] flex items-center ml-4' onClick={handleNav}>
                                     <GridViewIcon className='mr-2 my-4'/>
                                     Dashboard
                                 </NavLink>
 
-                                <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] flex items-center ml-4' onClick={handleNav}>
+                                <NavLink to='/projects' className='transition ease-in-out delay-75 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] flex items-center ml-4' onClick={handleNav}>
                                     <DetailsIcon className='mr-2 my-4' />
                                     Projects
                                 </NavLink>
 
-                                <NavLink to='/clients' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] flex items-center ml-4' onClick={handleNav}>
+                                <NavLink to='/clients' className='transition ease-in-out delay-75 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] flex items-center ml-4' onClick={handleNav}>
                                     <PeopleOutlineIcon className='mr-2 my-4' />
                                     Clients
                                 </NavLink>
 
-                                <NavLink to='/tasks' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] flex items-center ml-4' onClick={handleNav}>
+                                <NavLink to='/tasks' className='transition ease-in-out delay-75 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] flex items-center ml-4' onClick={handleNav}>
                                     <TaskAltIcon className='mr-2 my-4' />
                                     Tasks
                                 </NavLink>
 
-                                <NavLink to='/budgets' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] flex items-center ml-4' onClick={handleNav}>
+                                <NavLink to='/budgets' className='transition ease-in-out delay-75 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] flex items-center ml-4' onClick={handleNav}>
                                     <AttachMoneyIcon className='mr-2 my-4' />
                                     Budgets
                                 </NavLink>
@@ -97,9 +99,9 @@ function Nav() {
                             </div>
                                     
                             {/* Account Navigation */}
-                            <div className='border-t border-white mt-4'>
+                            <div className='border-t border-white py-2 '>
 
-                                <NavLink to='/settings' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] flex items-center ml-4' onClick={handleNav}>
+                                <NavLink to='/settings' className='transition ease-in-out delay-75 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] flex items-center ml-4' onClick={handleNav}>
                                     <SettingsIcon className='mr-2 my-4' />
                                     Settings
                                 </NavLink>
@@ -109,14 +111,10 @@ function Nav() {
                                     Logout
                                 </NavLink>  
 
-                        </div>
-
-
+                            </div>
 
                         </div>
 
-                        
-                    
                     </div>
 
                     :
