@@ -36,7 +36,7 @@ function Projects() {
         client: ''
     }
 
-      const formik = useFormik({
+    const formik = useFormik({
         initialValues,
         validationSchema: projectSchema,
         onSubmit: (formData) => {
@@ -85,7 +85,7 @@ function Projects() {
             })
     
         },
-      });
+    });
 
     const handleNewProject = () => {
         setNewProject(!newProject)
@@ -97,7 +97,6 @@ function Projects() {
         })
     })
 
-
     const clients = user.user.account_details.clients.map(client => {
         return <option value={client.id}>{client.name}</option>
     })
@@ -106,7 +105,7 @@ function Projects() {
  
         <div className='w-full h-full overflow-hidden'>
 
-            <div className='text-4xl  flex flex-row justify-between'>
+            <div className='text-4xl flex flex-row justify-between'>
 
                 <h1 className='text-lg'>
                     <DetailsIcon className='mr-2 my-4' />

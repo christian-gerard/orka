@@ -13,6 +13,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import CloseIcon from '@mui/icons-material/Close';
 
 function Project({id, name, company, description, status, deadline}) {
+    
     const { user, updateUser } = useContext(UserContext)
     const route = useParams();
     const routeType = useLocation()

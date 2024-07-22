@@ -5,10 +5,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import GridViewIcon from '@mui/icons-material/GridView';
 import DetailsIcon from '@mui/icons-material/Details';
 import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
-import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import SettingsIcon from '@mui/icons-material/Settings';
-import WavesIcon from '@mui/icons-material/Waves';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 
@@ -29,7 +27,7 @@ function Nav() {
         <div className='sm:hidden'>
             <div className='bg-black text-white'>
 
-                <h1 className='text-4xl tracking-[0.6em] p-4 flex flex-row reddit-mono italic'> 
+                <div className='text-4xl tracking-[0.6em] p-4 flex flex-row reddit-mono italic'> 
 
                     <span className='mr-6 hover:text-ocean flex items-center'>
                         <MenuIcon fontSize='xl' onClick={handleNav} />   
@@ -39,7 +37,7 @@ function Nav() {
                         ORKA
                     </NavLink>
 
-                </h1>
+                </div>
 
             
             </div>
@@ -85,7 +83,6 @@ function Nav() {
                             </NavLink>
                                              
                         </div>
-
 
 
                         <div className='bg-black border-t border-white text-white'>
