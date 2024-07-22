@@ -108,7 +108,7 @@ function Projects() {
 
             <div className='text-4xl  flex flex-row justify-between'>
 
-                <h1 className=''>
+                <h1 className='text-lg'>
                     <DetailsIcon className='mr-2 my-4' />
                     Projects
                 </h1>

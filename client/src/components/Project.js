@@ -402,7 +402,7 @@ function Project({id, name, company, description, status, deadline}) {
     
                 </div>
     
-                <div className='border border-black rounded-xl my-4 mx-4 p-4'>
+                <div className='border border-black my-4 mx-4 p-4'>
     
                     <div className='flex flex-row justify-between'>
                         <p className='text-4xl bold spacing-[0.5em]'>{currentProject ? currentProject.name : 'UNNAMED'}</p>
@@ -425,7 +425,7 @@ function Project({id, name, company, description, status, deadline}) {
     
     
                 <NavLink to={`/projects/${id}`}>
-                    <div className='border border-black rounded-xl my-4 mx-4 p-4'>
+                    <div className='border border-black my-4 mx-4 p-4'>
                         <p className='text-2xl bold spacing-[0.5em]'>{name ? name : 'UNNAMED'}</p>
                         <p>{company ? company : '___'}</p>
                         <p>{status ? status : 'No Status'}</p>

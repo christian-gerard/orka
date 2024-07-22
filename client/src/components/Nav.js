@@ -13,9 +13,10 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 
 
-
 function Nav() {
+
     const { logout, user } = useContext(UserContext)
+
     const [navOpen, setNavOpen] = useState(true)
 
     const handleNav = () => {
@@ -48,37 +49,37 @@ function Nav() {
 
                 { navOpen ?
 
-                    <>
+                    <div className=''>
 
-                        <div className='bg-black text-white flex flex-col'>
+                        <div className='bg-black text-white flex flex-col w-full'>
 
-                            <div className='bg-white text-black flex justify-center w-[80%]'>
+                            <div className='bg-white text-black flex justify-center w-[80%] '>
 
                                 <p>{user.user.account_details.name ? user.user.account_details.name : 'None'}</p>
 
                             </div>
 
-                            <NavLink to='/dashboard' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-black w-[100px] flex items-center ml-2' onClick={handleNav}>
+                            <NavLink to='/dashboard' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] flex items-center ml-2' onClick={handleNav}>
                                 <GridViewIcon className='mr-2 my-4'/>
                                 Dashboard
                             </NavLink>
 
-                            <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-black w-[100px] flex items-center ml-2' onClick={handleNav}>
-                                <DetailsIcon className='my-4' />
+                            <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] flex items-center ml-2' onClick={handleNav}>
+                                <DetailsIcon className='mr-2 my-4' />
                                 Projects
                             </NavLink>
 
-                            <NavLink to='/clients' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-black w-[100px] flex items-center ml-2' onClick={handleNav}>
+                            <NavLink to='/clients' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] flex items-center ml-2' onClick={handleNav}>
                                 <PeopleOutlineIcon className='mr-2 my-4' />
                                 Clients
                             </NavLink>
 
-                            <NavLink to='/clients' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-black w-[100px] flex items-center ml-2' onClick={handleNav}>
+                            <NavLink to='/clients' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] flex items-center ml-2' onClick={handleNav}>
                                 <TaskAltIcon className='mr-2 my-4' />
                                 Tasks
                             </NavLink>
 
-                            <NavLink to='/clients' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-black w-[100px] flex items-center ml-2' onClick={handleNav}>
+                            <NavLink to='/clients' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] flex items-center ml-2' onClick={handleNav}>
                                 <AttachMoneyIcon className='mr-2 my-4' />
                                 Budgets
                             </NavLink>
@@ -89,19 +90,19 @@ function Nav() {
 
                         <div className='bg-black border-t border-white text-white'>
 
-                            <NavLink to='/' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-black w-[100px] flex items-center ml-2' onClick={logout}>
+                            <NavLink to='/' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] flex items-center ml-2' onClick={logout}>
                                 <SettingsIcon className='mr-2 my-4' />
                                 Settings
                             </NavLink>
 
-                            <NavLink to='/' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-black w-[100px] flex items-center ml-2' onClick={logout}>
+                            <NavLink to='/' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] flex items-center ml-2' onClick={logout}>
                                 <ExitToAppIcon className='mr-2 my-4' />
                                 Logout
                             </NavLink>  
 
                         </div>
                     
-                    </>
+                    </div>
 
 
 
@@ -118,12 +119,13 @@ function Nav() {
 
         <div className='hidden sm:block'>
             <div className='bg-black text-white h-full flex flex-col justify-between'>
-                <div>
 
+                <div>
                     <h1 className={ navOpen ? "text-4xl tracking-[0.8em] p-4 flex flex-row reddit-mono italic flex items-center justify-left ml-2.5" : "text-4xl tracking-[0.8em] p-4 flex flex-row reddit-mono italic flex items-center justify-center "  }> 
 
                         <span className='hover:text-ocean flex flex-row items-center h-[50px] '>
-                            <MenuIcon fontSize='xl' onClick={handleNav} className={navOpen ? "mr-6" : ""} />   
+                            <MenuIcon fontSize='xl' onClick={handleNav} className={navOpen ? "mr-6" : ""} />  
+
                             {
                                 navOpen ?
 
@@ -133,9 +135,8 @@ function Nav() {
 
                                 <></>
                             }
+
                         </span>
-
-
                     </h1>
 
 
@@ -145,7 +146,9 @@ function Nav() {
                         <>
 
                         <div className=''>
+
                             <h1 className='flex justify-center m-2 text-2xl border'>{user.user.account_details.name}</h1>
+
                         </div>
                         
                         <div className='text-[1em] mx-6 text-white w-[175px] mt-2 p-2 tracking-[0.1em] flex flex-col'>
@@ -154,18 +157,22 @@ function Nav() {
                                 <GridViewIcon className='mr-2 my-4'/>
                                 Dashboard
                             </NavLink>
+
                             <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] py-1 flex flex-row items-center' >
                                 <DetailsIcon className='mr-2 my-4' />
                                 Projects
                             </NavLink>
+
                             <NavLink to='/clients' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] py-1 flex flex-row items-center'>
                                 <PeopleOutlineIcon className='mr-2 my-4' />
                                 Clients
                             </NavLink>
+
                             <NavLink to='/settings' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] py-1  flex flex-row items-center' >
                                 <SettingsIcon className='mr-2 my-4' />
                                 Settings
                             </NavLink>
+
                             <NavLink to='/' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-ocean w-[100px] py-1  flex flex-row items-center' onClick={logout}>
                                 <ExitToAppIcon className='mr-2 my-4' />
                                 Logout
@@ -199,8 +206,6 @@ function Nav() {
                     }
 
 
-
-
                 </div>
 
 
@@ -224,6 +229,8 @@ function Nav() {
                     :
 
                     <>
+
+
                     </>
                 
                 }
