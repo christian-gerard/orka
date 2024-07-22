@@ -425,11 +425,24 @@ function Project({id, name, company, description, status, deadline}) {
     
     
                 <NavLink to={`/projects/${id}`}>
-                    <div className='border border-black my-4 mx-4 p-4'>
-                        <p className='text-2xl bold spacing-[0.5em]'>{name ? name : 'UNNAMED'}</p>
-                        <p>{company ? company : '___'}</p>
-                        <p>{status ? status : 'No Status'}</p>
-                        <p>{deadline ? deadline.slice(0,-10) : 'No Deadline'}</p>
+                    <div className='border border-black my-4 mx-4 p-4 flex flex-col'>
+
+                        <div className='flex flex-row justify-between'>
+                            <p className='text-2xl bold spacing-[0.5em]'>{name ? name : 'UNNAMED'}</p>
+                            <p>{company ? company : '___'}</p>
+                        </div>
+
+                        <div className='flex flex-row justify-between'>
+                            <p>{status ? status : 'No Status'}</p>
+                            <p>{deadline ? deadline.slice(0,-10) : 'No Deadline'}</p>
+                        </div>
+
+                        <div>
+
+                        </div>
+                        
+                        
+                        
                     </div>
                 </NavLink>
                 

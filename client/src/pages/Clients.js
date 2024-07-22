@@ -224,7 +224,7 @@ function Clients() {
         }
         <div className=''>
             <div className='text-4xl flex flex-row justify-between'>
-                <h1 className='underline'>Clients</h1>
+                <h1 className='text-lg'>Clients</h1>
                 <div onClick={handleNewClient} className='border p-2 rounded-lg'>
                     <h1>+ NEW</h1>
                 </div>
