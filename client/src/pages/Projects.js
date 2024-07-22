@@ -26,7 +26,7 @@ function Projects() {
         .required(),
         client: number()
         .required()
-      });
+    });
 
     const initialValues = {
         name: '', 

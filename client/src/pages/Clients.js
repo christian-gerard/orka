@@ -28,8 +28,6 @@ function Clients() {
         return <Client key={client.id} {...client}/>
     })
 
-
-
     const clientSchema = object({
         name: string()
         .required(),
@@ -219,6 +217,7 @@ function Clients() {
             :
 
             <>
+
             </>
 
         }
