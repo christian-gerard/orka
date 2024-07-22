@@ -1,6 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
-from orka.models.ProductionNeed import ProductionNeed
+from server.orka.models.Task import ProductionNeed
 from orka.models.User import User
 from datetime import datetime
 

@@ -9,6 +9,9 @@ import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import SettingsIcon from '@mui/icons-material/Settings';
 import WavesIcon from '@mui/icons-material/Waves';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import TaskAltIcon from '@mui/icons-material/TaskAlt';
+
 
 
 function Nav() {
@@ -22,7 +25,7 @@ function Nav() {
     return(
         <>
         
-        <div className=' sm:hidden'>
+        <div className='sm:hidden'>
             <div className='bg-black text-white'>
 
                 <h1 className='text-4xl tracking-[0.8em] p-4 flex flex-row reddit-mono italic'> 
@@ -31,7 +34,7 @@ function Nav() {
                         <MenuIcon fontSize='xl' onClick={handleNav} />   
                     </span>
 
-                    <NavLink to='/dashboard' className='animate-spacing-reverse hover:animate-spacing-forward hover:text-ocean'>
+                    <NavLink to='/dashboard' className=''>
                         ORKA
                     </NavLink>
 
@@ -43,16 +46,63 @@ function Nav() {
 
             <div className='z-10'>
 
-
                 { navOpen ?
 
-                    <div className='fixed text-[0.8em] mx-6 border-2 text-white mt-2 p-2 bg-ocean tracking-[0.1em] flex flex-col'>
+                    <>
+
+                        <div className='bg-black text-white flex flex-col'>
+
+                            <div className='bg-white text-black flex justify-center w-[80%]'>
+
+                                <p>{user.user.account_details.name ? user.user.account_details.name : 'None'}</p>
+
+                            </div>
+
+                            <NavLink to='/dashboard' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-black w-[100px] flex items-center ml-2' onClick={handleNav}>
+                                <GridViewIcon className='mr-2 my-4'/>
+                                Dashboard
+                            </NavLink>
+
+                            <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-black w-[100px] flex items-center ml-2' onClick={handleNav}>
+                                <DetailsIcon className='my-4' />
+                                Projects
+                            </NavLink>
+
+                            <NavLink to='/clients' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-black w-[100px] flex items-center ml-2' onClick={handleNav}>
+                                <PeopleOutlineIcon className='mr-2 my-4' />
+                                Clients
+                            </NavLink>
+
+                            <NavLink to='/clients' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-black w-[100px] flex items-center ml-2' onClick={handleNav}>
+                                <TaskAltIcon className='mr-2 my-4' />
+                                Tasks
+                            </NavLink>
+
+                            <NavLink to='/clients' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-black w-[100px] flex items-center ml-2' onClick={handleNav}>
+                                <AttachMoneyIcon className='mr-2 my-4' />
+                                Budgets
+                            </NavLink>
+
+                                             
+                        </div>
+
+                        <div className='bg-black border-t border-white text-white'>
+
+                            <NavLink to='/' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-black w-[100px] flex items-center ml-2' onClick={logout}>
+                                <SettingsIcon className='mr-2 my-4' />
+                                Settings
+                            </NavLink>
+
+                            <NavLink to='/' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-black w-[100px] flex items-center ml-2' onClick={logout}>
+                                <ExitToAppIcon className='mr-2 my-4' />
+                                Logout
+                            </NavLink>  
+
+                        </div>
                     
-                        <NavLink to='/dashboard' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-black w-[100px]' onClick={handleNav}>Dashboard</NavLink>
-                        <NavLink to='/projects' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-black w-[100px]' onClick={handleNav}>Projects</NavLink>
-                        <NavLink to='/clients' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-black w-[100px]' onClick={handleNav}>Clients</NavLink>
-                        <NavLink to='/' className='transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-100 hover:text-black w-[100px]' onClick={logout}>Logout</NavLink>                   
-                    </div>
+                    </>
+
+
 
                     :
 
@@ -60,7 +110,6 @@ function Nav() {
                     </>
                 
                 }
-
 
             </div>
         

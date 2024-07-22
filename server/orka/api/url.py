@@ -17,6 +17,5 @@ urlpatterns = [
     path("task/", TaskList.as_view()),
     path("task/<int:pk>/", TaskDetail.as_view()),
     path("expense/", ExpenseList.as_view())
-    
 
 ]
