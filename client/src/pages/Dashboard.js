@@ -30,10 +30,10 @@ function Dashboard() {
 
 
     return(
-        <div className=' flex flex-col h-full overflow-hidden'>
+        <div className=' text-6xl flex flex-col h-full overflow-hidden bg-ocean   justify-between'>
 
             <div>
-                <h1>Dashboard</h1>
+                <h1>Dashboard Dashboard Dashboard Dashboard Dashboard Dashboard Dashboard Dashboard DashboardDashboardDashboard</h1>
             </div>
 
         </div>
