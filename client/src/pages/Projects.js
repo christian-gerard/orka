@@ -6,7 +6,7 @@ import { UserContext } from '../context/UserContext'
 import { useFormik, Formik, Form, Field } from 'formik'
 import { object, string, array, number } from "yup";
 import DatePicker from 'react-date-picker'
-import AddIcon from '@mui/icons-material/Add';
+import AddBoxIcon from '@mui/icons-material/AddBox';
 import DetailsIcon from '@mui/icons-material/Details';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -115,43 +115,15 @@ function Projects() {
                 </div>
 
                 <div>
-                    <AddIcon />
+                    <AddBoxIcon fontSize='medium' onClick={handleNewProject}/>
                 </div>
             </div>
 
             {/* Projects */}
-            <div className='border border-[0.2px] h-[100%] overflow-y-scroll'>
+            <div className='border border-[0.2px] h-[80%] overflow-y-scroll'>
 
-                <div className='border h-[200px] m-10'>
-                    TESTING TESTING
-                </div>
+               {projects}
 
-                <div className='border h-[200px] m-10'>
-                    TESTING TESTING
-                </div>
-
-                <div className='border h-[200px] m-10'>
-                    TESTING TESTING
-                </div>
-
-                <div className='border h-[200px] m-10'>
-                    TESTING TESTING
-                </div>
-
-
-                <div className='border h-[200px] m-10'>
-                    TESTING TESTING
-                </div>
-
-                <div className='border h-[200px] m-10'>
-                    TESTING TESTING
-                </div>
-                <div className='border h-[200px] m-10'>
-                    TESTING TESTING
-                </div>
-                <div className='border h-[200px] m-10'>
-                    TESTING TESTING
-                </div>
 
 
             </div>
