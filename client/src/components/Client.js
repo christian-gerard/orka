@@ -123,12 +123,16 @@ function Client({id, name, status}) {
 
 
             :
-                <NavLink to={`/clients/${id}`}>
-                    <div className='border border-black my-4 rounded-[100%] w-[200px] h-[200px] flex flex-col items-center justify-center my-4 mx-4'>
-                        <p>{name ? name : 'untitled'}</p>
-                        <p>{status ? status : 'Active'}</p>
-                    </div>
-                </NavLink>
+
+            <NavLink to={`/clients/${id}`} className='text-lg flex flex-col items-center my-2'>
+
+                <div className='border border-black  text-lg rounded-[100%] w-[125px] h-[125px] flex flex-col justify-center mx-4'>
+                    
+                </div>
+
+                <p>{name ? name : 'untitled'}</p>
+                
+            </NavLink>
 
 
         }
