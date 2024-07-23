@@ -12,12 +12,13 @@ import BudgetItem from './BudgetItem'
 import DeleteIcon from '@mui/icons-material/Delete';
 import CloseIcon from '@mui/icons-material/Close';
 
-function Project({id, name, company, description, status, deadline}) {
+function Project({id, name, client, description, status, deadline}) {
     
-    const { user, updateUser } = useContext(UserContext)
+    const { user, updateUser, clients } = useContext(UserContext)
     const route = useParams();
     const routeType = useLocation()
     const [currentProject, setCurrentProject] = useState(null)
+    const [clientName, setClientName] = useState('')
     const [prodNeeds, setProdNeeds] = useState([])
     const [budgItems, setBudgItems] = useState([])
     const [editMode, setEditMode] = useState(false)
@@ -26,7 +27,7 @@ function Project({id, name, company, description, status, deadline}) {
     const [newBudgItem, setNewBudgItem] = useState(false)
     const nav = useNavigate()
 
-    const clients = user.user.account_details.clients.map(client => {
+    const clientOptions = user.user.account_details.clients.map(client => {
         return <option value={client.id}>{client.name}</option>
     })
 
@@ -242,6 +243,8 @@ function Project({id, name, company, description, status, deadline}) {
             setProdNeeds(updatedProdNeeds);
             setBudgItems(updatedBudgItems)
         }
+
+        
     }, [currentProject]);
 
 
@@ -366,7 +369,7 @@ function Project({id, name, company, description, status, deadline}) {
                                 className='border m-2 p-1'>
                                     <option value=''>Select Client</option>
                                     {
-                                        clients
+                                        clientOptions
                                     }
                                     
                                 </Field>
@@ -424,16 +427,19 @@ function Project({id, name, company, description, status, deadline}) {
                 :
     
     
-                <NavLink to={`/projects/${id}`}>
+                <NavLink to={`/projects/${id}`} className='max-w-[400px]'>
                     <div className='border border-black my-4 mx-4 p-4 flex flex-col'>
 
                         <div className='flex flex-row justify-between'>
                             <p className='text-2xl bold spacing-[0.5em]'>{name ? name : 'UNNAMED'}</p>
-                            <p>{company ? company : '___'}</p>
+                            <div className='flex flex-row'>
+                                <div className='rounded-[100%] h-[20px] w-[20px] bg-doing border-black'></div>
+                                <div className='rounded-[100%] h-[20px] w-[20px] bg-ocean border-black'></div>
+                            </div>
                         </div>
 
                         <div className='flex flex-row justify-between'>
-                            <p>{status ? status : 'No Status'}</p>
+                            <p>{client ? client : 'None'}</p>
                             <p>{deadline ? deadline.slice(0,-10) : 'No Deadline'}</p>
                         </div>
 
