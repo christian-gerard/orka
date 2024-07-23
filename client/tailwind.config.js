@@ -32,7 +32,11 @@ module.exports = {
     colors: {
       'black': '#000000',
       'white': '#ffffff',
-      'ocean': '#6D99B5'
+      'ocean': '#6D99B5',
+      'notStarted':'#c5d8fc',
+      'doing': '#95FF7D',
+      'done' : '#F7FF5C',
+      'blocked': '#FF9294'
     }
   },
   plugins: [],

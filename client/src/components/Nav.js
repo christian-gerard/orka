@@ -151,27 +151,27 @@ function Nav() {
                                 <div className='flex flex-col items-left ml-6'>
 
                                     <NavLink to='/dashboard' className='w-[200px] justify-items-start transition my-4 ease-in-out delay-75 hover:-translate-y-1 hover:scale-100 hover:text-ocean flex items-center ' >
-                                        <GridViewIcon fontSize='xl' className=''/>
+                                        <GridViewIcon fontSize='xl' className='mr-2'/>
                                         <p>Dashboard</p>
                                     </NavLink>
 
                                     <NavLink to='/projects' className='w-[200px] justify-items-start transition my-4 ease-in-out delay-75 hover:-translate-y-1 hover:scale-100 hover:text-ocean flex items-center ' >
-                                        <DetailsIcon className='' />
+                                        <DetailsIcon className='mr-2' />
                                         <p>Projects</p>
                                     </NavLink>
 
                                     <NavLink to='/clients' className='w-[200px] justify-start transition my-4 ease-in-out delay-75 hover:-translate-y-1 hover:scale-100 hover:text-ocean flex items-center ' >
-                                        <PeopleOutlineIcon className='' />
+                                        <PeopleOutlineIcon className='mr-2' />
                                         <p>Clients</p>
                                     </NavLink>
 
                                     <NavLink to='/tasks' className='w-[200px] justify-start transition my-4 ease-in-out delay-75 hover:-translate-y-1 hover:scale-100 hover:text-ocean flex items-center ' >
-                                        <TaskAltIcon className='' />
+                                        <TaskAltIcon className='mr-2' />
                                         <p>Tasks</p>
                                     </NavLink>
 
                                     <NavLink to='/budgets' className='w-[200px] justify-start transition my-4 ease-in-out delay-75 hover:-translate-y-1 hover:scale-100 hover:text-ocean flex items-center' >
-                                        <AttachMoneyIcon className='' />
+                                        <AttachMoneyIcon className='mr-2' />
                                         <p>Budgets</p>
                                     </NavLink>
 
@@ -180,15 +180,13 @@ function Nav() {
                                 {/* Account Icons */}
                                 <div className='border-t'>
                                     
-                                    <NavLink to='/settings' className='transition my-4 ml-6 ease-in-out delay-75 hover:-translate-y-1 hover:scale-100 hover:text-ocean flex items-center' onClick={handleNav}>
-                                        <SettingsIcon className='' />
+                                    <NavLink to='/settings' className='transition my-4 ml-6 ease-in-out delay-75 hover:-translate-y-1 hover:scale-100 hover:text-ocean flex items-center' >
+                                        <SettingsIcon className='mr-2' />
                                         <p>Settings</p>
                                     </NavLink>
 
-
-
-                                    <NavLink className='transition my-4 ml-6 ease-in-out delay-75 hover:-translate-y-1 hover:scale-100 hover:text-ocean flex items-center' onClick={handleNav}>
-                                        <ExitToAppIcon className='' />
+                                    <NavLink className='transition my-4 ml-6 ease-in-out delay-75 hover:-translate-y-1 hover:scale-100 hover:text-ocean flex items-center' onClick={logout}>
+                                        <ExitToAppIcon className='mr-2' />
                                         <p>Logout</p>
                                     </NavLink>
 
@@ -211,7 +209,7 @@ function Nav() {
                                     </NavLink>
 
                                     <NavLink to='/projects' className='transition my-4 ease-in-out delay-75 hover:-translate-y-1 hover:scale-100 hover:text-ocean flex items-center justify-center' >
-                                        <DetailsIcon className='m-0 p-0' />
+                                        <DetailsIcon className='' />
                                     </NavLink>
 
                                     <NavLink to='/clients' className='transition my-4 ease-in-out delay-75 hover:-translate-y-1 hover:scale-100 hover:text-ocean flex items-center justify-center' >
@@ -231,13 +229,13 @@ function Nav() {
                                 {/* Account Icons */}
                                 <div className='border-t'>
                                     
-                                    <NavLink to='/settings' className='transition my-4 ease-in-out delay-75 hover:-translate-y-1 hover:scale-100 hover:text-ocean flex items-center justify-center' onClick={handleNav}>
+                                    <NavLink to='/settings' className='transition my-4 ease-in-out delay-75 hover:-translate-y-1 hover:scale-100 hover:text-ocean flex items-center justify-center'>
                                         <SettingsIcon className='' />
                                     </NavLink>
 
 
 
-                                    <NavLink className='transition my-4 ease-in-out delay-75 hover:-translate-y-1 hover:scale-100 hover:text-ocean flex items-center justify-center' onClick={handleNav}>
+                                    <NavLink className='transition my-4 ease-in-out delay-75 hover:-translate-y-1 hover:scale-100 hover:text-ocean flex items-center justify-center' onClick={logout}>
                                         <ExitToAppIcon className='' />
                                     </NavLink>
 

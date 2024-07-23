@@ -35,13 +35,13 @@ function Dashboard() {
         <div className='flex flex-col h-full'>
 
             {/* Page Header */}
-            <div className='flex flex-row items-center mb-2'>
+            <div className='flex flex-row items-center mb-2 h-[5%]'>
                 <GridViewIcon fontSize='small' />
                 <p className='text-lg ml-2'>Dashboard</p>
             </div>
 
             {/* Outstanding Tasks */}
-            <div className='border border-[0.2px] h-[40%]'>
+            <div className='border border-[0.2px] h-[35%]'>
                 <p className='text-lg p-1'>Outstanding Tasks</p>
 
             </div>

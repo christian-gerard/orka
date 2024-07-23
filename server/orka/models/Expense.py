@@ -7,13 +7,11 @@ class Expense(models.Model):
 
     project = models.ForeignKey(Project, related_name='expense', on_delete=models.CASCADE)
 
-    name = models.CharField(max_length=50)
     description = models.CharField(max_length=300, blank=True)
     amount = models.IntegerField()
     note = models.CharField(max_length=100)
     type = models.CharField(max_length=100)
-    deadline = models.DateTimeField(default=now, blank=True)
-
+    status = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
-        return f"{self.name} <> ${self.amount}"
+        return f"{self.description} <> ${self.amount}"

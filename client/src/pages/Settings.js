@@ -1,37 +1,28 @@
-
+import SettingsIcon from '@mui/icons-material/Settings';
 
 function Settings() {
 
     return (
-
-        <div>
-
         <>
             {/* Page Header */}
-            <div className='flex flex-row items-center'>
-                {/* <GridViewIcon fontSize='small' /> */}
-                <p className='text-lg ml-2'>Settings</p>
+
+                <div className='flex flex-row items-center h-[5%]'>
+                    <SettingsIcon fontSize='small' />
+                    <p className='text-lg ml-2'>Settings</p>
+                </div>
+
+
+
+
+            {/* Settings */}
+            <div className='border border-[0.2px] h-[100%] overflow-y-scroll h-[95%]'>
+                <p>Account Information</p>
+                <p>Manage Users</p>
+
             </div>
         
+        
         </>
-
-            <div className='text-4xl'>
-                <h1 className='underline'>Settings</h1>
-
-            </div>
-
-            <div>
-
-                <div>
-                    <h1>Manage Users</h1>
-
-                    <h1>Manage Account Info</h1>
-
-                    <h1></h1>
-                </div>
-            </div>
-
-        </div>
     )
 }
 

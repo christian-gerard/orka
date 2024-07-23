@@ -10,6 +10,7 @@ import AddBoxIcon from '@mui/icons-material/AddBox';
 import DetailsIcon from '@mui/icons-material/Details';
 import CloseIcon from '@mui/icons-material/Close';
 
+
 function Projects() {
     const { user, updateUser } = useContext(UserContext)
     const [newProject, setNewProject] = useState(false)
@@ -108,8 +109,8 @@ function Projects() {
 
 
             {/* Page Header */}
-            <div className='flex flex-row items-center justify-between mb-2'>
-                <div className='flex flex-row'>
+            <div className='flex flex-row items-center justify-between mb-2 h-[5%]'>
+                <div className='flex flex-row items-center'>
                     <DetailsIcon fontSize='small' />
                     <p className='text-lg ml-2'>Projects</p>
                 </div>
@@ -120,7 +121,7 @@ function Projects() {
             </div>
 
             {/* Projects */}
-            <div className='border border-[0.2px] h-[80%] overflow-y-scroll'>
+            <div className='border border-[0.2px] h-[95%] overflow-y-scroll'>
 
                {projects}
 
