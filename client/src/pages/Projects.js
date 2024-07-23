@@ -12,7 +12,7 @@ import CloseIcon from '@mui/icons-material/Close';
 
 
 function Projects() {
-    const { user, updateUser } = useContext(UserContext)
+    const { user, updateUser, projects } = useContext(UserContext)
     const [newProject, setNewProject] = useState(false)
     const [date, dateChange] = useState(null)
 
@@ -92,12 +92,6 @@ function Projects() {
         setNewProject(!newProject)
     }
 
-    const projects = user.user.account_details.clients.flatMap(client => {
-        return client.projects.map((project) => {
-            return <Project key={project.id} company={client.name} {...project}  />
-        })
-    })
-
     const clients = user.user.account_details.clients.map(client => {
         return <option value={client.id}>{client.name}</option>
     })
@@ -123,7 +117,21 @@ function Projects() {
             {/* Projects */}
             <div className='border border-[0.2px] h-[95%] overflow-y-scroll'>
 
-               {projects}
+               {projects ?
+
+                projects.map(project => {
+                    return <Project id={project.id} {...project} />
+                })
+               
+            
+                :
+                
+                <div>
+                    <h1>No Projects</h1>
+                    
+                </div>
+                
+                }
 
 
 

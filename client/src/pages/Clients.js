@@ -118,6 +118,20 @@ function Clients() {
                 </div>
             </div>
 
+            {
+                clients ?
+
+                clients.map(client => {
+                    return <Client id={client.id} {...client} />
+                })
+
+                :
+
+                <div>
+                    <h1>No Clients</h1>
+                </div>
+            }
+
 
 
 

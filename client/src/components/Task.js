@@ -10,7 +10,6 @@ function Task({id, description, deadline, project, type, note, status}) {
             </div>
 
             <div className='flex flex-row'>
-                <p>{deadline.slice(5,10)}</p>
             </div>
         </div>
     )
