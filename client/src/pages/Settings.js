@@ -6,6 +6,15 @@ function Settings() {
 
         <div>
 
+        <>
+            {/* Page Header */}
+            <div className='flex flex-row items-center'>
+                {/* <GridViewIcon fontSize='small' /> */}
+                <p className='text-lg ml-2'>Settings</p>
+            </div>
+        
+        </>
+
             <div className='text-4xl'>
                 <h1 className='underline'>Settings</h1>
 

@@ -103,34 +103,62 @@ function Projects() {
 
     return (
  
-        <div className='w-full h-full overflow-hidden'>
+        <div className='flex flex-col w-full h-full overflow-hidden'>
 
-            <div className='text-4xl flex flex-row justify-between'>
 
-                <h1 className='text-lg'>
-                    <DetailsIcon className='mr-2 my-4' />
-                    Projects
-                </h1>
 
-                <div className='border border-2 flex flex-row text-lg p-1' onClick={handleNewProject}>
-                    <p>New</p>
+            {/* Page Header */}
+            <div className='flex flex-row items-center justify-between mb-2'>
+                <div className='flex flex-row'>
+                    <DetailsIcon fontSize='small' />
+                    <p className='text-lg ml-2'>Projects</p>
+                </div>
+
+                <div>
                     <AddIcon />
                 </div>
+            </div>
+
+            {/* Projects */}
+            <div className='border border-[0.2px] h-[100%] overflow-y-scroll'>
+
+                <div className='border h-[200px] m-10'>
+                    TESTING TESTING
+                </div>
+
+                <div className='border h-[200px] m-10'>
+                    TESTING TESTING
+                </div>
+
+                <div className='border h-[200px] m-10'>
+                    TESTING TESTING
+                </div>
+
+                <div className='border h-[200px] m-10'>
+                    TESTING TESTING
+                </div>
+
+
+                <div className='border h-[200px] m-10'>
+                    TESTING TESTING
+                </div>
+
+                <div className='border h-[200px] m-10'>
+                    TESTING TESTING
+                </div>
+                <div className='border h-[200px] m-10'>
+                    TESTING TESTING
+                </div>
+                <div className='border h-[200px] m-10'>
+                    TESTING TESTING
+                </div>
+
 
             </div>
 
-            {
-                projects.length !== 0
-                
-                ? 
 
-                <div className='overflow-y-scroll bottom-0'>
-                    {projects}
-                </div>
-                :
 
-                <h1 className='text-3xl w-full h-full flex justify-center align-center'>No Projects</h1>
-            }
+
 
             {
                 newProject ?

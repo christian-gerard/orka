@@ -3,6 +3,8 @@ import Project from '../components/Project'
 import Client from '../components/Client'
 import ToDo from '../components/ToDo'
 import { UserContext } from '../context/UserContext'
+import GridViewIcon from '@mui/icons-material/GridView';
+import { Grid } from '@mui/material'
 
 function Dashboard() {
 
@@ -18,7 +20,7 @@ function Dashboard() {
         return <Client name={client.name}/>
     })
 
-    const projectNeeds = user.user.account_details.clients.flatMap(client => {
+    const tasks = user.user.account_details.clients.flatMap(client => {
         return client.projects.map((project) => {
             console.log(project)
         })
@@ -30,10 +32,30 @@ function Dashboard() {
 
 
     return(
-        <div className=' text-6xl flex flex-col h-full overflow-hidden bg-ocean   justify-between'>
+        <div className='flex flex-col h-full'>
 
-            <div>
-                <h1>Dashboard Dashboard Dashboard Dashboard Dashboard Dashboard Dashboard Dashboard DashboardDashboardDashboard</h1>
+            {/* Page Header */}
+            <div className='flex flex-row items-center mb-2'>
+                <GridViewIcon fontSize='small' />
+                <p className='text-lg ml-2'>Dashboard</p>
+            </div>
+
+            {/* Outstanding Tasks */}
+            <div className='border border-[0.2px] h-[40%]'>
+                <p className='text-lg p-1'>Outstanding Tasks</p>
+
+            </div>
+
+            {/* Projects */}
+            <div className='border border-[0.2px] my-4 h-[25%]'>
+                <p className='text-lg p-1'>Projects</p>
+
+            </div>
+
+            {/* Clients */}
+            <div className='border border-[0.2px] h-[25%]'>
+                <p className='text-lg p-1'>Clients</p>
+
             </div>
 
         </div>
