@@ -22,7 +22,7 @@ function Dashboard() {
 
     const tasks = user.user.account_details.clients.flatMap(client => {
         return client.projects.map((project) => {
-            console.log(project)
+
         })
     })
 

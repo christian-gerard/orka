@@ -1,3 +1,4 @@
+import { SliderTrack } from '@mui/material'
 import { createContext, useState, useEffect } from 'react'
 import { toast } from 'react-hot-toast'
 
@@ -26,33 +27,65 @@ const UserProvider = ({children}) => {
     }
 
     const updateProjects = (data) => {
-
+      setProjects(data)
     }
 
     const updateClients = (data) => {
-      
+      setClients(data)
     }
 
     const updateTasks = (data) => {
-      
+      setTasks(data)
     }
 
     const updateExpenses = (data) => {
-      
+      setExpenses(data)
     }
 
 
     // Update Variables when User updates
 
     useEffect(() => {
+      updateProjects( user ? 
+        user.user.account_details.clients.flatMap(client => {
+
+          return client.projects.map((project) => {
+              return project
+          })
+
+      }) 
+
+      : 
+
+      []
+      
+      )
+
+      updateClients( user ? user.user.account_details.clients.flatMap(client => {return client}) : [])
+
+      updateTasks( user ? user.user.account_details.clients.flatMap(client => {
+
+        return client.projects.map((project) => {
+            return project.tasks.map((tasks) => {
+              return tasks.map((task) => {return task})
+            })
+        })
+
+      })
+
+      :
+
+      []
+
+      )
 
     }, [user])
 
-    console.log(``)
+    console.log(tasks)
 
   return (
 
-    <UserContext.Provider value={{user, login, logout, updateUser}}>
+    <UserContext.Provider value={{user, login, logout, updateUser, projects, clients}}>
         {children}
     </UserContext.Provider>
 

@@ -5,6 +5,10 @@ from orka.models.Client import Client
 from django.utils.timezone import now
 from datetime import date
 
+def validate_deadline(value):
+    if value < date.today():
+        raise ValidationError("Deadline cannot be in the past")
+
 class Project(models.Model):
 
     client = models.ForeignKey(Client, related_name='projects', on_delete=models.CASCADE)
@@ -19,7 +23,7 @@ class Project(models.Model):
     type = models.CharField(max_length=30, default='Ad Campaign')
 
     status = models.CharField(max_length=30, default='Not Started')
-
+    
     budget=models.FloatField(default=0.00)
 
     def __str__(self):

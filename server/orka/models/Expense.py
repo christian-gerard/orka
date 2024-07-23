@@ -5,7 +5,7 @@ from django.utils.timezone import now
 
 class Expense(models.Model):
 
-    project = models.ForeignKey(Project, related_name='expense', on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, related_name='expenses', on_delete=models.CASCADE)
 
     description = models.CharField(max_length=300, blank=True)
     amount = models.IntegerField()
