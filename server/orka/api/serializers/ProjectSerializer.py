@@ -5,7 +5,7 @@ from orka.api.serializers.ExpenseSerializer import ExpenseSerializer
 
 class ProjectSerializer(serializers.ModelSerializer):
     expenses = ExpenseSerializer(many=True, read_only=True)
-    prod_needs = TaskSerializer(many=True, read_only=True)
+    tasks = TaskSerializer(many=True, read_only=True)
 
     class Meta:
         model = Project

@@ -8,28 +8,7 @@ import { Grid } from '@mui/material'
 
 function Dashboard() {
 
-    const { user } = useContext(UserContext)
-
-    const projects = user.user.account_details.clients.flatMap(client => {
-        return client.projects.map((project) => {
-            return <Project key={project.id} {...project} company={client.name} />
-        })
-    })
-
-    const clients = user.user.account_details.clients.flatMap(client => {
-        return <Client name={client.name}/>
-    })
-
-    const tasks = user.user.account_details.clients.flatMap(client => {
-        return client.projects.map((project) => {
-            console.log(project)
-        })
-    })
-
-    useEffect(() => {
-
-    },[user])
-
+    const { user, projects, tasks, expenses, clients } = useContext(UserContext)
 
     return(
         <div className='flex flex-col h-full'>
@@ -41,20 +20,76 @@ function Dashboard() {
             </div>
 
             {/* Outstanding Tasks */}
-            <div className='border border-[0.2px] h-[35%]'>
-                <p className='text-lg p-1'>Outstanding Tasks</p>
+            <div className='border border-[0.2px] h-[35%] '>
+
+                <p className='text-lg p-1 h-[10%]'>Outstanding Tasks</p>
+
+                <div className='overflow-y-scroll h-[90%]'>
+
+                    {
+                        tasks ?
+
+                        tasks.map((task) => 
+                            <div className='text-6xl m-2'> 
+                                {task.description}
+
+                            </div>
+                        )
+                        :
+                        <>
+                        </>
+                    }
+
+                </div>
 
             </div>
 
             {/* Projects */}
             <div className='border border-[0.2px] my-4 h-[25%]'>
-                <p className='text-lg p-1'>Projects</p>
+                <p className='text-lg p-1 h-[10%]'>Projects</p>
+
+                <div className='overflow-y-scroll h-[90%]'>
+
+                    {
+                        projects ?
+
+                        projects.map((project) => 
+                            <div className='text-6xl m-2'> 
+                                {project.name}
+
+                            </div>
+                        )
+                        :
+                        <>
+                        </>
+                    }
+
+                </div>
 
             </div>
 
             {/* Clients */}
             <div className='border border-[0.2px] h-[25%]'>
-                <p className='text-lg p-1'>Clients</p>
+
+                <p className='text-lg p-1 h-[10%]'>Clients</p>
+
+                <div className='overflow-y-scroll h-[90%]'>
+
+                    {
+                        clients ?
+
+                        clients.map((client) => 
+                            <div className='text-6xl m-2'> 
+                                {client.name}
+
+                            </div>
+                        )
+                        :
+                        <>
+                        </>
+                    }
+
+                </div>
 
             </div>
 

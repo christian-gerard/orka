@@ -18,7 +18,8 @@ function App() {
             success: {
               style: {
                 background: '#000000',
-                color: 'white'
+                color: 'white',
+                border: '0.2px solid white'
               },
               iconTheme: {
                 primary: '#ffffff',
