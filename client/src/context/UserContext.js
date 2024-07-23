@@ -65,9 +65,25 @@ const UserProvider = ({children}) => {
 
       updateTasks( user ? user.user.account_details.clients.flatMap(client => {
 
-        return client.projects.map((project) => {
-            return project.tasks.map((tasks) => {
-              return tasks.map((task) => {return task})
+        return client.projects.flatMap((project) => {
+            return project.tasks.flatMap((task) => {
+              return task
+            })
+        })
+
+      })
+
+      :
+
+      []
+
+      )
+
+      updateExpenses( user ? user.user.account_details.clients.flatMap(client => {
+
+        return client.projects.flatMap((project) => {
+            return project.expenses.flatMap((expense) => {
+              return expense
             })
         })
 
@@ -81,11 +97,11 @@ const UserProvider = ({children}) => {
 
     }, [user])
 
-    console.log(tasks)
+    console.log(expenses)
 
   return (
 
-    <UserContext.Provider value={{user, login, logout, updateUser, projects, clients}}>
+    <UserContext.Provider value={{user, login, logout, updateUser, projects, clients, tasks, expenses}}>
         {children}
     </UserContext.Provider>
 
