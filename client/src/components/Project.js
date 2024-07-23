@@ -128,7 +128,7 @@ function Project({id, name, company, description, status, deadline}) {
             })
     
         },
-      });
+    });
 
     const prodNeedFormik = useFormik({
         prodNeedInitialValues,
@@ -136,7 +136,7 @@ function Project({id, name, company, description, status, deadline}) {
         onSubmit: (formData) => { 
 
         }
-      });
+    });
 
     const handleEditMode = () => {
         setEditMode(!editMode)
@@ -415,8 +415,7 @@ function Project({id, name, company, description, status, deadline}) {
 
                 </div>
     
-                <ProductionNeed />
-                <BudgetItem />
+
     
                 </>
     

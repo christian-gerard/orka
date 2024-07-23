@@ -124,14 +124,14 @@ function Client({id, name, status}) {
 
             :
 
-            <NavLink to={`/clients/${id}`} className='text-lg flex flex-col items-center my-2'>
+            <NavLink to={`/clients/${id}`} className='text-lg flex flex-col items-center my-2 mx-2'>
 
                 <div className='border border-black  text-lg rounded-[100%] w-[125px] h-[125px] flex flex-col justify-center mx-4'>
                     
                 </div>
 
                 <p>{name ? name : 'untitled'}</p>
-                
+
             </NavLink>
 
 
