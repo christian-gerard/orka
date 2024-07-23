@@ -41,7 +41,7 @@ function App() {
       { user ? 
         <div className='h-full w-full flex flex-col sm:flex-row'>
             <Nav /> 
-            <div className='p-4 w-full'>
+            <div className='p-4 w-full h-full'>
               <Outlet />
             </div>
         </div>

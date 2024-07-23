@@ -8,6 +8,8 @@ import Projects from '../pages/Projects'
 import Clients from '../pages/Clients'
 import Client from '../components/Client'
 import Settings from '../pages/Settings'
+import Tasks from '../pages/Tasks'
+import Budgets from '../pages/Budgets'
 
 
 
@@ -44,6 +46,14 @@ const router = createBrowserRouter([
             {
                 path: '/settings',
                 element: <Settings />,
+            },
+            {
+                path: '/tasks',
+                element: <Tasks />,
+            },
+            {
+                path: '/budgets',
+                element: <Budgets />,
             }
 
 		]

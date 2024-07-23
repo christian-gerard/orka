@@ -8,6 +8,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import { object, string, array, number, bool } from "yup";
 import { useDropzone} from 'react-dropzone'
 import UploadFileIcon from '@mui/icons-material/UploadFile';
+import AddBoxIcon from '@mui/icons-material/AddBox';
+import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
 
 
 function Clients() {
@@ -104,8 +106,24 @@ function Clients() {
 
     return (
         <>
+            {/* Page Header */}
+            <div className='flex flex-row items-center justify-between mb-2 h-[5%]'>
+                <div className='flex flex-row items-center'>
+                    <PeopleOutlineIcon fontSize='small' />
+                    <p className='text-lg ml-2'>Clients</p>
+                </div>
+
+                <div>
+                    <AddBoxIcon fontSize='medium' onClick={handleNewClient}/>
+                </div>
+            </div>
+
+
+
+
         {
             newClient ?
+
             <div className='fixed inset-0 flex flex-col justify-center items-center transition-colors backdrop-blur'>
                 <CloseIcon onClick={handleNewClient} />
                 <Formik 
@@ -217,28 +235,11 @@ function Clients() {
             :
 
             <>
-
             </>
 
         }
-        <div className=''>
-            <div className='text-4xl flex flex-row justify-between'>
-                <h1 className='text-lg'>Clients</h1>
-                <div onClick={handleNewClient} className='border p-2 rounded-lg'>
-                    <h1>+ NEW</h1>
-                </div>
-            </div>
-            <div>
 
-                {
-                    clients ? 
-                    clients : 
-                    <h1>No Clients</h1>
-                }
-
-            </div>
-
-        </div>
+        
         </>
     )
 }

@@ -6,9 +6,10 @@ import { UserContext } from '../context/UserContext'
 import { useFormik, Formik, Form, Field } from 'formik'
 import { object, string, array, number } from "yup";
 import DatePicker from 'react-date-picker'
-import AddIcon from '@mui/icons-material/Add';
+import AddBoxIcon from '@mui/icons-material/AddBox';
 import DetailsIcon from '@mui/icons-material/Details';
 import CloseIcon from '@mui/icons-material/Close';
+
 
 function Projects() {
     const { user, updateUser } = useContext(UserContext)
@@ -103,34 +104,34 @@ function Projects() {
 
     return (
  
-        <div className='w-full h-full overflow-hidden'>
+        <div className='flex flex-col w-full h-full overflow-hidden'>
 
-            <div className='text-4xl flex flex-row justify-between'>
 
-                <h1 className='text-lg'>
-                    <DetailsIcon className='mr-2 my-4' />
-                    Projects
-                </h1>
 
-                <div className='border border-2 flex flex-row text-lg p-1' onClick={handleNewProject}>
-                    <p>New</p>
-                    <AddIcon />
+            {/* Page Header */}
+            <div className='flex flex-row items-center justify-between mb-2 h-[5%]'>
+                <div className='flex flex-row items-center'>
+                    <DetailsIcon fontSize='small' />
+                    <p className='text-lg ml-2'>Projects</p>
                 </div>
+
+                <div>
+                    <AddBoxIcon fontSize='medium' onClick={handleNewProject}/>
+                </div>
+            </div>
+
+            {/* Projects */}
+            <div className='border border-[0.2px] h-[95%] overflow-y-scroll'>
+
+               {projects}
+
+
 
             </div>
 
-            {
-                projects.length !== 0
-                
-                ? 
 
-                <div className='overflow-y-scroll bottom-0'>
-                    {projects}
-                </div>
-                :
 
-                <h1 className='text-3xl w-full h-full flex justify-center align-center'>No Projects</h1>
-            }
+
 
             {
                 newProject ?

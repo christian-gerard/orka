@@ -9,6 +9,7 @@ class Task(models.Model):
 
     description = models.CharField(max_length=100)
     deadline = models.DateTimeField(default=now, blank=True)
+    status = models.CharField(max_length=100, blank=True)
     note = models.CharField(max_length=1000)
     type = models.CharField(max_length=20, blank=True)
 

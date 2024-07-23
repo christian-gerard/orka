@@ -6,32 +6,49 @@ export const UserContext = createContext()
 const UserProvider = ({children}) => {
 
     const [user, setUser] = useState(null)
+    const [account, setAccount] = useState(null)
+    const [projects, setProjects] = useState(null)
+    const [tasks, setTasks] = useState(null)
+    const [expenses, setExpenses] = useState(null)
+    const [clients, setClients] = useState(null)
 
+
+    // Authorization Functions
     const login = (user) => setUser(user)
-
     const logout = () => {
-          // try {
-          //     fetch('http://127.0.0.1:8000/auth/logout/', { 
-          //       method: 'POST', 
-          //       headers: {
-          //           "Authorization": `Token ${user.token}`,
-          //       } 
-          //   }).then((res) => {
-          //       if(res.ok){
-          //           toast.success('Logged Out')
-          //           setUser(null)
-          //       }
-          //     })
-          // } catch (err) {
-          //     throw err
           setUser(null)
           toast.success('Logged Out')
     }
 
+    // Update Functions
     const updateUser = (data) => {
       setUser(data)
     }
-  
+
+    const updateProjects = (data) => {
+
+    }
+
+    const updateClients = (data) => {
+      
+    }
+
+    const updateTasks = (data) => {
+      
+    }
+
+    const updateExpenses = (data) => {
+      
+    }
+
+
+    // Update Variables when User updates
+
+    useEffect(() => {
+
+    }, [user])
+
+    console.log(``)
 
   return (
 
