@@ -1,11 +1,14 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { UserContext } from '../context/UserContext'
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
+import Task from '../components/Task'
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
 function Tasks() {
 
+    const { tasks } = useContext(UserContext)
     const [notDoing, setNotDoing] = useState(false)
     const [doing, setDoing] = useState(false)
     const [done, setDone] = useState(false)
@@ -55,7 +58,7 @@ function Tasks() {
                         </div>
 
                         {/* Stage Name */}
-                        <p className='mx-2'>Not Started { 0 ? [2] : '[0]'}</p>
+                        <p className='mx-2'>Not Started { tasks ? `[${tasks.length}]` : '[0]'}</p>
 
                         {/* Toggle Logo Depending on State */}
 
@@ -72,6 +75,21 @@ function Tasks() {
 
                         
                     </div>
+
+                    {
+                        tasks && notDoing ?
+
+                        tasks.map(task => {
+                            return <Task id={task.id} {...task} />
+                        })
+
+                        :
+
+                        <></>
+                    }
+
+
+
 
                     {/* Doing */}
                     <div className='flex flex-row items-center my-2' onClick={handleDoing}>

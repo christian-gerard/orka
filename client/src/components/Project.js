@@ -11,13 +11,15 @@ import ProductionNeed from './ProductionNeed'
 import BudgetItem from './BudgetItem'
 import DeleteIcon from '@mui/icons-material/Delete';
 import CloseIcon from '@mui/icons-material/Close';
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 
-function Project({id, name, company, description, status, deadline}) {
+function Project({id, name, client, description, status, deadline}) {
     
-    const { user, updateUser } = useContext(UserContext)
+    const { user, updateUser, clients, tasks } = useContext(UserContext)
     const route = useParams();
     const routeType = useLocation()
     const [currentProject, setCurrentProject] = useState(null)
+    const [clientName, setClientName] = useState('')
     const [prodNeeds, setProdNeeds] = useState([])
     const [budgItems, setBudgItems] = useState([])
     const [editMode, setEditMode] = useState(false)
@@ -26,7 +28,7 @@ function Project({id, name, company, description, status, deadline}) {
     const [newBudgItem, setNewBudgItem] = useState(false)
     const nav = useNavigate()
 
-    const clients = user.user.account_details.clients.map(client => {
+    const clientOptions = user.user.account_details.clients.map(client => {
         return <option value={client.id}>{client.name}</option>
     })
 
@@ -128,7 +130,7 @@ function Project({id, name, company, description, status, deadline}) {
             })
     
         },
-      });
+    });
 
     const prodNeedFormik = useFormik({
         prodNeedInitialValues,
@@ -136,7 +138,7 @@ function Project({id, name, company, description, status, deadline}) {
         onSubmit: (formData) => { 
 
         }
-      });
+    });
 
     const handleEditMode = () => {
         setEditMode(!editMode)
@@ -229,19 +231,8 @@ function Project({id, name, company, description, status, deadline}) {
         }, [route.id, editMode]);
 
     useEffect(() => {
-        if (currentProject) {
-            const updatedProdNeeds = currentProject.prod_needs.map(prod_need => {
-                return <ProductionNeed key={prod_need.id} {...prod_need} />
-            });
 
-            const updatedBudgItems = currentProject.budg_items.map(budg_item => {
-                // return <ProductionNeed key={budg_item.id} {...budg_item} />
-                return "BUDG ITEM"
-            });
-
-            setProdNeeds(updatedProdNeeds);
-            setBudgItems(updatedBudgItems)
-        }
+        
     }, [currentProject]);
 
 
@@ -253,7 +244,20 @@ function Project({id, name, company, description, status, deadline}) {
 
             <div>
 
-                <h1>LOADING...</h1>
+                <div className='flex flex-row justify-between mx-4'>
+                    <NavLink to={'/projects'} className='flex flex-row text-lg' >
+                        <ArrowBackIcon/>
+                        <p className='ml-2'>Projects</p>
+                    </NavLink>
+    
+                    <div>
+                        <EditIcon onClick={handleEditMode}/>
+                        <DeleteIcon onClick={handleDelete}/>
+                    </div>
+    
+                </div>
+
+                
 
             </div>
 
@@ -267,6 +271,7 @@ function Project({id, name, company, description, status, deadline}) {
                 
                 {
                     editMode ?
+
                     <div className='fixed inset-0 flex flex-col justify-center items-center transition-colors backdrop-blur'>
     
                         <Formik className='bg-white'>
@@ -366,7 +371,7 @@ function Project({id, name, company, description, status, deadline}) {
                                 className='border m-2 p-1'>
                                     <option value=''>Select Client</option>
                                     {
-                                        clients
+                                        clientOptions
                                     }
                                     
                                 </Field>
@@ -392,8 +397,9 @@ function Project({id, name, company, description, status, deadline}) {
                 }
     
                 <div className='flex flex-row justify-between mx-4'>
-                    <NavLink to={'/projects'} >
+                    <NavLink to={'/projects'} className='flex flex-row text-lg' >
                         <ArrowBackIcon/>
+                        <p className='ml-2'>Projects</p>
                     </NavLink>
     
                     <div>
@@ -407,16 +413,94 @@ function Project({id, name, company, description, status, deadline}) {
     
                     <div className='flex flex-row justify-between'>
                         <p className='text-4xl bold spacing-[0.5em]'>{currentProject ? currentProject.name : 'UNNAMED'}</p>
-                        <p className='text-2xl border text-white p-1 bg-ocean'>{currentProject ? currentProject.deadline.slice(5,12) : 'No Deadline'}</p>
+                    </div>
+
+                    <div className='flex flex-row justify-between'>
+                        <p>{currentProject ? currentProject.client : '___'}</p>
+                        <p>{currentProject ? currentProject.status : 'No Status'}</p>
+                    </div>
+
+                    <div>
+
+                        <div className='flex flex-row justify-between items-center my-4'>
+                            <p className='text-2xl bold'>Tasks</p>
+                            <NavLink to='/tasks' className='flex flex-row items-center text-lg'>
+                                <p>to Tasks</p>
+                                <ArrowRightAltIcon />
+                            </NavLink>
+                        </div>
+
+                        <div className='flex flex-row items-center'>
+                            <div className='w-[20px] h-[20px] bg-doing'></div>
+                            <p className='mx-2'>Doing</p>
+                            <p>{tasks ? tasks.length : '0'}</p>
+                        </div>
+
+                        <div className='flex flex-row items-center'>
+                            <div className='w-[20px] h-[20px] bg-blocked'></div>
+                            <p className='mx-2'>Blocked</p>
+                            <p>{tasks ? tasks.length : '{0'}</p>
+                        </div>
+
+                    </div>
+
+                    <div>
+                        
+                        <div className='flex flex-row justify-between items-center my-6'>
+                            <p className='text-2xl bold'>Budgets</p>
+                            <NavLink to='/tasks' className='flex flex-row items-center text-lg'>
+                                <p>to Expenses</p>
+                                <ArrowRightAltIcon />
+                            </NavLink>
+                        </div>
+
+                        <div className='border w-full h-[25px]'>
+                            <div className='bg-ocean h-full w-[65%]'></div>
+
+                        </div>
+
+                        <div className='my-6'>
+
+                            <div className='flex flex-row '>
+                                <p className='mr-4'>Budget</p>
+                                <p>{currentProject ? '$' + currentProject.budget + '.00' : 'None'}</p>
+                            </div>
+
+                            <div className='flex flex-row mr-2'>
+                                <p className='mr-4'>Spent</p>
+                                <p>{currentProject ? '$' + currentProject.budget + '.00' : 'None'}</p>
+                            </div>
+
+                        </div>
+
+
+                        <div className='my-6'>
+
+                            <p className='my-4'>Details</p>
+
+                            <div className='flex flex-row text-lg'>
+                                <p className='mr-4'>Deadline</p>
+                                <p>{currentProject ? currentProject.deadline : ""}</p>
+                            </div>
+
+                            <div className='flex flex-row text-lg'>
+                                <p className='mr-4'>Status</p>
+                                <p>{currentProject ? currentProject.status : ""}</p>
+                            </div>
+
+                            <div className='flex flex-row text-lg'>
+                                <p className='mr-4'>Type</p>
+                                <p>{currentProject ? currentProject.type : ""}</p>
+                            </div>
+
+                        </div>
+
                     </div>
     
-                    <p>{currentProject ? currentProject.client : '___'}</p>
-                    <p>{currentProject ? currentProject.status : 'No Status'}</p>
 
                 </div>
     
-                <ProductionNeed />
-                <BudgetItem />
+
     
                 </>
     
@@ -425,17 +509,20 @@ function Project({id, name, company, description, status, deadline}) {
                 :
     
     
-                <NavLink to={`/projects/${id}`}>
+                <NavLink to={`/projects/${id}`} className='max-w-[400px]'>
                     <div className='border border-black my-4 mx-4 p-4 flex flex-col'>
 
                         <div className='flex flex-row justify-between'>
                             <p className='text-2xl bold spacing-[0.5em]'>{name ? name : 'UNNAMED'}</p>
-                            <p>{company ? company : '___'}</p>
+                            <div className='flex flex-row'>
+                                <div className='rounded-[100%] h-[20px] w-[20px] bg-doing border-black'></div>
+                                <div className='rounded-[100%] h-[20px] w-[20px] bg-ocean border-black'></div>
+                            </div>
                         </div>
 
                         <div className='flex flex-row justify-between'>
-                            <p>{status ? status : 'No Status'}</p>
-                            <p>{deadline ? deadline.slice(0,-10) : 'No Deadline'}</p>
+                            <p>{client ? client : 'None'}</p>
+                            <p>{deadline ? deadline.slice(5, 10) : 'No Deadline'}</p>
                         </div>
 
                         <div>

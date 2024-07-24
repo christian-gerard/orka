@@ -97,7 +97,7 @@ const UserProvider = ({children}) => {
 
     }, [user])
 
-    console.log(expenses)
+    console.log(projects)
 
   return (
 

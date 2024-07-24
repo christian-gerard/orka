@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
 import Project from '../components/Project'
 import Client from '../components/Client'
-import ToDo from '../components/ToDo'
+import Task from '../components/Task'
 import { UserContext } from '../context/UserContext'
 import GridViewIcon from '@mui/icons-material/GridView';
 import { Grid } from '@mui/material'
@@ -30,12 +30,11 @@ function Dashboard() {
                         tasks ?
 
                         tasks.map((task) => 
-                            <div className='text-6xl m-2'> 
-                                {task.description}
-
-                            </div>
+                            <Task id={task.id} {...task} />
                         )
+
                         :
+                        
                         <>
                         </>
                     }
@@ -48,16 +47,13 @@ function Dashboard() {
             <div className='border border-[0.2px] my-4 h-[25%]'>
                 <p className='text-lg p-1 h-[10%]'>Projects</p>
 
-                <div className='overflow-y-scroll h-[90%]'>
+                <div className='overflow-x-scroll h-[90%] flex flex-row'>
 
                     {
                         projects ?
 
                         projects.map((project) => 
-                            <div className='text-6xl m-2'> 
-                                {project.name}
-
-                            </div>
+                            <Project id={project.id} {...project} />
                         )
                         :
                         <>
@@ -73,16 +69,13 @@ function Dashboard() {
 
                 <p className='text-lg p-1 h-[10%]'>Clients</p>
 
-                <div className='overflow-y-scroll h-[90%]'>
+                <div className='overflow-x-scroll h-[90%] flex flex-row'>
 
                     {
                         clients ?
 
                         clients.map((client) => 
-                            <div className='text-6xl m-2'> 
-                                {client.name}
-
-                            </div>
+                            <Client id={client.id} {...client} />
                         )
                         :
                         <>
