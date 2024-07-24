@@ -448,8 +448,8 @@ function Project({id, name, client, description, status, deadline}) {
                         
                         <div className='flex flex-row justify-between items-center my-6'>
                             <p className='text-2xl bold'>Budgets</p>
-                            <NavLink to='/tasks' className='flex flex-row items-center text-lg'>
-                                <p>to Expenses</p>
+                            <NavLink to='/budgets' className='flex flex-row items-center text-lg'>
+                                <p>to Budgets</p>
                                 <ArrowRightAltIcon />
                             </NavLink>
                         </div>
