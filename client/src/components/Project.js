@@ -11,10 +11,11 @@ import ProductionNeed from './ProductionNeed'
 import BudgetItem from './BudgetItem'
 import DeleteIcon from '@mui/icons-material/Delete';
 import CloseIcon from '@mui/icons-material/Close';
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 
 function Project({id, name, client, description, status, deadline}) {
     
-    const { user, updateUser, clients } = useContext(UserContext)
+    const { user, updateUser, clients, tasks } = useContext(UserContext)
     const route = useParams();
     const routeType = useLocation()
     const [currentProject, setCurrentProject] = useState(null)
@@ -230,19 +231,6 @@ function Project({id, name, client, description, status, deadline}) {
         }, [route.id, editMode]);
 
     useEffect(() => {
-        if (currentProject) {
-            const updatedProdNeeds = currentProject.prod_needs.map(prod_need => {
-                return <ProductionNeed key={prod_need.id} {...prod_need} />
-            });
-
-            const updatedBudgItems = currentProject.budg_items.map(budg_item => {
-                // return <ProductionNeed key={budg_item.id} {...budg_item} />
-                return "BUDG ITEM"
-            });
-
-            setProdNeeds(updatedProdNeeds);
-            setBudgItems(updatedBudgItems)
-        }
 
         
     }, [currentProject]);
@@ -256,7 +244,20 @@ function Project({id, name, client, description, status, deadline}) {
 
             <div>
 
-                <h1>LOADING...</h1>
+                <div className='flex flex-row justify-between mx-4'>
+                    <NavLink to={'/projects'} className='flex flex-row text-lg' >
+                        <ArrowBackIcon/>
+                        <p className='ml-2'>Projects</p>
+                    </NavLink>
+    
+                    <div>
+                        <EditIcon onClick={handleEditMode}/>
+                        <DeleteIcon onClick={handleDelete}/>
+                    </div>
+    
+                </div>
+
+                
 
             </div>
 
@@ -270,6 +271,7 @@ function Project({id, name, client, description, status, deadline}) {
                 
                 {
                     editMode ?
+
                     <div className='fixed inset-0 flex flex-col justify-center items-center transition-colors backdrop-blur'>
     
                         <Formik className='bg-white'>
@@ -395,8 +397,9 @@ function Project({id, name, client, description, status, deadline}) {
                 }
     
                 <div className='flex flex-row justify-between mx-4'>
-                    <NavLink to={'/projects'} >
+                    <NavLink to={'/projects'} className='flex flex-row text-lg' >
                         <ArrowBackIcon/>
+                        <p className='ml-2'>Projects</p>
                     </NavLink>
     
                     <div>
@@ -410,11 +413,53 @@ function Project({id, name, client, description, status, deadline}) {
     
                     <div className='flex flex-row justify-between'>
                         <p className='text-4xl bold spacing-[0.5em]'>{currentProject ? currentProject.name : 'UNNAMED'}</p>
-                        <p className='text-2xl border text-white p-1 bg-ocean'>{currentProject ? currentProject.deadline.slice(5,12) : 'No Deadline'}</p>
+                    </div>
+
+                    <div className='flex flex-row justify-between'>
+                        <p>{currentProject ? currentProject.client : '___'}</p>
+                        <p>{currentProject ? currentProject.status : 'No Status'}</p>
+                    </div>
+
+                    <div>
+
+                        <div className='flex flex-row justify-between items-center my-4'>
+                            <p className='text-2xl bold'>Tasks</p>
+                            <NavLink to='/tasks' className='flex flex-row items-center text-lg'>
+                                <p>to Tasks</p>
+                                <ArrowRightAltIcon />
+                            </NavLink>
+                        </div>
+
+                        <div className='flex flex-row items-center'>
+                            <div className='w-[20px] h-[20px] bg-doing'></div>
+                            <p className='mx-2'>Doing</p>
+                            <p>{tasks ? tasks.length : '0'}</p>
+                        </div>
+
+                        <div className='flex flex-row items-center'>
+                            <div className='w-[20px] h-[20px] bg-blocked'></div>
+                            <p className='mx-2'>Blocked</p>
+                            <p>{tasks ? tasks.length : '{0'}</p>
+                        </div>
+
+                    </div>
+
+                    <div>
+                        
+                        <div className='flex flex-row justify-between items-center my-4'>
+                            <p className='text-2xl bold'>Budgets</p>
+                            <NavLink to='/tasks' className='flex flex-row items-center text-lg'>
+                                <p>to Expenses</p>
+                                <ArrowRightAltIcon />
+                            </NavLink>
+                        </div>
+
+                        <div>
+                            <p>{currentProject ? '$' + currentProject.budget + '.00' : 'None'}</p>
+                        </div>
+
                     </div>
     
-                    <p>{currentProject ? currentProject.client : '___'}</p>
-                    <p>{currentProject ? currentProject.status : 'No Status'}</p>
 
                 </div>
     
@@ -440,7 +485,7 @@ function Project({id, name, client, description, status, deadline}) {
 
                         <div className='flex flex-row justify-between'>
                             <p>{client ? client : 'None'}</p>
-                            <p>{deadline ? deadline.slice(0,-10) : 'No Deadline'}</p>
+                            <p>{deadline ? deadline.slice(5, 10) : 'No Deadline'}</p>
                         </div>
 
                         <div>
