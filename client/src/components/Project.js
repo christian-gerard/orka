@@ -446,7 +446,7 @@ function Project({id, name, client, description, status, deadline}) {
 
                     <div>
                         
-                        <div className='flex flex-row justify-between items-center my-4'>
+                        <div className='flex flex-row justify-between items-center my-6'>
                             <p className='text-2xl bold'>Budgets</p>
                             <NavLink to='/tasks' className='flex flex-row items-center text-lg'>
                                 <p>to Expenses</p>
@@ -454,8 +454,45 @@ function Project({id, name, client, description, status, deadline}) {
                             </NavLink>
                         </div>
 
-                        <div>
-                            <p>{currentProject ? '$' + currentProject.budget + '.00' : 'None'}</p>
+                        <div className='border w-full h-[25px]'>
+                            <div className='bg-ocean h-full w-[65%]'></div>
+
+                        </div>
+
+                        <div className='my-6'>
+
+                            <div className='flex flex-row '>
+                                <p className='mr-4'>Budget</p>
+                                <p>{currentProject ? '$' + currentProject.budget + '.00' : 'None'}</p>
+                            </div>
+
+                            <div className='flex flex-row mr-2'>
+                                <p className='mr-4'>Spent</p>
+                                <p>{currentProject ? '$' + currentProject.budget + '.00' : 'None'}</p>
+                            </div>
+
+                        </div>
+
+
+                        <div className='my-6'>
+
+                            <p className='my-4'>Details</p>
+
+                            <div className='flex flex-row text-lg'>
+                                <p className='mr-4'>Deadline</p>
+                                <p>{currentProject ? currentProject.deadline : ""}</p>
+                            </div>
+
+                            <div className='flex flex-row text-lg'>
+                                <p className='mr-4'>Status</p>
+                                <p>{currentProject ? currentProject.status : ""}</p>
+                            </div>
+
+                            <div className='flex flex-row text-lg'>
+                                <p className='mr-4'>Type</p>
+                                <p>{currentProject ? currentProject.type : ""}</p>
+                            </div>
+
                         </div>
 
                     </div>
