@@ -83,15 +83,7 @@ function Client({id, name, status}) {
 
             <div className='h-full'>
 
-            {
-                editMode ?
-                <div>
-                    <h1>EDIT FORM</h1>
-                </div>
-
-                :
-                <></>
-            }
+            
             
             <div className='h-[15%]'>
                 <div className='flex flex-row justify-between'>
@@ -103,7 +95,6 @@ function Client({id, name, status}) {
 
                     <div>
                         <DeleteIcon onClick={handleDelete} />
-                        <EditIcon onClick={handleEdit}/>
                     </div>
 
                 </div>

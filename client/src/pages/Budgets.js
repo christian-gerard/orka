@@ -18,10 +18,6 @@ function Budgets() {
                     <AttachMoneyIcon fontSize='small' />
                     <p className='text-lg ml-2'>Budgets</p>
                 </div>
-
-                <div>
-                    <AddBoxIcon fontSize='medium'/>
-                </div>
             </div>
 
             {/* Budgets */}
@@ -31,12 +27,14 @@ function Budgets() {
                     projects ?
 
                     projects.map(project => {
-                        return (<NavLink>
+                        return (
+                        <NavLink to={`/budgets/${project.id}`}>
                             <div className='border border-[0.2px] my-4 mx-4 p-2'>
                                 <p>{project.name}</p>
                                 <p>${project.budget}.00</p>
                             </div>
-                        </NavLink>)
+                        </NavLink>
+                        )
                     })
 
                     :

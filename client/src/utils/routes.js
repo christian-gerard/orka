@@ -10,6 +10,7 @@ import Client from '../components/Client'
 import Settings from '../pages/Settings'
 import Tasks from '../pages/Tasks'
 import Budgets from '../pages/Budgets'
+import Budget from '../components/Budget'
 
 
 
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
             {
                 path: '/budgets',
                 element: <Budgets />,
+            },
+            {
+                path: '/budgets/:id',
+                element: <Budget />,
             }
 
 		]
