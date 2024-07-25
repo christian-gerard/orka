@@ -52,7 +52,7 @@ function Dashboard() {
             <div className='border border-[0.2px] my-4 h-[25%] flex justify-between flex-col'>
                 <p className='text-lg p-1 h-[10%]'>Projects</p>
 
-                <div className='overflow-x-scroll h-[90%] flex flex-row items-center bg-ocean'>
+                <div className='overflow-x-scroll h-[95%] flex flex-row w-full items-center'>
   
                     {
                         projects.length !== 0 ?
@@ -64,7 +64,7 @@ function Dashboard() {
                         )
 
                         :
-                        
+
                         <div className='h-full w-full flex justify-center items-center'>
 
                             <h1 className='text-3xl italic mx-2'> No Current Projects </h1>
@@ -81,7 +81,7 @@ function Dashboard() {
 
                 <p className='text-lg p-1 h-[10%]'>Clients</p>
 
-                <div className='overflow-x-scroll h-[90%] flex flex-row'>
+                <div className='overflow-x-scroll h-[90%] flex flex-row items-center'>
 
                     {
                         clients.length !== 0 ?
