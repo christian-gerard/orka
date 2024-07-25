@@ -11,7 +11,7 @@ import Project from './Project'
 
 
 function Client({id, name, status}) {
-    const { user, updateUser } = useContext(UserContext)
+    const { user, updateUser, projects } = useContext(UserContext)
     const route = useParams();
     const [currentClient, setCurrentClient] = useState(null)
     const [editMode, setEditMode] = useState(false)
@@ -21,13 +21,7 @@ function Client({id, name, status}) {
         setEditMode(!editMode)
     }
 
-    const projects = user.user.account_details.clients.flatMap(client => {
-        if(currentClient && currentClient.id === client.id){
-            return client.projects.map((project) => {
-                return <Project key={project.id} {...project} company={client.name} />
-            })
-        }
-    })
+    
 
     const handleDelete = () => {
         fetch(`http://127.0.0.1:8000/client/${route.id}`, {
@@ -87,7 +81,7 @@ function Client({id, name, status}) {
         {
             route.id ?
 
-            <div>
+            <div className='h-full'>
 
             {
                 editMode ?
@@ -99,22 +93,39 @@ function Client({id, name, status}) {
                 <></>
             }
             
-            <div>
-                <NavLink to={'/clients'}>
-                    <ArrowBackIcon />
-                </NavLink>
-                <DeleteIcon onClick={handleDelete} />
-                <EditIcon onClick={handleEdit}/>
+            <div className='h-[15%]'>
+                <div className='flex flex-row justify-between'>
+
+                    <NavLink to={'/clients'} className='flex flex-row text-xl items-center '>
+                        <ArrowBackIcon className='mr-2'/>
+                        <p>clients</p>
+                    </NavLink>
+
+                    <div>
+                        <DeleteIcon onClick={handleDelete} />
+                        <EditIcon onClick={handleEdit}/>
+                    </div>
+
+                </div>
+
                 <h1>{currentClient ? currentClient.name : 'untitled'}</h1>
                 <p>{currentClient ? currentClient.type : 'Inactive'}</p>
                 <p>{currentClient ? currentClient.client_img : 'Inactive'}</p>
                 <p>{currentClient ? currentClient.isActive : 'Inactive'}</p>
+
             </div>
 
-            <div>
-                <h1>Projects</h1>
+            <div className='h-[40%] border border-[0.2px] my-4'>
+                <p className='text-lg'> Client Projects</p>
                 {
-                    projects ? projects : <h1>NONE</h1>
+                    projects && currentClient ? projects.filter(project => project.client === currentClient.id).map(project => <Project id={project.id} {...project} />) : <h1>NONE</h1>
+                }
+            </div>
+
+            <div className='h-[40%] border border-[0.2px] my-4'>
+                <p className='text-lg'> Client Contacts</p>
+                {
+                    projects && currentClient ? projects.filter(project => project.client === currentClient.id).map(project => <Project id={project.id} {...project} />) : <h1>NONE</h1>
                 }
             </div>
             
@@ -126,7 +137,7 @@ function Client({id, name, status}) {
 
             <NavLink to={`/clients/${id}`} className='text-lg flex flex-col items-center my-2 mx-2'>
 
-                <div className='border border-black  text-lg rounded-[100%] w-[100px] h-[100px] flex flex-col justify-center mx-4'>
+                <div className='border border-black  text-lg rounded-[100%] w-[100px] h-[100px] bg-ocean flex flex-col justify-center mx-4'>
                     
                 </div>
 

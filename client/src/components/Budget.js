@@ -284,4 +284,4 @@ function BudgetItem({}) {
     )
 }
 
-export default BudgetItem
+export default Budget

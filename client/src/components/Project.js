@@ -7,8 +7,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { object, string, array, number } from "yup";
 import { useFormik, Field, Form, Formik } from "formik";
 import EditIcon from '@mui/icons-material/Edit';
-import ProductionNeed from './ProductionNeed'
-import BudgetItem from './BudgetItem'
+
 import DeleteIcon from '@mui/icons-material/Delete';
 import CloseIcon from '@mui/icons-material/Close';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
@@ -188,14 +187,6 @@ function Project({id, name, client, description, status, deadline}) {
         })
     }
 
-    const handleNewProdNeed = () => {
-        setNewProdNeed(!newProdNeed)
-    }
-
-    const handleNewBudgItem = () => {
-        setNewBudgItem(!newBudgItem)
-    }
-
     useEffect(() => {
 
         
@@ -239,29 +230,7 @@ function Project({id, name, client, description, status, deadline}) {
     return(
         <>
         
-        {
-            isLoading ?
 
-            <div>
-
-                <div className='flex flex-row justify-between mx-4'>
-                    <NavLink to={'/projects'} className='flex flex-row text-lg' >
-                        <ArrowBackIcon/>
-                        <p className='ml-2'>Projects</p>
-                    </NavLink>
-    
-                    <div>
-                        <EditIcon onClick={handleEditMode}/>
-                        <DeleteIcon onClick={handleDelete}/>
-                    </div>
-    
-                </div>
-
-                
-
-            </div>
-
-            :
 
             <>
             {
@@ -383,13 +352,7 @@ function Project({id, name, client, description, status, deadline}) {
     
                                 </Form>
                         </Formik>
-    
-    
-    
-    
-    
-    
-    
+
                     </div>
                     :
     
@@ -569,7 +532,7 @@ function Project({id, name, client, description, status, deadline}) {
             }
             </>
 
-        }
+        
         
         
         </>
