@@ -100,8 +100,6 @@ function Projects() {
  
         <div className='flex flex-col w-full h-full overflow-hidden'>
 
-
-
             {/* Page Header */}
             <div className='flex flex-row items-center justify-between mb-2 h-[5%]'>
                 <div className='flex flex-row items-center'>
@@ -117,7 +115,7 @@ function Projects() {
             {/* Projects */}
             <div className='border border-[0.2px] h-[95%] overflow-y-scroll'>
 
-               {projects ?
+               {projects.length !== 0 ?
 
                 projects.map(project => {
                     return <Project id={project.id} {...project} />
@@ -126,9 +124,10 @@ function Projects() {
             
                 :
                 
-                <div>
-                    <h1>No Projects</h1>
-                    
+                <div className='h-full w-full flex justify-center items-center'>
+
+                    <h1 className='text-3xl italic mx-2'> No Current Projects </h1>
+
                 </div>
                 
                 }
@@ -136,10 +135,6 @@ function Projects() {
 
 
             </div>
-
-
-
-
 
             {
                 newProject ?
@@ -260,7 +255,9 @@ function Projects() {
                     </Formik>
 
                 </div>
+
                 :
+                
                 <>
                 </>
             }

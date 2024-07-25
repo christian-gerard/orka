@@ -503,36 +503,69 @@ function Project({id, name, client, description, status, deadline}) {
 
     
                 </>
-    
-                
-                
+
                 :
-    
-    
-                <NavLink to={`/projects/${id}`} className='max-w-[400px]'>
-                    <div className='border border-black my-4 mx-4 p-4 flex flex-col'>
 
-                        <div className='flex flex-row justify-between'>
-                            <p className='text-2xl bold spacing-[0.5em]'>{name ? name : 'UNNAMED'}</p>
-                            <div className='flex flex-row'>
-                                <div className='rounded-[100%] h-[20px] w-[20px] bg-doing border-black'></div>
-                                <div className='rounded-[100%] h-[20px] w-[20px] bg-ocean border-black'></div>
+                <>
+
+                {
+                    routeType.pathname.includes('dashboard') ?
+
+                    <NavLink to={`/projects/${id}`} className='text-lg w-[200px] h-full'>
+                        <div className='border border-black my-4 mx-4 p-4 flex flex-col'>
+    
+                            <div className='flex flex-row justify-between'>
+                                <p className='text-md bold spacing-[0.5em]'>{name ? name : 'UNNAMED'}</p>
+                                
                             </div>
+    
+                            <div className='flex flex-row justify-between'>
+                                <p>{client ? client : 'None'}</p>
+                                <p>{deadline ? deadline.slice(5, 10) : 'No Deadline'}</p>
+                                
+                            </div>
+    
+                            <div>
+    
+                            </div>
+                            
+                            
+                            
                         </div>
+                    </NavLink>
 
-                        <div className='flex flex-row justify-between'>
-                            <p>{client ? client : 'None'}</p>
-                            <p>{deadline ? deadline.slice(5, 10) : 'No Deadline'}</p>
+                    :
+
+                    <NavLink to={`/projects/${id}`} className='w-[50px]'>
+                        <div className='border border-black my-4 mx-4 p-4 flex flex-col'>
+    
+                            <div className='flex flex-row justify-between'>
+                                <p className='text-2xl bold spacing-[0.5em]'>{name ? name : 'UNNAMED'}</p>
+                                <div className='flex flex-row'>
+                                    <div className='rounded-[100%] h-[20px] w-[20px] bg-doing border-black'></div>
+                                    <div className='rounded-[100%] h-[20px] w-[20px] bg-ocean border-black'></div>
+                                </div>
+                            </div>
+    
+                            <div className='flex flex-row justify-between'>
+                                <p>{client ? client : 'None'}</p>
+                                <p>{deadline ? deadline.slice(5, 10) : 'No Deadline'}</p>
+                            </div>
+    
+                            <div>
+    
+                            </div>
+                            
+                            
+                            
                         </div>
+                    </NavLink>
 
-                        <div>
 
-                        </div>
-                        
-                        
-                        
-                    </div>
-                </NavLink>
+                }
+                </>
+    
+    
                 
             }
             </>

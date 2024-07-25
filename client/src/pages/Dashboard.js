@@ -24,19 +24,24 @@ function Dashboard() {
 
                 <p className='text-lg p-1 h-[10%]'>Outstanding Tasks</p>
 
-                <div className='overflow-y-scroll h-[90%]'>
+                <div className='overflow-y-scroll h-[90%] w-full'>
 
                     {
-                        tasks ?
+                        tasks.length !== 0 ?
 
                         tasks.map((task) => 
                             <Task id={task.id} {...task} />
                         )
 
                         :
+
+                        <div className='h-full w-full flex justify-center items-center'>
+
+                            <h1 className='text-3xl italic mx-2'> No Outstanding Tasks </h1>
+
+                        </div>
                         
-                        <>
-                        </>
+
                     }
 
                 </div>
@@ -44,20 +49,27 @@ function Dashboard() {
             </div>
 
             {/* Projects */}
-            <div className='border border-[0.2px] my-4 h-[25%]'>
+            <div className='border border-[0.2px] my-4 h-[25%] flex justify-between flex-col'>
                 <p className='text-lg p-1 h-[10%]'>Projects</p>
 
-                <div className='overflow-x-scroll h-[90%] flex flex-row'>
-
+                <div className='overflow-x-scroll h-[90%] flex flex-row items-center bg-ocean'>
+  
                     {
-                        projects ?
+                        projects.length !== 0 ?
 
                         projects.map((project) => 
+
                             <Project id={project.id} {...project} />
+
                         )
+
                         :
-                        <>
-                        </>
+                        
+                        <div className='h-full w-full flex justify-center items-center'>
+
+                            <h1 className='text-3xl italic mx-2'> No Current Projects </h1>
+
+                        </div>
                     }
 
                 </div>
@@ -72,14 +84,19 @@ function Dashboard() {
                 <div className='overflow-x-scroll h-[90%] flex flex-row'>
 
                     {
-                        clients ?
+                        clients.length !== 0 ?
 
                         clients.map((client) => 
                             <Client id={client.id} {...client} />
                         )
+
                         :
-                        <>
-                        </>
+
+                        <div className='h-full w-full flex justify-center items-center'>
+
+                            <h1 className='text-3xl italic mx-2'> No Current Clients</h1>
+
+                        </div>
                     }
 
                 </div>
