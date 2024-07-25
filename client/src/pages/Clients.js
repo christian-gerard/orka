@@ -13,7 +13,7 @@ import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
 
 
 function Clients() {
-    const { user,updateUser } = useContext(UserContext)
+    const { user,updateUser, clients } = useContext(UserContext)
     const [newClient, setNewClient] = useState(false)
     const [files, setFiles] = useState([]);
 
@@ -26,9 +26,7 @@ function Clients() {
         }
       });
 
-    const clients = user.user.account_details.clients.flatMap(client => {
-        return <Client key={client.id} {...client}/>
-    })
+    
 
     const clientSchema = object({
         name: string()
@@ -103,6 +101,7 @@ function Clients() {
         setNewClient(!newClient)
     }
 
+    console.log(clients)
 
     return (
         <>
@@ -118,19 +117,25 @@ function Clients() {
                 </div>
             </div>
 
-            {
-                clients ?
+            <div className='flex flex-row flex-wrap overflow-y-scroll items-start justify-center h-full'>
+                <div className='flex flex-row flex-wrap'>
+                    {
+                        clients ?
 
-                clients.map(client => {
-                    return <Client id={client.id} {...client} />
-                })
+                        clients.map(client => {
+                            return <Client id={client.id} {...client} />
+                        })
 
-                :
+                        :
 
-                <div>
-                    <h1>No Clients</h1>
+
+                            <h1>No Clients</h1>
+
+                    }
                 </div>
-            }
+
+            </div>
+
 
 
 

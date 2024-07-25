@@ -7,8 +7,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { object, string, array, number } from "yup";
 import { useFormik, Field, Form, Formik } from "formik";
 import EditIcon from '@mui/icons-material/Edit';
-import ProductionNeed from './ProductionNeed'
-import BudgetItem from './BudgetItem'
+
 import DeleteIcon from '@mui/icons-material/Delete';
 import CloseIcon from '@mui/icons-material/Close';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
@@ -188,14 +187,6 @@ function Project({id, name, client, description, status, deadline}) {
         })
     }
 
-    const handleNewProdNeed = () => {
-        setNewProdNeed(!newProdNeed)
-    }
-
-    const handleNewBudgItem = () => {
-        setNewBudgItem(!newBudgItem)
-    }
-
     useEffect(() => {
 
         
@@ -239,29 +230,7 @@ function Project({id, name, client, description, status, deadline}) {
     return(
         <>
         
-        {
-            isLoading ?
 
-            <div>
-
-                <div className='flex flex-row justify-between mx-4'>
-                    <NavLink to={'/projects'} className='flex flex-row text-lg' >
-                        <ArrowBackIcon/>
-                        <p className='ml-2'>Projects</p>
-                    </NavLink>
-    
-                    <div>
-                        <EditIcon onClick={handleEditMode}/>
-                        <DeleteIcon onClick={handleDelete}/>
-                    </div>
-    
-                </div>
-
-                
-
-            </div>
-
-            :
 
             <>
             {
@@ -383,13 +352,7 @@ function Project({id, name, client, description, status, deadline}) {
     
                                 </Form>
                         </Formik>
-    
-    
-    
-    
-    
-    
-    
+
                     </div>
                     :
     
@@ -448,8 +411,8 @@ function Project({id, name, client, description, status, deadline}) {
                         
                         <div className='flex flex-row justify-between items-center my-6'>
                             <p className='text-2xl bold'>Budgets</p>
-                            <NavLink to='/tasks' className='flex flex-row items-center text-lg'>
-                                <p>to Expenses</p>
+                            <NavLink to='/budgets' className='flex flex-row items-center text-lg'>
+                                <p>to Budgets</p>
                                 <ArrowRightAltIcon />
                             </NavLink>
                         </div>
@@ -503,41 +466,73 @@ function Project({id, name, client, description, status, deadline}) {
 
     
                 </>
-    
-                
-                
+
                 :
-    
-    
-                <NavLink to={`/projects/${id}`} className='max-w-[400px]'>
-                    <div className='border border-black my-4 mx-4 p-4 flex flex-col'>
 
-                        <div className='flex flex-row justify-between'>
-                            <p className='text-2xl bold spacing-[0.5em]'>{name ? name : 'UNNAMED'}</p>
-                            <div className='flex flex-row'>
-                                <div className='rounded-[100%] h-[20px] w-[20px] bg-doing border-black'></div>
-                                <div className='rounded-[100%] h-[20px] w-[20px] bg-ocean border-black'></div>
+                <>
+
+                {
+                    routeType.pathname.includes('dashboard') ?
+
+                    <NavLink to={`/projects/${id}`} className='text-lg w-[200px] min-w-[200px] h-[80%] border border-black my-4 mx-4 p-4'>
+                        <div className=' flex flex-col '>
+    
+                            <div className='flex flex-row justify-between'>
+                                <p className='text-sm bold spacing-[0.5em]'>{name ? name : 'UNNAMED'}</p>
+                                
                             </div>
+    
+                            <div className='flex flex-row justify-between'>
+                                <p>{client ? client : 'None'}</p>
+                                
+    
+                            <div>
+    
+                            </div>
+                            </div>
+                            
+                            
+                            
                         </div>
+                    </NavLink>
 
-                        <div className='flex flex-row justify-between'>
-                            <p>{client ? client : 'None'}</p>
-                            <p>{deadline ? deadline.slice(5, 10) : 'No Deadline'}</p>
+                    :
+
+                    <NavLink to={`/projects/${id}`} className='w-[50px]'>
+                        <div className='border border-black my-4 mx-4 p-4 flex flex-col'>
+    
+                            <div className='flex flex-row justify-between'>
+                                <p className='text-2xl bold spacing-[0.5em]'>{name ? name : 'UNNAMED'}</p>
+                                <div className='flex flex-row'>
+                                    <div className='rounded-[100%] h-[20px] w-[20px] bg-doing border-black'></div>
+                                    <div className='rounded-[100%] h-[20px] w-[20px] bg-ocean border-black'></div>
+                                </div>
+                            </div>
+    
+                            <div className='flex flex-row justify-between'>
+                                <p>{client ? client : 'None'}</p>
+                                <p>{deadline ? deadline.slice(5, 10) : 'No Deadline'}</p>
+                            </div>
+    
+                            <div>
+    
+                            </div>
+                            
+                            
+                            
                         </div>
+                    </NavLink>
 
-                        <div>
 
-                        </div>
-                        
-                        
-                        
-                    </div>
-                </NavLink>
+                }
+                </>
+    
+    
                 
             }
             </>
 
-        }
+        
         
         
         </>
