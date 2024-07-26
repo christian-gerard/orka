@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import { Formik, useFormik, Form, Field } from 'formik'
 import { object, string, array, number } from "yup";
 import { toast } from 'react-hot-toast'
+import Expense from '../components/Expense'
 import AddBoxIcon from '@mui/icons-material/AddBox';
 
 
@@ -11,15 +12,11 @@ function Budget({}) {
 
     const route = useParams();
 
-    const { user, updateUser } = useContext(UserContext)
-    const [budgItems, setBudgItems] = useState([])
-    const [newProdNeed, setNewProdNeed] = useState(false)
+    const { user, updateUser, expenses } = useContext(UserContext)
+    const initialValue = 0
 
-    const handleNewProdNeed = () => {
-        setNewProdNeed(!newProdNeed)
-    }
 
-    const prodNeedSchema = object({
+    const expenseSchema = object({
         name: string(),
         amount: number(),
         description: string(),
@@ -35,25 +32,21 @@ function Budget({}) {
         description: '',
         type: '',
         note: '',
-        deadline: '',
         project:''
     }
 
     const formik = useFormik({
         initialValues,
-        validationSchema: prodNeedSchema,
+        validationSchema: expenseSchema,
         onSubmit: (formData) => { 
-
-
 
             // Add Project to Form Data
 
             formData['project'] = parseInt(route.id)
 
-            console.log(formData)
 
 
-            fetch('http://127.0.0.1:8000/budgetitem/', {
+            fetch('http://127.0.0.1:8000/expense/', {
                 method: "POST",
                 body: JSON.stringify(formData),
                 headers: {
@@ -67,36 +60,36 @@ function Budget({}) {
                     return resp.json().then(data => {
 
 
-                        const updatedUser = {
-                            ...user,
-                            user: {
-                                ...user.user,
-                                account_details: {
-                                    ...user.user.account_details,
-                                    clients: user.user.account_details.clients.map(client => {
-                                        if(client.id === data.client) {
-                                            return {
-                                                ...client,
-                                                projects: client.projects.map((project) => {
-                                                    if (project.id === data.id) {
-                                                        return {
-                                                            ...project,
-                                                            budg_items: [...project.budg_items, data]
-                                                        }
-                                                    }
-                                                    return project
-                                                })
-                                            };
-                                        }
-                                        return client;
-                                    })
-                                }
-                            }
-                        };
+                        // const updatedUser = {
+                        //     ...user,
+                        //     user: {
+                        //         ...user.user,
+                        //         account_details: {
+                        //             ...user.user.account_details,
+                        //             clients: user.user.account_details.clients.map(client => {
+                        //                 if(client.id === data.client) {
+                        //                     return {
+                        //                         ...client,
+                        //                         projects: client.projects.map((project) => {
+                        //                             if (project.id === data.id) {
+                        //                                 return {
+                        //                                     ...project,
+                        //                                     budg_items: [...project.budg_items, data]
+                        //                                 }
+                        //                             }
+                        //                             return project
+                        //                         })
+                        //                     };
+                        //                 }
+                        //                 return client;
+                        //             })
+                        //         }
+                        //     }
+                        // };
 
-                        updateUser(updatedUser)
+                        // updateUser(updatedUser)
 
-                        toast.success("Budget Item Added")
+                        toast.success("Expense Added")
 
                         
 
@@ -111,19 +104,6 @@ function Budget({}) {
 
 
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/budgetitem/', {
-            headers: {
-                'Authorization': `Token ${user.token}`
-            }
-
-        })
-        .then(resp => {
-            if(resp.ok){
-                return  resp.json().then(data => {
-                    setBudgItems(data)
-                })
-            }
-        })
 
     }, [])
 
@@ -137,107 +117,125 @@ function Budget({}) {
             <div className='border border-black rounded-xl my-4 mx-4 p-4 h-full '>
                 <div className='flex flex-row justify-between h-[10%]'>
                     <h1>Expenses</h1>
-                    <AddBoxIcon onClick={handleNewProdNeed}/>
+
+                </div>
+
+                <div className='w-full bg-black text-white flex flex-row items-center h-[5%]'>
+                    <p className='text-sm w-[10%]'>New Expense</p>
+                    <Formik>
+                            <Form
+                                className='flex flex-row items-center text-black justify-between w-[90%] p-1'
+                                onSubmit={formik.handleSubmit}
+                                initialValues={initialValues}
+                            >
+                                <Field 
+                                    name='description'
+                                    value={formik.values.description}
+                                    onChange={formik.handleChange}
+                                    type='text'
+                                    className='text-sm border-[0.2px] w-[25%] h-[25px]'
+                                    placeholder='description'
+                                    
+                                >
+                                </Field>
+
+                                {formik.errors.description && formik.touched.description && (
+                                    <div className="text-sm text-ocean ml-2"> **{formik.errors.description.toUpperCase()}</div>
+                                )}
+
+                                <Field 
+                                    name='amount'
+                                    value={formik.values.amount}
+                                    onChange={formik.handleChange}
+                                    type='number'
+                                    step='100'
+                                    className='text-sm border-[0.2px] w-[10%] h-[25px]'
+                                    placeholder='amount'
+                                />
+
+                                {formik.errors.type && formik.touched.type && (
+                                    <div className="text-sm text-ocean ml-2"> **{formik.errors.type.toUpperCase()}</div>
+                                )}
+                                
+                                <Field 
+                                    name='note'
+                                    value={formik.values.note}
+                                    onChange={formik.handleChange}
+                                    type='text'
+                                    className='text-sm border-[0.2px] w-[20%] h-[25px]'
+                                    placeholder='note'
+                                >
+                                    
+                                </Field>
+
+                                {formik.errors.note && formik.touched.note && (
+                                    <div className="text-sm text-ocean ml-2"> **{formik.errors.note.toUpperCase()}</div>
+                                )}
+
+                                <Field 
+                                    name='type'
+                                    value={formik.values.type}
+                                    onChange={formik.handleChange}
+                                    type='text'
+                                    as='select'
+                                    className='text-sm border-[0.2px] w-[15%] h-[25px]'
+                                    placeholder='type'
+                                >
+                                    <option>Payroll</option>
+                                    <option>Ad Spend</option>
+                                    
+                                </Field>
+
+                                {formik.errors.type && formik.touched.type && (
+                                    <div className="text-sm text-ocean ml-2"> **{formik.errors.type.toUpperCase()}</div>
+                                )}
+
+                                <Field 
+                                    name='status'
+                                    value={formik.values.status}
+                                    onChange={formik.handleChange}
+                                    type='text'
+                                    as='select'
+                                    className='text-sm border-[0.2px] w-[15%] h-[25px]'
+                                    placeholder='status'
+                                >
+                                    <option>Planned</option>
+                                    <option>Pending</option>
+                                    <option>Paid</option>
+                                    
+                                </Field>
+
+                                {formik.errors.status && formik.touched.status && (
+                                    <div className="text-sm text-ocean ml-2"> **{formik.errors.status.toUpperCase()}</div>
+                                )}
+                                <button type='submit' className='flex items-center'>
+                                    <AddBoxIcon className='text-white' />
+                                </button>
+                            </Form>
+                    </Formik>
 
                 </div>
 
 
                 <div className='flex flex-col h-[90%] w-full flex mb-2'>
 
-                    <div className='border-b-[0.2px] h-[95%]'>
+                    <div className='border-b-[0.2px] h-[90%]'>
 
-                        <div className='h-full w-[80%] border-r-[0.2px]'>
-                            <Formik>
-                                <Form
-                                    className='flex flex-row'
-                                    onSubmit={formik.handleSubmit}
-                                    initialValues={initialValues}
-                                >
+                        { expenses.filter(expense => expense.project === parseInt(route.id)).length !== 0 ?
 
-                                    <Field 
-                                        name='name'
-                                        value={formik.values.name}
-                                        onChange={formik.handleChange}
-                                        type='text'
-                                        className='text-sm border-[0.2px] w-[10%] h-[25px]'
-                                        placeholder='name'
-                                        
-                                    >
-                                    </Field>
+                            expenses.filter(expense => expense.project === parseInt(route.id)).map(expense => {
+                                return <Expense id={expense.id} {...expense} />
+                            })
 
-                                    {formik.errors.name && formik.touched.name && (
-                                        <div className="text-sm text-ocean ml-2"> **{formik.errors.name.toUpperCase()}</div>
-                                    )}
-                                    <Field 
-                                        name='description'
-                                        value={formik.values.description}
-                                        onChange={formik.handleChange}
-                                        type='text'
-                                        className='border my-2 p-1 w-[200px]'
-                                        placeholder='description'
-                                        
-                                    >
-                                    </Field>
+                            :
 
-                                    {formik.errors.description && formik.touched.description && (
-                                        <div className="text-sm text-ocean ml-2"> **{formik.errors.description.toUpperCase()}</div>
-                                    )}
+                            <div className='text-black text-6xl w-full flex justify-center '>
+                                <p>No Project Expenses</p>
+                            </div>
+                        
+                        }
 
-                                    <Field 
-                                        name='type'
-                                        value={formik.values.type}
-                                        onChange={formik.handleChange}
-                                        as='select'
-                                        type='text'
-                                        className='border m-2 p-1 w-[100px]'
-                                        placeholder='type'
-                                    >
-                                        <option>Select Here</option>
-                                        <option>Organization</option>
-                                        <option>Production</option>
-                                        <option>Lead Work</option>
-                                    </Field>
-
-                                    {formik.errors.type && formik.touched.type && (
-                                        <div className="text-sm text-ocean ml-2"> **{formik.errors.type.toUpperCase()}</div>
-                                    )}
-                                    
-                                    <Field 
-                                        name='note'
-                                        value={formik.values.note}
-                                        onChange={formik.handleChange}
-                                        type='text'
-                                        className='border m-2 p-1 w-[100px]'
-                                        placeholder='note'
-                                    >
-                                        
-                                    </Field>
-
-                                    {formik.errors.note && formik.touched.note && (
-                                        <div className="text-sm text-ocean ml-2"> **{formik.errors.note.toUpperCase()}</div>
-                                    )}
-
-                                    <Field 
-                                        name='deadline'
-                                        value={formik.values.deadline}
-                                        onChange={formik.handleChange}
-                                        type='text'
-                                        className='border m-2 p-1 w-[100px]'
-                                        placeholder='note'
-                                    >
-                                        
-                                    </Field>
-
-                                    {formik.errors.deadline && formik.touched.deadline && (
-                                        <div className="text-sm text-ocean ml-2"> **{formik.errors.deadline.toUpperCase()}</div>
-                                    )}
-                                    <button type='submit'>+</button>
-                                </Form>
-                            </Formik>
-
-                        </div>
-
-                        <div className='h-full'>
+                        <div className='w-[80%] h-full border-r-[0.2px]'>
                         </div>
 
 
@@ -245,12 +243,23 @@ function Budget({}) {
 
                     <div className='flex flex-row h-[5%] w-full'>
 
-                        <div className='border-r-[0.2px] w-[80%] bg-ocean h-full'>
+                        <div className='border-r-[0.2px] w-[80%] h-full'>
                             
                         </div>
 
-                        <div className='w-[20%] bg-ocean h-full text-sm'>
-                            Total: $100,000.25
+                        <div className='w-[20%] h-full text-sm flex flex-row text-2xl'>
+                            <p className='text-2xl'>Total:</p>
+
+                            <p className='text-2xl'> $
+                                {
+                                    expenses ?
+
+                                    expenses.reduce((accumulator, currentExpense) => accumulator + currentExpense.amount, initialValue)
+                                    :
+
+                                    <></>
+                                }
+                            </p>
                             
                         </div>
 
