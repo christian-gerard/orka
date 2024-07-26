@@ -244,115 +244,115 @@ function Project({id, name, client, description, status, deadline}) {
                     <div className='fixed inset-0 flex flex-col justify-center items-center transition-colors backdrop-blur'>
     
                         <Formik className='bg-white'>
-                        <Form 
-                                className='bg-white border flex flex-col'
-                                onSubmit={formik.handleSubmit}
-                                initialValues={initialValues}>
-                                <CloseIcon onClick={handleEditMode} />
-                                <label className='p-2 text-4xl'>
-                                    EDIT
-                                </label>
-    
-                                <label className='ml-2'>
-                                    Name
-                                </label>
-    
-                                <Field 
-                                name='name' 
-                                value={formik.values.name}
-                                onChange={formik.handleChange}
-                                type='text'
-                                placeholder='Name'
-                                className='border m-2 p-1'/>
-    
-                                {formik.errors.name && formik.touched.name && (
-                                    <div className="text-sm text-ocean ml-2"> **{formik.errors.name.toUpperCase()}</div>
-                                )}
-    
-                                <label className='ml-2'>
-                                    Type
-                                </label>
-    
-                                <Field 
-                                name='type' 
-                                type='text'
-                                value={formik.values.type}
-                                onChange={formik.handleChange}
-                                as='select'
-                                placeholder='Type'
-                                className='border m-2 p-1'>
-                                    <option>Select Type</option>
-                                    <option value='Ad Campaign'>Ad Campaign</option>
-                                    <option>Social Media</option>
-                                    <option>Billboard</option>
-    
-                                </Field>
-                                {formik.errors.type && formik.touched.type && (
-                                    <div className="text-sm text-ocean ml-2"> **{formik.errors.type.toUpperCase()}</div>
-                                )}
-                                <label className='ml-2'>
-                                    Status
-                                </label>
-    
-                                <Field 
-                                name='status' 
-                                as='select'
-                                placeholder='Status'
-                                value={formik.values.status}
-                                onChange={formik.handleChange}
-                                className='border m-2 p-1'>
-                                    <option>Select Status</option>
-                                    <option value='Planning'>Planning</option>
-                                    <option value='In Progress'>In Progress</option>
-                                    <option value='Completed'>Completed</option>
-                                </Field>
-                                {formik.errors.status && formik.touched.status && (
-                                    <div className="text-sm text-ocean ml-2"> **{formik.errors.status.toUpperCase()}</div>
-                                )}
-    
-                                <label className='ml-2'>
-                                    Deadline
-                                </label>
-    
-                                <Field 
-                                name='deadline' 
-                                type='date'
-                                min='2024-01-01'
-                                max='2024-12-31'
-                                value={formik.values.deadline}
-                                onChange={formik.handleChange}
-                                placeholder='YYYY-MM-DD'
-                                className='border m-2 p-1'>
-    
-                                </Field>
-    
-                                {formik.errors.deadline && formik.touched.deadline && (
-                                    <div className="text-sm text-ocean ml-2"> **{formik.errors.deadline.toUpperCase()}</div>
-                                )}
-    
-                                <label className='ml-2'>
-                                    Client
-                                </label>
-                                <Field 
-                                name='client' 
-                                as='select'
-                                value={formik.values.client}
-                                onChange={formik.handleChange}
-                                placeholder='Client'
-                                className='border m-2 p-1'>
-                                    <option value=''>Select Client</option>
-                                    {
-                                        clientOptions
-                                    }
-                                    
-                                </Field>
-                                {formik.errors.client && formik.touched.client && (
-                                    <div className="text-sm text-ocean ml-2"> **{formik.errors.client.toUpperCase()}</div>
-                                )}
-    
-                                <button type='submit'>Submit +</button>
-    
-                                </Form>
+                            <Form 
+                                    className='bg-white border flex flex-col'
+                                    onSubmit={formik.handleSubmit}
+                                    initialValues={initialValues}>
+                                    <CloseIcon onClick={handleEditMode} />
+                                    <label className='p-2 text-4xl'>
+                                        EDIT
+                                    </label>
+        
+                                    <label className='ml-2'>
+                                        Name
+                                    </label>
+        
+                                    <Field 
+                                    name='name' 
+                                    value={formik.values.name}
+                                    onChange={formik.handleChange}
+                                    type='text'
+                                    placeholder='Name'
+                                    className='border m-2 p-1'/>
+        
+                                    {formik.errors.name && formik.touched.name && (
+                                        <div className="text-sm text-ocean ml-2"> **{formik.errors.name.toUpperCase()}</div>
+                                    )}
+        
+                                    <label className='ml-2'>
+                                        Type
+                                    </label>
+        
+                                    <Field 
+                                    name='type' 
+                                    type='text'
+                                    value={formik.values.type}
+                                    onChange={formik.handleChange}
+                                    as='select'
+                                    placeholder='Type'
+                                    className='border m-2 p-1'>
+                                        <option>Select Type</option>
+                                        <option value='Ad Campaign'>Ad Campaign</option>
+                                        <option>Social Media</option>
+                                        <option>Billboard</option>
+        
+                                    </Field>
+                                    {formik.errors.type && formik.touched.type && (
+                                        <div className="text-sm text-ocean ml-2"> **{formik.errors.type.toUpperCase()}</div>
+                                    )}
+                                    <label className='ml-2'>
+                                        Status
+                                    </label>
+        
+                                    <Field 
+                                    name='status' 
+                                    as='select'
+                                    placeholder='Status'
+                                    value={formik.values.status}
+                                    onChange={formik.handleChange}
+                                    className='border m-2 p-1'>
+                                        <option>Select Status</option>
+                                        <option value='Planning'>Planning</option>
+                                        <option value='In Progress'>In Progress</option>
+                                        <option value='Completed'>Completed</option>
+                                    </Field>
+                                    {formik.errors.status && formik.touched.status && (
+                                        <div className="text-sm text-ocean ml-2"> **{formik.errors.status.toUpperCase()}</div>
+                                    )}
+        
+                                    <label className='ml-2'>
+                                        Deadline
+                                    </label>
+        
+                                    <Field 
+                                    name='deadline' 
+                                    type='date'
+                                    min='2024-01-01'
+                                    max='2024-12-31'
+                                    value={formik.values.deadline}
+                                    onChange={formik.handleChange}
+                                    placeholder='YYYY-MM-DD'
+                                    className='border m-2 p-1'>
+        
+                                    </Field>
+        
+                                    {formik.errors.deadline && formik.touched.deadline && (
+                                        <div className="text-sm text-ocean ml-2"> **{formik.errors.deadline.toUpperCase()}</div>
+                                    )}
+        
+                                    <label className='ml-2'>
+                                        Client
+                                    </label>
+                                    <Field 
+                                    name='client' 
+                                    as='select'
+                                    value={formik.values.client}
+                                    onChange={formik.handleChange}
+                                    placeholder='Client'
+                                    className='border m-2 p-1'>
+                                        <option value=''>Select Client</option>
+                                        {
+                                            clientOptions
+                                        }
+                                        
+                                    </Field>
+                                    {formik.errors.client && formik.touched.client && (
+                                        <div className="text-sm text-ocean ml-2"> **{formik.errors.client.toUpperCase()}</div>
+                                    )}
+        
+                                    <button type='submit'>Submit +</button>
+        
+                            </Form>
                         </Formik>
 
                     </div>
@@ -396,15 +396,21 @@ function Project({id, name, client, description, status, deadline}) {
                         </div>
 
                         <div className='flex flex-row items-center'>
+                            <div className='w-[20px] h-[20px] bg-ocean'></div>
+                            <p className='mx-2'>Not Started</p>
+                            <p>{tasks && currentProject ? tasks.filter(task => task.project === currentProject.id && task.status === 'Not Started').length : '0'}</p>
+                        </div>
+
+                        <div className='flex flex-row items-center'>
                             <div className='w-[20px] h-[20px] bg-doing'></div>
                             <p className='mx-2'>Doing</p>
-                            <p>{tasks ? tasks.length : '0'}</p>
+                            <p>{tasks && currentProject ? tasks.filter(task => task.project === currentProject.id && task.status === 'Doing').length : '0'}</p>
                         </div>
 
                         <div className='flex flex-row items-center'>
                             <div className='w-[20px] h-[20px] bg-blocked'></div>
                             <p className='mx-2'>Blocked</p>
-                            <p>{tasks ? tasks.length : '{0'}</p>
+                            <p>{tasks && currentProject ? tasks.filter(task => task.project === currentProject.id && task.status === 'Blocked').length : '{0'}</p>
                         </div>
 
                     </div>

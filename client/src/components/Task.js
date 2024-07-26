@@ -1,9 +1,11 @@
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { UserContext } from '../context/UserContext'
 
 function Task({id, description, deadline, project, type, note, status}) {
 
     const [taskStatus, setTaskStatus] = useState(false)
+    const { projects } = useContext(UserContext)
     console.log(taskStatus)
 
     
@@ -23,7 +25,7 @@ function Task({id, description, deadline, project, type, note, status}) {
             </div>
 
             <div className='flex flex-row items-center'>
-                <p className='mx-3'>{project}</p>
+                <p className='mx-3 underline'>{project ? projects.filter(project_obj => project_obj.id === project)[0].name : "UnNamed"}</p>
             <p className=''>{taskStatus ? 'Done' : status}</p>
                 <input 
                     type='checkbox'
