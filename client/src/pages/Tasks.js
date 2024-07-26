@@ -12,7 +12,7 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
 function Tasks() {
 
-    const { tasks, user, updateUser } = useContext(UserContext)
+    const { tasks, user, updateUser, projects } = useContext(UserContext)
     const [notDoing, setNotDoing] = useState(false)
     const [doing, setDoing] = useState(false)
     const [done, setDone] = useState(false)
@@ -49,18 +49,23 @@ function Tasks() {
 
 
     const taskSchema = object({
-        name: string()
-        .required(),
+        description: string(),
+        deadline: string(),
+        status: string(),
+        note: string(),
         type: string(),
-        account: number(),
+        project: string()
+
 
       });
 
     const initialValues = {
-        name: '', 
+        description: '',
+        deadline: '',
+        status: '',
+        note: '',
         type: '',
-        isActive: null,
-        account: user.user.account_details.id
+        project: null
     }
 
     const formik = useFormik({
@@ -92,8 +97,9 @@ function Tasks() {
                                 }
                             }
                         };
-        
-                        updateUser(updatedUser)
+
+                        console.log(resp)
+                        // updateUser(updatedUser)
         
                         handleNewTask()
                         toast.success("Project Added")
@@ -134,40 +140,116 @@ function Tasks() {
 
                                 <label> Description </label>
                                 <Field
-                                    name='name'
-                                    value={formik.values.name}
+                                    name='description'
+                                    value={formik.values.description}
                                     onChange={formik.handleChange}
                                     type='text'
-                                    placeholder='Name'
+                                    placeholder='Description'
                                     className='border m-2 p-2'
                                 />
 
-                                {formik.errors.name && formik.touched.name && (
-                                    <div className="text-sm text-ocean ml-2"> **{formik.errors.name.toUpperCase()}</div>
+                                {formik.errors.description && formik.touched.description && (
+                                    <div className="text-sm text-ocean ml-2"> **{formik.errors.description.toUpperCase()}</div>
                                 )}
 
 
-                                <label> Client Type </label>
 
+                                <label> Deadline </label>
+                                <Field
+                                    name='deadline'
+                                    type='date'
+                                    min="2024-01-01" 
+                                    max="2025-12-31"
+                                    value={formik.values.deadline}
+                                    onChange={formik.handleChange}
+                                    placeholder='Deadline'
+                                    className='border m-2 p-2'
+                                />
+
+                                {formik.errors.deadline && formik.touched.deadline && (
+                                    <div className="text-sm text-ocean ml-2"> **{formik.errors.deadline.toUpperCase()}</div>
+                                )}
+                                <label> status </label>
+                                <Field
+                                    name='status'
+                                    as='select'
+                                    value={formik.values.status}
+                                    onChange={formik.handleChange}
+                                    type='text'
+                                    placeholder='Status'
+                                    className='border m-2 p-2'
+                                >
+                                    <option value=''>Select Status</option>
+                                    <option value='Not Started'>Not Started</option>
+                                    <option value='Doing'>Doing</option>
+                                    <option value='Blocked'>Blocked</option>
+                                    <option value='Done'>Done</option>
+
+                                </Field>
+
+                                {formik.errors.status && formik.touched.status && (
+                                    <div className="text-sm text-ocean ml-2"> **{formik.errors.status.toUpperCase()}</div>
+                                )}
+                                <label> note </label>
+                                <Field
+                                    name='note'
+                                    value={formik.values.note}
+                                    onChange={formik.handleChange}
+                                    type='text'
+                                    placeholder='Note'
+                                    className='border m-2 p-2 h-[250px] flex justify-start'
+                                />
+
+                                {formik.errors.note && formik.touched.note && (
+                                    <div className="text-sm text-ocean ml-2"> **{formik.errors.note.toUpperCase()}</div>
+                                )}
+                                <label> type </label>
                                 <Field
                                     name='type'
+                                    as='select'
                                     value={formik.values.type}
                                     onChange={formik.handleChange}
-                                    as='select'
                                     type='text'
-                                    placeholder='type'
+                                    placeholder='Type'
                                     className='border m-2 p-2'
                                 >
                                     <option value=''>Select Type</option>
-                                    <option value='CPG'>CPG</option>
-                                    <option value='Brands'>Brands</option>
+                                    <option value='Prep'>Prep</option>
+                                    <option value='Shooting'>Shooting</option>
+                                    <option value='Edit'>Edit</option>
+
                                 </Field>
 
                                 {formik.errors.type && formik.touched.type && (
                                     <div className="text-sm text-ocean ml-2"> **{formik.errors.type.toUpperCase()}</div>
                                 )}
 
+                                <label> Project </label>
+                                <Field
+                                    name='project'
+                                    as='select'
+                                    value={formik.values.project}
+                                    onChange={formik.handleChange}
+                                    type='text'
+                                    className='border m-2 p-2'
+                                >
+                                    <option value=''>Select Project</option>
+                                    {
+                                        projects ?
 
+                                        projects.map(project => { return <option value={project.id}>{project.name}</option>})
+
+                                        :
+
+                                        <></>
+                                    }
+                                    
+
+                                </Field>
+
+                                {formik.errors.type && formik.touched.type && (
+                                    <div className="text-sm text-ocean ml-2"> **{formik.errors.type.toUpperCase()}</div>
+                                )}
 
                                 <button type='submit'> + Add Task </button>
 
