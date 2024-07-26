@@ -14,7 +14,8 @@ import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 
 function Project({id, name, client, description, status, deadline}) {
     
-    const { user, updateUser, clients, tasks } = useContext(UserContext)
+    const { user, updateUser, clients, tasks, expenses } = useContext(UserContext)
+    const initialValue = 0
     const route = useParams();
     const routeType = useLocation()
     const [currentProject, setCurrentProject] = useState(null)
@@ -41,7 +42,8 @@ function Project({id, name, client, description, status, deadline}) {
         deadline: string()
         .required(),
         client: number()
-        .required()
+        .required(),
+        budget: number()
       });
 
       const prodNeedSchema = object({
@@ -62,13 +64,15 @@ function Project({id, name, client, description, status, deadline}) {
         type: '',
         deadline: '', 
         status: '', 
-        client: ''
+        client: '',
+        budget: 0
     }
 
     const prodNeedInitialValues = {
         description: '',
         type: '',
         note: '',
+        
         deadline: '',
         project:''
     }
@@ -186,6 +190,11 @@ function Project({id, name, client, description, status, deadline}) {
             }
         })
     }
+
+
+
+    console.log(expenses && currentProject ? 
+        (Math.round((expenses.filter(expense => expense.project === currentProject.id).reduce((accumulator, currentExpense) => accumulator + currentExpense.amount, initialValue) / currentProject.budget) * 100)) + '%' : '10%')
 
     useEffect(() => {
 
@@ -309,6 +318,23 @@ function Project({id, name, client, description, status, deadline}) {
                                     {formik.errors.status && formik.touched.status && (
                                         <div className="text-sm text-ocean ml-2"> **{formik.errors.status.toUpperCase()}</div>
                                     )}
+
+                                    <label className='ml-2'>
+                                        Budget
+                                    </label>
+
+                                    <Field 
+                                    name='budget' 
+                                    type='number'
+                                    step='100'
+                                    placeholder='amount'
+                                    value={formik.values.budget}
+                                    onChange={formik.handleChange}
+                                    className='border m-2 p-1'/>
+                                        
+                                    {formik.errors.budget && formik.touched.budget && (
+                                        <div className="text-sm text-ocean ml-2"> **{formik.errors.amount.toUpperCase()}</div>
+                                    )}
         
                                     <label className='ml-2'>
                                         Deadline
@@ -426,19 +452,49 @@ function Project({id, name, client, description, status, deadline}) {
                         </div>
 
                         <div className='border w-full h-[25px]'>
-                            <div className='bg-ocean h-full w-[65%]'></div>
+                            <div className={`bg-ocean h-full w-[${ 
+                                expenses && currentProject ? 
+                                Math.round(
+                                    (
+                                        expenses.filter(expense => expense.project === currentProject.id)
+                                    .reduce((accumulator, currentExpense) => accumulator + currentExpense.amount, initialValue) / currentProject.budget) * 100) + '%' 
+                                    
+                                    : '10%'
+                                    
+                                    }`}> 
+                            
+                            
+                            </div>
 
                         </div>
 
                         <div className='my-6'>
 
-                            <div className='flex flex-row '>
-                                <p className='mr-4'>Budget</p>
-                                <p>{currentProject ? '$' + currentProject.budget + '.00' : 'None'}</p>
-                            </div>
+
+
+
 
                             <div className='flex flex-row mr-2'>
                                 <p className='mr-4'>Spent</p>
+                                <p>
+                                $ 
+                                {
+                                    
+                                        expenses && currentProject ?
+    
+                                        expenses.filter(expense => expense.project === currentProject.id).reduce((accumulator, currentExpense) => accumulator + currentExpense.amount, initialValue)
+
+                                        :
+    
+                                        <></>
+                                    
+                                    
+                                    
+                                }.00
+                                </p>
+                            </div>
+                            <div className='flex flex-row '>
+                                <p className='mr-4'>Budget</p>
                                 <p>{currentProject ? '$' + currentProject.budget + '.00' : 'None'}</p>
                             </div>
 
