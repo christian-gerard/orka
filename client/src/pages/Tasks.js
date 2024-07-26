@@ -1,5 +1,9 @@
 import { useState, useContext } from 'react'
+import { useFormik, Formik, Form, Field } from 'formik'
+import { toast } from 'react-hot-toast'
+import CloseIcon from '@mui/icons-material/Close';
 import { UserContext } from '../context/UserContext'
+import { object, string, array, number, bool } from "yup";
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import Task from '../components/Task'
 import AddBoxIcon from '@mui/icons-material/AddBox';
@@ -8,10 +12,11 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
 function Tasks() {
 
-    const { tasks } = useContext(UserContext)
+    const { tasks, user, updateUser } = useContext(UserContext)
     const [notDoing, setNotDoing] = useState(false)
     const [doing, setDoing] = useState(false)
     const [done, setDone] = useState(false)
+    const [newTask, setNewTask] = useState(false)
     const [blocked, setBlocked] = useState(false)
 
     const handlenotDoing = () => {
@@ -30,8 +35,157 @@ function Tasks() {
         setBlocked(!blocked)
     }
 
+    const handleNewTask= () => {
+        setNewTask(!newTask)
+    }
+
+
+
+
+
+
+
+
+
+
+    const taskSchema = object({
+        name: string()
+        .required(),
+        type: string(),
+        account: number(),
+
+      });
+
+    const initialValues = {
+        name: '', 
+        type: '',
+        isActive: null,
+        account: user.user.account_details.id
+    }
+
+    const formik = useFormik({
+        initialValues,
+        validationSchema: taskSchema,
+        onSubmit: (formData) => {
+
+
+            fetch('http://127.0.0.1:8000/task/', {
+                method: "POST",
+                body: JSON.stringify(formData),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Token ${user.token}`
+                }
+            })
+            .then(resp => {
+                if(resp.ok){
+        
+                    return resp.json().then(data => {
+                        const updatedUser = {
+                            ...user,
+                            user: {
+                                ...user.user,
+                                account_details: {
+                                    ...user.user.account_details,
+                                    clients: [...user.user.account_details.clients,data]
+                                
+                                }
+                            }
+                        };
+        
+                        updateUser(updatedUser)
+        
+                        handleNewTask()
+                        toast.success("Project Added")
+        
+                    })
+        
+        
+        
+                }
+            })
+
+
+
+        }
+    })
+
+
+
     return (
         <>
+
+            {
+                newTask ?
+
+                <div className='fixed inset-0 flex flex-col justify-center items-center transition-colors backdrop-blur'>
+                    <div className='bg-white border'>
+                        <CloseIcon onClick={handleNewTask} />
+                        <Formik 
+                            onSubmit={formik.handleSubmit}
+                            initialValues={initialValues}
+                        >
+                            <Form 
+                            className=' flex flex-col'
+                            onSubmit={formik.handleSubmit}
+                            initialValues={initialValues}
+                            >
+                                <label> New Task </label>
+
+                                <label> Description </label>
+                                <Field
+                                    name='name'
+                                    value={formik.values.name}
+                                    onChange={formik.handleChange}
+                                    type='text'
+                                    placeholder='Name'
+                                    className='border m-2 p-2'
+                                />
+
+                                {formik.errors.name && formik.touched.name && (
+                                    <div className="text-sm text-ocean ml-2"> **{formik.errors.name.toUpperCase()}</div>
+                                )}
+
+
+                                <label> Client Type </label>
+
+                                <Field
+                                    name='type'
+                                    value={formik.values.type}
+                                    onChange={formik.handleChange}
+                                    as='select'
+                                    type='text'
+                                    placeholder='type'
+                                    className='border m-2 p-2'
+                                >
+                                    <option value=''>Select Type</option>
+                                    <option value='CPG'>CPG</option>
+                                    <option value='Brands'>Brands</option>
+                                </Field>
+
+                                {formik.errors.type && formik.touched.type && (
+                                    <div className="text-sm text-ocean ml-2"> **{formik.errors.type.toUpperCase()}</div>
+                                )}
+
+
+
+                                <button type='submit'> + Add Task </button>
+
+
+                            </Form>
+
+                        </Formik>
+                    </div>
+                </div>
+
+                :
+
+                <>
+                </>
+
+            }
+
+
             {/* Page Header */}
             <div className='flex flex-row items-center justify-between mb-2 h-[5%]'>
                 <div className='flex flex-row items-center'>
@@ -40,7 +194,7 @@ function Tasks() {
                 </div>
 
                 <div>
-                    <AddBoxIcon fontSize='medium'/>
+                    <AddBoxIcon fontSize='medium' onClick={handleNewTask}/>
                 </div>
             </div>
 
