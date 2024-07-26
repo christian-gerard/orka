@@ -220,7 +220,9 @@ function Projects() {
 
                             <Field 
                             name='deadline' 
-                            type='text'
+                            type='date'
+                            min='2024-01-01'
+                            max='2024-12-31'
                             value={formik.values.deadline}
                             onChange={formik.handleChange}
                             placeholder='YYYY-MM-DD'

@@ -36,7 +36,8 @@ module.exports = {
       'notStarted':'#c5d8fc',
       'doing': '#95FF7D',
       'done' : '#F7FF5C',
-      'blocked': '#FF9294'
+      'blocked': '#FF9294',
+      'gray': '#c9c9c9'
     }
   },
   plugins: [],

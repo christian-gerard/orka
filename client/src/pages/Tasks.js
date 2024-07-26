@@ -294,7 +294,7 @@ function Tasks() {
                         </div>
 
                         {/* Stage Name */}
-                        <p className='mx-2'>Not Started { tasks ? `[${tasks.length}]` : '[0]'}</p>
+                        <p className='mx-2'>Not Started { tasks ? `[${tasks.filter(task => task.status === 'Not Started').length}]` : '[0]'}</p>
 
                         {/* Toggle Logo Depending on State */}
 
@@ -315,7 +315,7 @@ function Tasks() {
                     {
                         tasks && notDoing ?
 
-                        tasks.map(task => {
+                        tasks.filter(task => task.status === 'Not Started').map(task => {
                             return <Task id={task.id} {...task} />
                         })
 
@@ -335,7 +335,7 @@ function Tasks() {
                         </div>
 
                         {/* Stage Name */}
-                        <p className='mx-2'> Doing { 0 ? [2] : '[0]'}<p>
+                        <p className='mx-2'> Doing { tasks ? `[${tasks.filter(task => task.status === 'Doing').length}]`  : '[0]'}<p>
 
 
 
@@ -360,6 +360,18 @@ function Tasks() {
                         
                     </div>
 
+                    {
+                        tasks && doing ?
+
+                        tasks.filter(task => task.status === 'Doing').map(task => {
+                            return <Task id={task.id} {...task} />
+                        })
+
+                        :
+
+                        <></>
+                    }
+
                     {/* Blocked */}
                     <div className='flex flex-row items-center my-2' onClick={handleBlocked}>
                         {/* Color Indicator */}
@@ -368,7 +380,7 @@ function Tasks() {
                         </div>
 
                         {/* Stage Name */}
-                        <p className='mx-2'>Blocked { 0 ? [2] : '[0]'}</p>
+                        <p className='mx-2'>Blocked { tasks ? `[${tasks.filter(task => task.status === 'Blocked').length}]` : '[0]'}</p>
 
                         {/* Toggle Logo Depending on State */}
 
@@ -385,6 +397,18 @@ function Tasks() {
                         
                     </div>
 
+                    {
+                        tasks && blocked ?
+
+                        tasks.filter(task => task.status === 'Blocked').map(task => {
+                            return <Task id={task.id} {...task} />
+                        })
+
+                        :
+
+                        <></>
+                    }
+
                     {/* Done */}
                     <div className='flex flex-row items-center my-2' onClick={handleDone}>
                         {/* Color Indicator */}
@@ -393,7 +417,7 @@ function Tasks() {
                         </div>
 
                         {/* Stage Name */}
-                        <p className='mx-2'>Done { 0 ? [2] : '[0]'}</p>
+                        <p className='mx-2'>Done { tasks ? `[${tasks.filter(task => task.status === 'Done').length}]` : '[0]'}</p>
 
 
                         {/* Toggle Logo Depending on State */}
@@ -410,6 +434,18 @@ function Tasks() {
                         }
                         
                     </div>
+
+                    {
+                        tasks && done ?
+
+                        tasks.filter(task => task.status === 'Done').map(task => {
+                            return <Task id={task.id} {...task} />
+                        })
+
+                        :
+
+                        <></>
+                    }
                 
                 </div>
 

@@ -29,7 +29,7 @@ function Dashboard() {
                     {
                         tasks.length !== 0 ?
 
-                        tasks.map((task) => 
+                        tasks.filter(task => task.status !== 'Done').map((task) => 
                             <Task id={task.id} {...task} />
                         )
 
