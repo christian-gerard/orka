@@ -381,7 +381,7 @@ function Project({id, name, client, description, status, deadline}) {
                     </div>
 
                     <div className='flex flex-row justify-between'>
-                        <p>{currentProject ? currentProject.client : '___'}</p>
+                        <p>{currentProject ? clients.filter(client => client.id === currentProject.client)[0].name : '___'}</p>
                         <p>{currentProject ? currentProject.status : 'No Status'}</p>
                     </div>
 
@@ -485,19 +485,27 @@ function Project({id, name, client, description, status, deadline}) {
                     <NavLink to={`/projects/${id}`} className='text-lg w-[200px] min-w-[200px] h-[80%] border border-black my-4 mx-4 p-4'>
                         <div className=' flex flex-col '>
     
-                            <div className='flex flex-row justify-between'>
-                                <p className='text-sm bold spacing-[0.5em]'>{name ? name : 'UNNAMED'}</p>
+                            <div className='flex flex-row justify-between '>
+                                <p className='text-xl underline bold spacing-[0.5em]'>{name ? name : 'UNNAMED'}</p>
                                 
                             </div>
     
-                            <div className='flex flex-row justify-between'>
-                                <p>{client ? client : 'None'}</p>
+                            <div className='flex flex-row justify-between border p-1 text-white bg-ocean'>
+                                <p>{client ? clients.filter(client_obj => client_obj.id === client)[0].name : 'None'}</p>
+    
+                            </div>
+
+                            <div className='flex flex-row justify-between border p-1 text-white bg-gray'>
+                                <p>{deadline ? deadline.slice(5,12) : 'None'}</p>
+    
+                            </div>
+
+
+
                                 
     
-                            <div>
-    
-                            </div>
-                            </div>
+
+                            
                             
                             
                             

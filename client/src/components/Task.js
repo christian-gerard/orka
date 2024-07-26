@@ -25,8 +25,8 @@ function Task({id, description, deadline, project, type, note, status}) {
             </div>
 
             <div className='flex flex-row items-center'>
-                <p className='mx-3 underline'>{project ? projects.filter(project_obj => project_obj.id === project)[0].name : "UnNamed"}</p>
-            <p className=''>{taskStatus ? 'Done' : status}</p>
+                <p className={ taskStatus ? 'border p-1 text-gray' : 'border p-1 text-white bg-ocean'}>{project ? projects.filter(project_obj => project_obj.id === project)[0].name : "UnNamed"}</p>
+            <p className={ taskStatus ? 'border p-1 text-gray' : 'border p-1 text-white bg-gray'} >{taskStatus ? 'Done' : status}</p>
                 <input 
                     type='checkbox'
                     className=' border h-[25px] w-[25px] mx-3'
