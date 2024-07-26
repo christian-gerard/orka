@@ -26,6 +26,8 @@ function Projects() {
         deadline: string()
         .required(),
         client: number()
+        .required(),
+        budget: number()
         .required()
     });
 
@@ -34,7 +36,8 @@ function Projects() {
         type: '',
         deadline: '', 
         status: '', 
-        client: ''
+        client: '',
+        budget: 0,
     }
 
     const formik = useFormik({
@@ -155,7 +158,7 @@ function Projects() {
                             </label>
 
                             <label className='ml-2'>
-                                Name
+                                Project Name
                             </label>
 
                             <Field 
@@ -163,7 +166,7 @@ function Projects() {
                             value={formik.values.name}
                             onChange={formik.handleChange}
                             type='text'
-                            placeholder='Name'
+                            placeholder='Project Name'
                             className='border m-2 p-1'/>
 
                             {formik.errors.name && formik.touched.name && (
@@ -227,6 +230,25 @@ function Projects() {
 
                             {formik.errors.deadline && formik.touched.deadline && (
                                 <div className="text-sm text-ocean ml-2"> **{formik.errors.deadline.toUpperCase()}</div>
+                            )}
+
+
+                            <label className='ml-2'>
+                                Budget
+                            </label>
+                            <Field 
+                            step="1000.00"
+                            type='number'
+                            name='budget' 
+                            value={formik.values.budget}
+                            onChange={formik.handleChange}
+                            placeholder='Budget'
+                            className='border m-2 p-1'>
+                                
+                                
+                            </Field>
+                            {formik.errors.budget && formik.touched.budget && (
+                                <div className="text-sm text-ocean ml-2"> **{formik.errors.budget.toUpperCase()}</div>
                             )}
 
                             <label className='ml-2'>
