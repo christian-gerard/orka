@@ -32,7 +32,6 @@ function Clients() {
         name: string()
         .required(),
         type: string(),
-        isActive: bool(),
         account: number(),
 
       });
@@ -144,111 +143,106 @@ function Clients() {
             newClient ?
 
             <div className='fixed inset-0 flex flex-col justify-center items-center transition-colors backdrop-blur'>
-                <CloseIcon onClick={handleNewClient} />
-                <Formik 
-                    onSubmit={formik.handleSubmit}
-                    initialValues={initialValues}
-                >
-                    <Form 
-                    className='bg-white border flex flex-col'
-                    onSubmit={formik.handleSubmit}
-                    initialValues={initialValues}
+                <div className='bg-white border'>
+                    <CloseIcon onClick={handleNewClient} />
+                    <Formik 
+                        onSubmit={formik.handleSubmit}
+                        initialValues={initialValues}
                     >
-                        <label> New Client </label>
-                        <Field
-                            name='name'
-                            value={formik.values.name}
-                            onChange={formik.handleChange}
-                            type='text'
-                            placeholder='Name'
-                            className='border m-2 p-2'
-                        />
-
-                        {formik.errors.name && formik.touched.name && (
-                            <div className="text-sm text-ocean ml-2"> **{formik.errors.name.toUpperCase()}</div>
-                        )}
-
-
-                        <Field
-                            name='type'
-                            value={formik.values.type}
-                            onChange={formik.handleChange}
-                            type='text'
-                            placeholder='type'
-                            className='border m-2 p-2'
-                        />
-
-                        {formik.errors.type && formik.touched.type && (
-                            <div className="text-sm text-ocean ml-2"> **{formik.errors.type.toUpperCase()}</div>
-                        )}
-
-
-                        <Field
-                            name='isActive'
-                            value={formik.values.isActive}
-                            onChange={formik.handleChange}
-                            type='text'
-                            as='select'
-                            placeholder='Active?'
-                            className='border m-2 p-2'
+                        <Form 
+                        className=' flex flex-col'
+                        onSubmit={formik.handleSubmit}
+                        initialValues={initialValues}
                         >
-                            <option value='true'>Yes</option>
-                            <option value='false'>No</option>
-                        </Field>
+                            <label> New Client </label>
 
-                        {formik.errors.isActive && formik.touched.isActive && (
-                            <div className="text-sm text-ocean ml-2"> **{formik.errors.isActive.toUpperCase()}</div>
-                        )}
+                            <label> Name </label>
+                            <Field
+                                name='name'
+                                value={formik.values.name}
+                                onChange={formik.handleChange}
+                                type='text'
+                                placeholder='Name'
+                                className='border m-2 p-2'
+                            />
 
-                <div  {...getRootProps({className: 'dropzone'})}>
-                  <input {...getInputProps()} />
-                  <p className='bg-ocean border text-black m-2 p-2rounded-lg'>
+                            {formik.errors.name && formik.touched.name && (
+                                <div className="text-sm text-ocean ml-2"> **{formik.errors.name.toUpperCase()}</div>
+                            )}
 
-                    <UploadFileIcon />
-                    Drag or Click Here 
-                    
-                    </p>
-                </div>
 
-                  {files[0] ? 
-                  <div className='flex flex-row justify-between bg-champagne p-2 m-2 rounded-lg '> 
+                            <label> Client Type </label>
 
-                    <div clasName='flex flex-row'>
-                      <img alt='img_preview' src={files[0].preview} className='h-[50px] w-[50px]' />
+                            <Field
+                                name='type'
+                                value={formik.values.type}
+                                onChange={formik.handleChange}
+                                as='select'
+                                type='text'
+                                placeholder='type'
+                                className='border m-2 p-2'
+                            >
+                                <option value=''>Select Type</option>
+                                <option value='CPG'>CPG</option>
+                                <option value='Brands'>Brands</option>
+                            </Field>
 
-                      <div className='flex flex-col'> 
+                            {formik.errors.type && formik.touched.type && (
+                                <div className="text-sm text-ocean ml-2"> **{formik.errors.type.toUpperCase()}</div>
+                            )}
 
-                        <p>{files[0].name}</p>
-                        <p>{files[0].size}</p>
+
+
+                    {/* <div  {...getRootProps({className: 'dropzone'})}>
+                    <input {...getInputProps()} />
+                    <p className='bg-ocean border text-black m-2 p-2rounded-lg'>
+
+                        <UploadFileIcon />
+                        Drag or Click Here 
                         
-                      </div>
+                        </p>
+                    </div> */}
+
+                    {/* {files[0] ? 
+                    <div className='flex flex-row justify-between bg-champagne p-2 m-2 rounded-lg '> 
+
+                        <div clasName='flex flex-row'>
+                        <img alt='img_preview' src={files[0].preview} className='h-[50px] w-[50px]' />
+
+                        <div className='flex flex-col'> 
+
+                            <p>{files[0].name}</p>
+                            <p>{files[0].size}</p>
+                            
+                        </div>
+
+                        </div>
+
+
+                        <div className='flex flex-col'>
+
+                        <button 
+                            className='bg-shittake text-black rounded-lg p-1'
+                            onClick={() => removeFile(files[0].name)}
+                        >
+                            Remove
+                        </button>
+
+                        </div>
 
                     </div>
-
-
-                    <div className='flex flex-col'>
-
-                      <button 
-                        className='bg-shittake text-black rounded-lg p-1'
-                        onClick={() => removeFile(files[0].name)}
-                      >
-                        Remove
-                      </button>
-
-                    </div>
-
-                  </div>
-                  : 
-                  <h1>No file Uploaded</h1>}
+                    : 
+                    <h1>No file Uploaded</h1>} */}
 
 
 
-                        <button type='submit'> + Add Client </button>
+                            <button type='submit'> + Add Client </button>
 
 
-                    </Form>
+                        </Form>
 
-                </Formik>
+                    </Formik>
+                </div>
             </div>
 
             :

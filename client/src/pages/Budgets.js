@@ -8,7 +8,6 @@ import Project from '../components/Project'
 function Budgets() {
     const { projects } = useContext(UserContext)
 
-    console.log(projects)
 
     return (
         <>
