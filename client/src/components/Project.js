@@ -193,9 +193,6 @@ function Project({id, name, client, description, status, deadline}) {
 
 
 
-    console.log(expenses && currentProject ? 
-        (Math.round((expenses.filter(expense => expense.project === currentProject.id).reduce((accumulator, currentExpense) => accumulator + currentExpense.amount, initialValue) / currentProject.budget) * 100)) + '%' : '10%')
-
     useEffect(() => {
 
         
@@ -445,7 +442,7 @@ function Project({id, name, client, description, status, deadline}) {
                         
                         <div className='flex flex-row justify-between items-center my-6'>
                             <p className='text-2xl bold'>Budgets</p>
-                            <NavLink to='/budgets' className='flex flex-row items-center text-lg'>
+                            <NavLink to={currentProject ? `/budgets/${currentProject.id}` : '/budgets'} className='flex flex-row items-center text-lg'>
                                 <p>to Budgets</p>
                                 <ArrowRightAltIcon />
                             </NavLink>
