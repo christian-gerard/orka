@@ -214,7 +214,8 @@ function Project({id, name, client, description, status, deadline}) {
                             type: data.type,
                             status: data.status,
                             deadline: data.deadline,
-                            client: data.client
+                            client: data.client,
+                            budget: data.budget
                           })
 
                         setCurrentProject(data)
