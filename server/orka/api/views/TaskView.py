@@ -21,8 +21,8 @@ class TaskList(APIView):
         serializer = TaskSerializer(data=request.data)
 
         if serializer.is_valid():
-            production_need = serializer.save()
-            return Response(TaskSerializer(production_need).data)
+            task = serializer.save()
+            return Response(TaskSerializer(task).data)
 
         return Response(serializer.errors,status=404)
     
