@@ -6,13 +6,11 @@ function Task({id, description, deadline, project, type, note, status}) {
     const [taskStatus, setTaskStatus] = useState(false)
     console.log(taskStatus)
 
-    const handleTaskStatus = () => {
-        setTaskStatus(!taskStatus)
-    }
+    
 
     const markAsDone = () => {
+        setTaskStatus(!taskStatus)
 
-        
 
     }
 
@@ -30,7 +28,7 @@ function Task({id, description, deadline, project, type, note, status}) {
                 <input 
                     type='checkbox'
                     className=' border h-[25px] w-[25px] mx-3'
-                    onClick={handleTaskStatus}
+                    onClick={markAsDone}
                     value={taskStatus} 
                     >
                 </input>

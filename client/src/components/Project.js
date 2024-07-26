@@ -316,7 +316,9 @@ function Project({id, name, client, description, status, deadline}) {
     
                                 <Field 
                                 name='deadline' 
-                                type='text'
+                                type='date'
+                                min='2024-01-01'
+                                max='2024-12-31'
                                 value={formik.values.deadline}
                                 onChange={formik.handleChange}
                                 placeholder='YYYY-MM-DD'
@@ -510,7 +512,6 @@ function Project({id, name, client, description, status, deadline}) {
                             </div>
     
                             <div className='flex flex-row justify-between'>
-                                <p>{client ? client : 'None'}</p>
                                 <p>{deadline ? deadline.slice(5, 10) : 'No Deadline'}</p>
                             </div>
     
