@@ -99,25 +99,27 @@ function Client({id, name, status}) {
 
                 </div>
 
-                <h1>{currentClient ? currentClient.name : 'untitled'}</h1>
+                <h1 className='text-4xl'>{currentClient ? currentClient.name : 'untitled'}</h1>
                 <p>{currentClient ? currentClient.type : 'Inactive'}</p>
                 <p>{currentClient ? currentClient.client_img : 'Inactive'}</p>
                 <p>{currentClient ? currentClient.isActive : 'Inactive'}</p>
 
             </div>
 
-            <div className='h-[40%] border border-[0.2px] my-4'>
+            <div className='h-[40%] overflow-y-scroll border border-[0.2px] my-4'>
                 <p className='text-lg'> Client Projects</p>
                 {
                     projects && currentClient ? projects.filter(project => project.client === currentClient.id).map(project => <Project id={project.id} {...project} />) : <h1>NONE</h1>
                 }
             </div>
 
-            <div className='h-[40%] border border-[0.2px] my-4'>
+            <div className='h-[40%] overflow-y-scroll border border-[0.2px] my-4'>
                 <p className='text-lg'> Client Contacts</p>
-                {
+                {/* {
                     projects && currentClient ? projects.filter(project => project.client === currentClient.id).map(project => <Project id={project.id} {...project} />) : <h1>NONE</h1>
-                }
+                } */}
+
+                <h1>No Contacts Yet</h1>
             </div>
             
             

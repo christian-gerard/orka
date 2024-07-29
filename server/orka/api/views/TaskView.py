@@ -44,3 +44,11 @@ class TaskDetail(APIView):
         production_need = self.get_object(pk)
         production_need.delete()
         return Response('DELETE SUCCESSFUL')
+    
+    def patch(self, request, pk, format=None):
+        task = self.get_object(pk)
+        serializer = TaskSerializer(task, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors)
