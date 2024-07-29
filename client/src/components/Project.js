@@ -191,8 +191,6 @@ function Project({id, name, client, description, status, deadline}) {
         })
     }
 
-
-
     useEffect(() => {
 
         
@@ -228,10 +226,9 @@ function Project({id, name, client, description, status, deadline}) {
 
         }, [route.id, editMode]);
 
-    useEffect(() => {
 
-        
-    }, [currentProject]);
+
+    console.log()
 
 
     return(
@@ -451,15 +448,20 @@ function Project({id, name, client, description, status, deadline}) {
 
                         <div className='border w-full h-[25px]'>
                             <div className={`bg-ocean h-full w-[${ 
-                                expenses && currentProject ? 
+                                currentProject && currentProject.budget === 1 ? 
+
                                 Math.round(
                                     (
-                                        expenses.filter(expense => expense.project === currentProject.id)
-                                    .reduce((accumulator, currentExpense) => accumulator + currentExpense.amount, initialValue) / currentProject.budget) * 100) + '%' 
+                                    ((expenses.filter(expense => expense.project === currentProject.id)
+                                    .reduce((accumulator, currentExpense) => accumulator + currentExpense.amount, initialValue)) / currentProject.budget) * 100
                                     
-                                    : '10%'
+                                    ) ) + '%'
                                     
-                                    }`}> 
+                                    : 
+                                    
+                                    '0%'
+                                    
+                                    }]`}> 
                             
                             
                             </div>
@@ -553,15 +555,6 @@ function Project({id, name, client, description, status, deadline}) {
                                 <p>{deadline ? deadline.slice(5,12) : 'None'}</p>
     
                             </div>
-
-
-
-                                
-    
-
-                            
-                            
-                            
                             
                         </div>
                     </NavLink>

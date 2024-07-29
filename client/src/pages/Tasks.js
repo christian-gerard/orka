@@ -12,9 +12,9 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
 function Tasks() {
 
-    const { tasks, user, updateUser, projects } = useContext(UserContext)
+    const { tasks, user, updateTasks, projects } = useContext(UserContext)
     const [notDoing, setNotDoing] = useState(false)
-    const [doing, setDoing] = useState(false)
+    const [doing, setDoing] = useState(true)
     const [done, setDone] = useState(false)
     const [newTask, setNewTask] = useState(false)
     const [blocked, setBlocked] = useState(false)
@@ -38,14 +38,6 @@ function Tasks() {
     const handleNewTask= () => {
         setNewTask(!newTask)
     }
-
-
-
-
-
-
-
-
 
 
     const taskSchema = object({
@@ -86,23 +78,10 @@ function Tasks() {
                 if(resp.ok){
         
                     return resp.json().then(data => {
-                        const updatedUser = {
-                            ...user,
-                            user: {
-                                ...user.user,
-                                account_details: {
-                                    ...user.user.account_details,
-                                    clients: [...user.user.account_details.clients,data]
-                                
-                                }
-                            }
-                        };
-
-                        console.log(resp)
-                        // updateUser(updatedUser)
-        
+                        const updatedTasks = [...tasks, data]
+                        updateTasks(updatedTasks)
                         handleNewTask()
-                        toast.success("Project Added")
+                        toast.success("Task Added")
         
                     })
         

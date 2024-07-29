@@ -12,7 +12,7 @@ function Budget({}) {
 
     const route = useParams();
 
-    const { user, updateUser, expenses } = useContext(UserContext)
+    const { user, updateExpenses, expenses } = useContext(UserContext)
     const initialValue = 0
 
 
@@ -59,35 +59,10 @@ function Budget({}) {
 
                     return resp.json().then(data => {
 
+                        const newExpenses = [...expenses, data]
 
-                        // const updatedUser = {
-                        //     ...user,
-                        //     user: {
-                        //         ...user.user,
-                        //         account_details: {
-                        //             ...user.user.account_details,
-                        //             clients: user.user.account_details.clients.map(client => {
-                        //                 if(client.id === data.client) {
-                        //                     return {
-                        //                         ...client,
-                        //                         projects: client.projects.map((project) => {
-                        //                             if (project.id === data.id) {
-                        //                                 return {
-                        //                                     ...project,
-                        //                                     budg_items: [...project.budg_items, data]
-                        //                                 }
-                        //                             }
-                        //                             return project
-                        //                         })
-                        //                     };
-                        //                 }
-                        //                 return client;
-                        //             })
-                        //         }
-                        //     }
-                        // };
+                        updateExpenses(newExpenses)
 
-                        // updateUser(updatedUser)
 
                         toast.success("Expense Added")
 
@@ -115,12 +90,12 @@ function Budget({}) {
             route.id ?            
             
             <div className='border border-black rounded-xl my-4 mx-4 p-4 h-full '>
-                <div className='flex flex-row justify-between h-[10%]'>
-                    <h1>Expenses</h1>
+                <div className='flex flex-row justify-between h-[5%]'>
+                    <h1 className=''>Expenses</h1>
 
                 </div>
 
-                <div className='w-full bg-black text-white flex flex-row items-center h-[5%]'>
+                <div className='w-full bg-black text-white flex flex-row items-center h-[5%] p-4'>
                     <p className='text-sm w-[10%]'>New Expense</p>
                     <Formik>
                             <Form
@@ -219,7 +194,7 @@ function Budget({}) {
 
                 <div className='flex flex-col h-[90%] w-full flex mb-2'>
 
-                    <div className='border-b-[0.2px] h-[90%]'>
+                    <div className='border-b-[0.2px] h-[90%] overflow-y-scroll'>
 
                         { expenses.filter(expense => expense.project === parseInt(route.id)).length !== 0 ?
 
@@ -235,7 +210,7 @@ function Budget({}) {
                         
                         }
 
-                        <div className='w-[80%] h-full border-r-[0.2px]'>
+                        <div className='w-[80%] border-r-[0.2px]'>
                         </div>
 
 
@@ -254,7 +229,7 @@ function Budget({}) {
                                 {
                                     expenses ?
 
-                                    expenses.reduce((accumulator, currentExpense) => accumulator + currentExpense.amount, initialValue)
+                                    expenses.filter(expense => expense.project === parseInt(route.id)).reduce((accumulator, currentExpense) => accumulator + currentExpense.amount, initialValue)
                                     :
 
                                     <></>
@@ -264,11 +239,6 @@ function Budget({}) {
                         </div>
 
                     </div>
-                    
-
-
-
-                
 
                 </div>
 
