@@ -1,0 +1,22 @@
+databases:
+  - name: orkadb
+    plan: free
+    databaseName: orka
+    user: mysite
+
+services:
+  - type: web
+    plan: free
+    name: orka
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "python -m gunicorn mysite.asgi:application -k uvicorn.workers.UvicornWorker"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: orkadb
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
