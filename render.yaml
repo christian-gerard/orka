@@ -1,6 +1,6 @@
 databases:
   - name: orkadb
-    plan: free
+    plan: Starter
     databaseName: orka
     user: orka
 
