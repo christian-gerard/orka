@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-1sq+f4u$4*yj4-ys5=amw73^5=jy_5%1ow9=a18!6e+e$v61*b
 DEBUG = getenv("IS_PRODUCTION", True)
 
 ALLOWED_HOSTS = [
-    getenv("APP_HOST")
+    "localhost"
 
 ]
 
@@ -137,10 +137,11 @@ WSGI_APPLICATION = 'server.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        # Replace this value with your local database's connection string.
+        default='postgresql://postgres:postgres@localhost:5432/orka',
+        conn_max_age=600
+    )
 }
 
 
