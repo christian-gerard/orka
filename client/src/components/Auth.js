@@ -33,7 +33,7 @@ function Auth({handleLogin}) {
         {
           formData['username'] = formData['email']
 
-          fetch('http://127.0.0.1:8000/auth/signup/',{
+          fetch('postgresql://orka:HlDS5ziSO2mn7yY5Fe7ygVpJgA4AbmKp@dpg-cqmligg8fa8c73aelkt0-a.oregon-postgres.render.com/orka_hqs2/auth/signup/',{
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
