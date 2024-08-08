@@ -29,7 +29,8 @@ SECRET_KEY = 'django-insecure-1sq+f4u$4*yj4-ys5=amw73^5=jy_5%1ow9=a18!6e+e$v61*b
 DEBUG = getenv("IS_PRODUCTION", True)
 
 ALLOWED_HOSTS = [
-    "localhost"
+    'localhost',
+    '127.0.0.1'
 
 ]
 
@@ -137,12 +138,13 @@ WSGI_APPLICATION = 'server.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(
-        # Replace this value with your local database's connection string.
-        default='postgresql://postgres:postgres@localhost:5432/orka',
-        conn_max_age=600
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
+
+DATABASES["default"] = dj_database_url.parse("postgresql://orka:HlDS5ziSO2mn7yY5Fe7ygVpJgA4AbmKp@dpg-cqmligg8fa8c73aelkt0-a.oregon-postgres.render.com/orka_hqs2")
 
 
 # Password validation
