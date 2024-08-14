@@ -1,14 +1,14 @@
-import { useState, useEffect, useContext } from 'react'
+import { useContext } from 'react'
 import Project from '../components/Project'
 import Client from '../components/Client'
 import Task from '../components/Task'
 import { UserContext } from '../context/UserContext'
 import GridViewIcon from '@mui/icons-material/GridView';
-import { Grid } from '@mui/material'
+
 
 function Dashboard() {
 
-    const { user, projects, tasks, expenses, clients } = useContext(UserContext)
+    const { projects, tasks, clients } = useContext(UserContext)
 
     return(
         <div className='flex flex-col h-full w-[95%]'>
