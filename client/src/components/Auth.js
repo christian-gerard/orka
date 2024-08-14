@@ -1,12 +1,12 @@
 
 import { useContext, useState } from 'react'
-import { Formik, Form, Field, useFormik, ErrorMessage } from "formik";
-import { useNavigate, NavLink } from 'react-router-dom'
+import { useFormik } from "formik";
+import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
 import toast from 'react-hot-toast'
 
 function Auth({handleLogin}) {
-  const { user, login } = useContext(UserContext)
+  const { login } = useContext(UserContext)
   const [newUser, setNewUser] = useState(false)
   const nav = useNavigate()
 

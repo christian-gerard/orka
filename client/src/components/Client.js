@@ -4,9 +4,8 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import CloseIcon from '@mui/icons-material/Close';
+
 import Project from './Project'
 
 
@@ -17,9 +16,6 @@ function Client({id, name, status}) {
     const [editMode, setEditMode] = useState(false)
     const nav = useNavigate()
 
-    const handleEdit = () => {
-        setEditMode(!editMode)
-    }
 
     
 

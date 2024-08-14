@@ -7,7 +7,6 @@ export const UserContext = createContext()
 const UserProvider = ({children}) => {
 
     const [user, setUser] = useState(null)
-    const [account, setAccount] = useState(null)
     const [projects, setProjects] = useState(null)
     const [tasks, setTasks] = useState(null)
     const [expenses, setExpenses] = useState(null)

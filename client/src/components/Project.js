@@ -19,13 +19,8 @@ function Project({id, name, client, description, status, deadline}) {
     const route = useParams();
     const routeType = useLocation()
     const [currentProject, setCurrentProject] = useState(null)
-    const [clientName, setClientName] = useState('')
-    const [prodNeeds, setProdNeeds] = useState([])
-    const [budgItems, setBudgItems] = useState([])
     const [editMode, setEditMode] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
-    const [newProdNeed, setNewProdNeed] = useState(false)
-    const [newBudgItem, setNewBudgItem] = useState(false)
     const nav = useNavigate()
 
     const clientOptions = user.user.account_details.clients.map(client => {
@@ -172,7 +167,7 @@ function Project({id, name, client, description, status, deadline}) {
                                     if (client.id == currentProject.client) {
                                         return {
                                             ...client,
-                                            projects: client.projects.filter(project => project.id != currentProject.id)
+                                            projects: client.projects.filter(project => project.id !== currentProject.id)
                                         };
                                     }
                                     return client; // Ensure the original client object is returned if no match is found
