@@ -66,7 +66,7 @@ function Tasks() {
         onSubmit: (formData) => {
 
 
-            fetch('http://127.0.0.1:8000/task/', {
+            fetch('http://127.0.0.1:5555/task/', {
                 method: "POST",
                 body: JSON.stringify(formData),
                 headers: {

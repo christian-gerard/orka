@@ -49,7 +49,7 @@ function Clients() {
         onSubmit: (formData) => {
 
 
-            fetch('http://127.0.0.1:8000/client/', {
+            fetch('http://127.0.0.1:5555/client/', {
                 method: "POST",
                 body: JSON.stringify(formData),
                 headers: {

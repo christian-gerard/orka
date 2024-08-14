@@ -15,7 +15,7 @@ function Task({id, description, deadline, project, type, note, status}) {
     const markAsDone = () => {
         setTaskStatus(!taskStatus)
 
-        fetch(`http://127.0.0.1:8000/task/${id}/`, {
+        fetch(`http://127.0.0.1:5555/task/${id}/`, {
                 method: "PATCH",
                 body: JSON.stringify({"status": "Done"}),
                 headers: {

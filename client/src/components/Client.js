@@ -24,7 +24,7 @@ function Client({id, name, status}) {
     
 
     const handleDelete = () => {
-        fetch(`http://127.0.0.1:8000/client/${route.id}`, {
+        fetch(`http://127.0.0.1:5555/client/${route.id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Token ${user.token}`
@@ -57,7 +57,7 @@ function Client({id, name, status}) {
 
     useEffect(() => {
         if (route.id) { 
-            fetch(`http://127.0.0.1:8000/client/${route.id}`,{
+            fetch(`http://127.0.0.1:5555/client/${route.id}`,{
                 headers: {
                     'Authorization': `Token ${user.token}`
                 } 

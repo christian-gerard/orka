@@ -47,7 +47,7 @@ function ProductionNeed({description, deadline, note, type, project }) {
             formData['project'] = parseInt(route.id)
 
 
-            fetch('http://127.0.0.1:8000/productionneed/', {
+            fetch('http://127.0.0.1:5555/productionneed/', {
                 method: "POST",
                 body: JSON.stringify(formData),
                 headers: {
