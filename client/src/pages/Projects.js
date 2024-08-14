@@ -45,7 +45,7 @@ function Projects() {
         validationSchema: projectSchema,
         onSubmit: (formData) => {
 
-            fetch('http://127.0.0.1:8000/project/', {
+            fetch('http://127.0.0.1:5555/project/', {
                 method: "POST",
                 body: JSON.stringify(formData),
                 headers: {

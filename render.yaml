@@ -1,7 +1,7 @@
 databases:
-  - name: orkadb
-    plan: Starter
-    databaseName: orka
+  - name: orka_db
+    plan: free
+    databaseName: orka_db
     user: orka
 
 services:
@@ -10,11 +10,11 @@ services:
     name: orka
     runtime: python
     buildCommand: "./build.sh"
-    startCommand: "cd server && python -m gunicorn server.asgi:application -k uvicorn.workers.UvicornWorker"
+    startCommand: "python -m gunicorn orka.asgi:application -k uvicorn.workers.UvicornWorker"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: orkadb
+          name: orka_db
           property: connectionString
       - key: SECRET_KEY
         generateValue: true

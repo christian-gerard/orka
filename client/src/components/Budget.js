@@ -46,7 +46,7 @@ function Budget({}) {
 
 
 
-            fetch('http://127.0.0.1:8000/expense/', {
+            fetch('http://127.0.0.1:5555/expense/', {
                 method: "POST",
                 body: JSON.stringify(formData),
                 headers: {

@@ -82,7 +82,7 @@ function Project({id, name, client, description, status, deadline}) {
         validationSchema: projectSchema,
         onSubmit: (formData) => {
 
-            fetch(`http://127.0.0.1:8000/project/${route.id}`, {
+            fetch(`http://127.0.0.1:5555/project/${route.id}`, {
                 method: "PATCH",
                 body: JSON.stringify(formData),
                 headers: {
@@ -152,7 +152,7 @@ function Project({id, name, client, description, status, deadline}) {
     }
 
     const handleDelete = () => {
-        fetch(`http://127.0.0.1:8000/project/${route.id}`, {
+        fetch(`http://127.0.0.1:5555/project/${route.id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Token ${user.token}`
@@ -196,7 +196,7 @@ function Project({id, name, client, description, status, deadline}) {
         
         if (route.id) { 
             setIsLoading(true)
-            fetch(`http://127.0.0.1:8000/project/${route.id}`,{
+            fetch(`http://127.0.0.1:5555/project/${route.id}`,{
                 headers: {
                     'Authorization': `Token ${user.token}`
                 } 
