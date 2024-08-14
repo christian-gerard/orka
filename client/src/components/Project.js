@@ -4,7 +4,7 @@ import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { object, string, array, number } from "yup";
+import { object, string, number } from "yup";
 import { useFormik, Field, Form, Formik } from "formik";
 import EditIcon from '@mui/icons-material/Edit';
 
