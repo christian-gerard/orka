@@ -13,7 +13,7 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
 
     password = models.CharField(
-        max_length=20
+        max_length=200
     )
 
     admin = models.BooleanField(default=False)
