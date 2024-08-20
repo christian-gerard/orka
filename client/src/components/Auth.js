@@ -80,6 +80,9 @@ function Auth({handleLogin}) {
                 toast.success('Login Successful')
 
               })}
+            else if(resp.status === 404) {
+              toast.error("Invalid Login")
+            }
           })
           .then(() => {
 
