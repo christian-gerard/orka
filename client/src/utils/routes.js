@@ -11,6 +11,7 @@ import Settings from '../pages/Settings'
 import Tasks from '../pages/Tasks'
 import Budgets from '../pages/Budgets'
 import Budget from '../components/Budget'
+import Welcome from '../pages/Welcome'
 
 
 
@@ -62,7 +63,11 @@ const router = createBrowserRouter([
             }
 
 		]
-	}
+	},
+    {
+        path: '/welcome',
+		element: <Welcome />,
+    }
 ])
 
 export default router

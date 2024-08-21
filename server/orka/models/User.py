@@ -10,17 +10,16 @@ class User(AbstractUser):
         unique=True
     )
 
-    USERNAME_FIELD = 'email'
-
     password = models.CharField(
-        max_length=20
+        max_length=200
     )
 
     admin = models.BooleanField(default=False)
 
-    account = models.ForeignKey(Account,default=1, on_delete=models.CASCADE)
+    account = models.ForeignKey(Account, on_delete=models.CASCADE)
 
-    REQUIRED_FIELDS = ['username'] 
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username', 'account'] 
     
     def __str__(self):
-        return self.email
+        return self.email + self.account

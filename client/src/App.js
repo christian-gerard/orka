@@ -4,6 +4,7 @@ import { Outlet } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import Nav from '../src/components/Nav' 
 import Auth from '../src/components/Auth'
+import Welcome from '../src/pages/Welcome'
 
 
 function App() {

@@ -138,11 +138,10 @@ WSGI_APPLICATION = 'server.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(
-        # Replace this value with your local database's connection string.
-        default='postgresql://orka_db_user:v0PHx4xynuBVFUQYYCRQOarnNsHUDn3P@dpg-cqudm1jv2p9s73d69aqg-a.oregon-postgres.render.com/orka_db',
-        conn_max_age=600
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 # DATABASES["default"] = dj_database_url.parse("postgresql://orka_db_user:v0PHx4xynuBVFUQYYCRQOarnNsHUDn3P@dpg-cqudm1jv2p9s73d69aqg-a/orka_db")
