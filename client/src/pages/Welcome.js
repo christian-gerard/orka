@@ -11,7 +11,10 @@ function Welcome() {
                         Orka is a production management tool built for small ad agencies that want to keep things simple and tidy. Track Projects and their budgets.
                         Assign action items to your team members.
                     </p>
-                    <NavLink to='/'>Sign Up for ORKA</NavLink>
+                    <p className='text-lg m-4'>
+                        Orka Orka Orka Orka
+                    </p>
+                    <NavLink to='/' className='m-4 bg-black text-white p-2'>Sign Up for ORKA</NavLink>
                         
                 </div>
             </div>

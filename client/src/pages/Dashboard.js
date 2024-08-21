@@ -11,7 +11,7 @@ function Dashboard() {
     const { projects, tasks, clients } = useContext(UserContext)
 
     return(
-        <div className='flex flex-col h-full w-[95%]'>
+        <div className='flex flex-col h-full w-full'>
 
             {/* Page Header */}
             <div className='flex flex-row items-center mb-2 h-[5%]'>
@@ -20,7 +20,7 @@ function Dashboard() {
             </div>
 
             {/* Outstanding Tasks */}
-            <div className='border border-[0.2px] h-[35%] '>
+            <div className='border border-[0.2px] h-[35%] w-[95%]'>
 
                 <p className='text-lg p-1 h-[10%]'>Outstanding Tasks</p>
 
@@ -49,7 +49,7 @@ function Dashboard() {
             </div>
 
             {/* Projects */}
-            <div className='border border-[0.2px] my-4 h-[25%] w-full flex justify-between flex-col'>
+            <div className='border border-[0.2px] my-4 h-[25%] w-[95%] flex justify-between flex-col'>
                 <p className='text-lg p-1 h-[10%]'>Projects</p>
 
                 <div className='overflow-x-scroll h-[95%] flex flex-row w-full items-center'>
@@ -77,7 +77,7 @@ function Dashboard() {
             </div>
 
             {/* Clients */}
-            <div className='border w-full border-[0.2px] h-[25%]'>
+            <div className='border w-[95%] border-[0.2px] h-[25%]'>
 
                 <p className='text-lg p-1 h-[10%]'>Clients</p>
 
