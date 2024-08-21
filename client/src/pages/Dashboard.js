@@ -11,8 +11,7 @@ function Dashboard() {
     const { projects, tasks, clients } = useContext(UserContext)
 
     return(
-        <div className='flex flex-col h-full w-full'>
-
+        <div className='flex flex-col h-full w-full overflow-hidden'>
             {/* Page Header */}
             <div className='flex flex-row items-center mb-2 h-[5%]'>
                 <GridViewIcon fontSize='small' />
@@ -20,11 +19,11 @@ function Dashboard() {
             </div>
 
             {/* Outstanding Tasks */}
-            <div className='border border-[0.2px] h-[35%] w-[95%]'>
+            <div className='border border-[0.2px] h-[35%] '>
 
                 <p className='text-lg p-1 h-[10%]'>Outstanding Tasks</p>
 
-                <div className='overflow-y-scroll h-[90%] w-full'>
+                <div className='overflow-y-scroll h-[90%] '>
 
                     {
                         tasks.length !== 0 ?
@@ -49,10 +48,10 @@ function Dashboard() {
             </div>
 
             {/* Projects */}
-            <div className='border border-[0.2px] my-4 h-[25%] w-[95%] flex justify-between flex-col'>
+            <div className='border border-[0.2px] my-4 h-[25%] flex justify-between flex-col'>
                 <p className='text-lg p-1 h-[10%]'>Projects</p>
 
-                <div className='overflow-x-scroll h-[95%] flex flex-row w-full items-center'>
+                <div className='overflow-x-scroll h-[95%] flex flex-row items-center overflow-hidden'>
   
                     {
                         projects.length !== 0 ?
@@ -65,7 +64,7 @@ function Dashboard() {
 
                         :
 
-                        <div className='h-full w-full flex justify-center items-center'>
+                        <div className='h-full  flex justify-center items-center'>
 
                             <h1 className='text-3xl italic mx-2'> No Current Projects </h1>
 
@@ -77,7 +76,7 @@ function Dashboard() {
             </div>
 
             {/* Clients */}
-            <div className='border w-[95%] border-[0.2px] h-[25%]'>
+            <div className='border border-[0.2px] h-[25%] overflow-hidden'>
 
                 <p className='text-lg p-1 h-[10%]'>Clients</p>
 
