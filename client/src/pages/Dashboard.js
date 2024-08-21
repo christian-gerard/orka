@@ -4,6 +4,10 @@ import Client from '../components/Client'
 import Task from '../components/Task'
 import { UserContext } from '../context/UserContext'
 import GridViewIcon from '@mui/icons-material/GridView';
+import TaskAltIcon from '@mui/icons-material/TaskAlt';
+import DetailsIcon from '@mui/icons-material/Details';
+import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
+import TaskAlt from '@mui/icons-material/TaskAlt'
 
 
 function Dashboard() {
@@ -19,16 +23,20 @@ function Dashboard() {
             </div>
 
             {/* Outstanding Tasks */}
-            <div className='border border-[0.2px] h-[35%] '>
+            <div className='border border-[0.2px] h-[45%] '>
 
-                <p className='text-lg p-1 h-[10%]'>Outstanding Tasks</p>
+                <div className='text-lg p-1 h-[10%] flex flex-row items-center'>
+                    <TaskAltIcon fontSize='small' />
+                    <p className='text-lg ml-2 '>Outstanding Tasks</p>
+                </div>
+
 
                 <div className='overflow-y-scroll h-[90%] '>
 
                     {
                         tasks.length !== 0 ?
 
-                        tasks.filter(task => task.status !== 'Done').map((task) => 
+                        tasks.map((task) => 
                             <Task id={task.id} {...task} />
                         )
 
@@ -49,7 +57,11 @@ function Dashboard() {
 
             {/* Projects */}
             <div className='border border-[0.2px] my-4 h-[25%] flex justify-between flex-col'>
-                <p className='text-lg p-1 h-[10%]'>Projects</p>
+
+                <div className='text-lg p-1 h-[10%] flex flex-row items-center'>
+                    <DetailsIcon fontSize='small' />
+                    <p className='text-lg ml-2 '>Projects</p>
+                </div>
 
                 <div className='overflow-x-scroll h-[95%] flex flex-row items-center overflow-hidden'>
   
@@ -78,7 +90,10 @@ function Dashboard() {
             {/* Clients */}
             <div className='border border-[0.2px] h-[25%] overflow-hidden'>
 
-                <p className='text-lg p-1 h-[10%]'>Clients</p>
+                <div className='text-lg p-1 h-[10%] flex flex-row items-center'>
+                    <PeopleOutlineIcon fontSize='small' />
+                    <p className='text-lg ml-2 '>Clients</p>
+                </div>
 
                 <div className='overflow-x-scroll h-[90%] flex flex-row items-center'>
 
