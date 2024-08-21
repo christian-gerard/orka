@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
 import toast from 'react-hot-toast'
 
-function Auth({handleLogin}) {
+function Auth() {
   const { login } = useContext(UserContext)
   const [newUser, setNewUser] = useState(false)
   const nav = useNavigate()
@@ -98,13 +98,11 @@ function Auth({handleLogin}) {
         <>
         {
           newUser ?
-          
+          // Account Creation
           <div className='bg-black text-white py-12 px-8 flex flex-col items-center '>
             <h1 className='text-4xl p-2 tracking-[0.8em] reddit-mono italic'> ORKA </h1>
             <h3>SIGNUP</h3>
-
             <form onSubmit={formik.handleSubmit} className='flex flex-col p-2'>
-  
               <label htmlFor="username" className='text-xl'>Email</label>
               <input
                   id="email"
@@ -115,7 +113,6 @@ function Auth({handleLogin}) {
                   className='text-black my-2 p-1 text-lg'
                   placeholder='email'
               />
-
               <label htmlFor="password" className='text-xl'>Password</label>
               <input
                   id="password"
@@ -126,8 +123,6 @@ function Auth({handleLogin}) {
                   className='text-black my-2 p-1 text-lg'
                   placeholder='password'
               />
-
-
               <label htmlFor="account_name" className='text-xl'>Account Name</label>
               <input
                   id="account_name"
@@ -138,25 +133,15 @@ function Auth({handleLogin}) {
                   className='text-black my-2 p-1 text-lg'
                   placeholder='Account Name'
               />
-
               <button type="submit" className='mt-4 bg-white text-black'>Create Account</button>
-
             </form>
-
-            <button type='button' className='mt-6' onClick={handleNewUser}>
-                    Log In
-            </button>
-
+            <button type='button' className='mt-6' onClick={handleNewUser}>Log In</button>
           </div>
-
           :
-
-          <div className='bg-black text-white py-12 px-8 flex flex-col items-center '>
-  
-              <h1 className='text-4xl p-2 tracking-[0.8em] reddit-mono italic'> ORKA </h1>
-  
+          // Login
+          <div className='bg-black text-white py-12 px-8 flex flex-col'>
+              <h1 className='text-4xl p-2 tracking-[0.8em] reddit-mono italic w-full flex justify-center'> ORKA </h1>
               <form onSubmit={formik.handleSubmit} className='flex flex-col p-2'>
-  
                   <label htmlFor="username" className='text-xl'>Email</label>
                   <input
                       id="username"
@@ -167,7 +152,6 @@ function Auth({handleLogin}) {
                       className='text-black my-2 p-1 text-lg'
                       placeholder='email'
                   />
-  
                   <label htmlFor="password" className='text-xl'>Password</label>
                   <input
                       id="password"
@@ -178,22 +162,11 @@ function Auth({handleLogin}) {
                       className='text-black my-2 p-1 text-lg'
                       placeholder='password'
                   />
-              
                   <button type="submit" className='mt-4 bg-white text-black'>Log In</button>
-                  <button type='button' className='mt-6' onClick={handleNewUser}>
-                    Create New User
-                  </button>
-
-  
+                  <button type='button' className='mt-6' onClick={handleNewUser}>Create New User</button>
               </form>
-  
-  
-  
           </div>
-
-
         }
-        
         </>
       );
 }
