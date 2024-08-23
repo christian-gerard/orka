@@ -8,7 +8,7 @@ import Expense from '../components/Expense'
 import AddBoxIcon from '@mui/icons-material/AddBox';
 
 
-function Budget({}) {
+function Budget() {
 
     const route = useParams();
 
@@ -89,10 +89,9 @@ function Budget({}) {
         {
             route.id ?            
             
-            <div className='border border-black rounded-xl my-4 mx-4 p-4 h-full '>
+            <div className='border border-black rounded-xl p-4 h-full '>
                 <div className='flex flex-row justify-between h-[5%]'>
                     <h1 className=''>Expenses</h1>
-
                 </div>
 
                 <div className='w-full bg-black text-white flex flex-row items-center h-[5%] p-4'>
@@ -194,7 +193,7 @@ function Budget({}) {
 
                 <div className='flex flex-col h-[90%] w-full flex mb-2'>
 
-                    <div className='border-b-[0.2px] h-[90%] overflow-y-scroll'>
+                    <div className='border-b-[0.2px] h-[97%] overflow-y-scroll'>
 
                         { expenses.filter(expense => expense.project === parseInt(route.id)).length !== 0 ?
 
@@ -204,7 +203,7 @@ function Budget({}) {
 
                             :
 
-                            <div className='text-black text-6xl w-full flex justify-center '>
+                            <div className='text-black text-5xl w-full flex justify-center h-full items-center'>
                                 <p>No Project Expenses</p>
                             </div>
                         
@@ -216,14 +215,14 @@ function Budget({}) {
 
                     </div>
 
-                    <div className='flex flex-row h-[5%] w-full'>
+                    <div className='flex flex-row h-[3%] w-full'>
 
                         <div className='border-r-[0.2px] w-[80%] h-full'>
                             
                         </div>
 
                         <div className='w-[20%] h-full text-sm flex flex-row text-2xl'>
-                            <p className='text-2xl'>Total:</p>
+                            <p className='text-2xl ml-1'>Total:</p>
 
                             <p className='text-2xl'> $
                                 {

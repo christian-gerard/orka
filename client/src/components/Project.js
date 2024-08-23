@@ -222,10 +222,6 @@ function Project({id, name, client, description, status, deadline}) {
         }, [route.id, editMode]);
 
 
-
-    console.log()
-
-
     return(
         <>
         
@@ -521,9 +517,7 @@ function Project({id, name, client, description, status, deadline}) {
     
 
                 </div>
-    
-
-    
+                
                 </>
 
                 :
